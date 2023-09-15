@@ -7,7 +7,7 @@
             <div class="row q-my-sm" style="width: 100%">
               <div class="col-7 text-right text-weight-medium">
                 <q-icon name="lock" />
-                afimm_
+                    afimm_
                 <q-icon name="keyboard_arrow_down" />
               </div>
               <div class="col-5 text-right q-px-md">
@@ -15,12 +15,14 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col-3">
             <div class="row">
               <div class="col-4 flex align-center justify-center">
-                <q-avatar size="4rem">
-                  <img src="https://cdn.quasar.dev/img/avatar.png" />
-                </q-avatar>
+                <div class="border-rad flex items-center justify-center q-pa xs">
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                </div>
               </div>
               <div class="col">
                 <div class="column flex items-center justify-center">
@@ -46,7 +48,14 @@
               </div>
             </div>
           </div>
-          <div class="col">1 of 3</div>
+          <div class="col-4 q-mx-md">
+            <div class="column">
+              <div class="col text-caption">Quasar dev</div>
+              <div class="col text-caption">Frontend Developer</div>
+              <div class="col text-caption">Aspiring Tech bro...</div>
+              <q-btn size=".7rem" no-caps outline class="q-my-sm border-grey" text-color="black" dense label="Edit Profile" />
+            </div>
+          </div>
           <div class="col">1 of 3</div>
         </div>
       </div>
@@ -57,13 +66,24 @@
 </template>
 
 <script>
-import Footer from "../components/Footer.vue"
+import Footer from "../components/Footer.vue";
 export default {
-    name: "DashboardPage",
+  name: "DashboardPage",
   components: {
     Footer,
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .border-grey{
+        border-block-color: black;
+    }
+
+    .border-rad{
+        height: 4.5rem;
+        width: 4.5rem;
+        border: 2px solid grey;
+        border-radius: 50%;
+    }
+</style>

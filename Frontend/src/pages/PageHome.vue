@@ -1,5 +1,6 @@
 <template>
   <q-page class="constrain q-pa-md">
+    <Header />
     <div class="row q-col-gutter-lg">
       <div class="col-12 col-sm-8">
         <q-card
@@ -53,10 +54,11 @@
 import { date } from "quasar";
 // import { defineComponent } from "vue";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default {
   name: "PageHome",
-  components: { Footer },
+  components: { Footer, Header },
   data() {
     return {
       posts: [

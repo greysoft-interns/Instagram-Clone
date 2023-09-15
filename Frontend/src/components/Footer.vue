@@ -1,9 +1,9 @@
 <template>
   <q-footer class="small-screen bg-white" bordered>
-    <q-tabs v-model="tab" class="bg-white text-black shadow-2">
+    <q-tabs v-model="tab" outside-arrows=false class="bg-white text-black shadow-2">
       <q-route-tab name="home" to="/" icon="home" />
       <q-route-tab name="search" to="/search" icon="search" />
-      <q-route-tab class="text-black" name="add" to="/" icon="add_box" />
+      <q-route-tab class="text-black" name="add" to="/create" icon="add_box" />
       <q-route-tab name="favorite" to="/" icon="favorite_border" />
       <q-route-tab>
         <q-avatar to="/" size="32px">

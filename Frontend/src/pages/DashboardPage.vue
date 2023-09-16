@@ -4,10 +4,10 @@
       <div class="col-5">
         <div class="column" style="height: 100%">
           <div class="col-2 flex align-center justify-center">
-            <div class="row q-my-sm" style="width: 100%">
+            <div class="row q-py-md" style="width: 100%">
               <div class="col-7 text-right text-weight-medium">
                 <q-icon name="lock" />
-                    afimm_
+                afimm_
                 <q-icon name="keyboard_arrow_down" />
               </div>
               <div class="col-5 text-right q-px-md">
@@ -18,10 +18,12 @@
           <div class="col-3">
             <div class="row">
               <div class="col-4 flex align-center justify-center">
-                <div class="border-rad flex items-center justify-center q-pa xs">
-                    <q-avatar size="4rem">
-                      <img src="https://cdn.quasar.dev/img/avatar.png" />
-                    </q-avatar>
+                <div
+                  class="border-rad flex items-center justify-center q-pa xs"
+                >
+                  <q-avatar size="4rem">
+                    <img src="https://cdn.quasar.dev/img/avatar.png" />
+                  </q-avatar>
                 </div>
               </div>
               <div class="col">
@@ -53,13 +55,107 @@
               <div class="col text-caption">Quasar dev</div>
               <div class="col text-caption">Frontend Developer</div>
               <div class="col text-caption">Aspiring Tech bro...</div>
-              <q-btn size=".7rem" no-caps outline class="q-my-sm border-grey" text-color="black" dense label="Edit Profile" />
+              <q-btn
+                size=".7rem"
+                no-caps
+                outline
+                class="q-my-sm border-grey"
+                text-color="black"
+                dense
+                label="Edit Profile"
+              />
             </div>
           </div>
-          <div class="col">1 of 3</div>
+          <div class="col">
+            <q-scroll-area visible="false" style="height: 90px; max-width: 98%">
+              <div class="row no-wrap q-my-xs q-mx-md">
+                <div class="col q-mx-sm q-mx-md">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-icon name="add" color="grey" size="2.4rem" />
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+              </div>
+            </q-scroll-area>
+          </div>
         </div>
       </div>
-      <div class="col-7">1 of 2</div>
+      <div class="col-7 q-py-md">
+        <div class="row">
+          <div class="col flex items-center justify-center">.col</div>
+          <div class="col flex items-center justify-center">.col</div>
+          <div class="col flex items-center justify-center">.col</div>
+        </div>
+        <div class="row">
+          <div class="col flex items-center justify-center">.col</div>
+          <div class="col flex items-center justify-center">.col</div>
+          <div class="col flex items-center justify-center">.col</div>
+        </div>
+      </div>
     </div>
     <Footer />
   </q-page>
@@ -76,14 +172,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .border-grey{
-        border-block-color: black;
-    }
+.border-grey {
+  border-block-color: black;
+}
 
-    .border-rad{
-        height: 4.5rem;
-        width: 4.5rem;
-        border: 2px solid grey;
-        border-radius: 50%;
-    }
+.border-rad {
+  height: 4.5rem;
+  width: 4.5rem;
+  border: 2px solid grey;
+  border-radius: 50%;
+}
 </style>

@@ -11,32 +11,74 @@
         <div class="col-2 q-px-md q-py-xl">
           <div style="height: 100vh; width: 200px">
             <a href="#">Instagram</a>
-            <q-tabs v-model="tab" vertical class="text-black">
-              <!-- <q-icon name="home" /> -->
-              <q-tab class="flex flex-row" name="home" icon="home">
-                <p class="text-caption">home</p>
-              </q-tab>
-              <q-tab name="search" icon="search">
+            <q-tabs v-model="tab" vertical class="text-black q-my-lg">
+              <a href="#/" class="custom-link">
+                <q-tab class="flex flex-row" name="home" icon="home">
+                  <p class="text-caption">home</p>
+                </q-tab>
+              </a>
+              <q-tab name="search" icon="search" @click="open('left')">
                 <p class="text-caption">search</p>
               </q-tab>
-              <q-tab name="explore" icon="explore">
-                <p class="text-caption">explore</p>
-              </q-tab>
-              <q-tab name="smart_display" icon="smart_display">
-                <p class="text-caption">Reels</p>
-              </q-tab>
-              <q-tab name="chat" icon="chat">
-                <p class="text-caption">Messages</p>
-              </q-tab>
-              <q-tab name="favorite_border" icon="favorite_border">
-                <p class="text-caption">Notifications</p>
-              </q-tab>
-              <q-tab name="add_box" icon="add_box">
+              <q-tab name="add_box" icon="add_box" @click="addPost = true">
                 <p class="text-caption">Create</p>
               </q-tab>
-              <q-tab name="perm_identity" icon="perm_identity">
-                <p class="text-caption">Profile</p>
-              </q-tab>
+              <a href="#/home" class="custom-link">
+                <q-tab name="perm_identity" icon="perm_identity">
+                  <p class="text-caption">Profile</p>
+                </q-tab>
+              </a>
+              <q-dialog v-model="dialog" :position="position">
+                <q-card style="width: 350px; height: 100vh">
+                  <!-- <q-linear-progress :value="0.6" color="pink" /> -->
+
+                  <q-card-section class="row items-center no-wrap">
+                    <div class="flex" style="width: 100%; height: 600px">
+                      <div style="width: 100%">
+                        <p class="text-h4 q-pa-md">Search</p>
+                        <q-input
+                          color="black"
+                          filled
+                          v-model="search"
+                          label="Search"
+                        >
+                          <template v-slot:append>
+                            <q-icon name="search" />
+                          </template>
+                        </q-input>
+                      </div>
+                      <div
+                        class="flex items-center justify-center"
+                        style="height: 100%; width: 100%"
+                      >
+                        <p class="text-caption">No Recent Searches</p>
+                      </div>
+                    </div>
+                  </q-card-section>
+                </q-card>
+              </q-dialog>
+              <q-dialog v-model="addPost">
+                <q-card style="height: 500px; width: 500px">
+                  <q-card-section class="row items-center q-pb-none">
+                    <div class="text-h6">Create New Post</div>
+                    <q-space />
+                    <q-btn icon="close" flat round dense v-close-popup />
+                  </q-card-section>
+
+                  <q-card-section class="flex items-center justify-center" style="height: 400px">
+                    <q-file
+                      bg-color="blue"
+                      style="max-width: 300px"
+                      v-model="filesMaxSize"
+                      outlined
+                      label="Select From Computer (Not more than 2kb)"
+                      multiple
+                      max-file-size="2048"
+                      @rejected="onRejected"
+                    />
+                  </q-card-section>
+                </q-card>
+              </q-dialog>
             </q-tabs>
           </div>
         </div>
@@ -151,7 +193,7 @@
                     class="q-pa-sm custom-center"
                   >
                     <div class="column custom-center" style="height: 100%">
-                      <div class="col" style="width: 80%;">
+                      <div class="col" style="width: 80%">
                         <q-card class="my-card q-my-lg">
                           <q-card-section class="row justify-between q-pa-md">
                             <div class="text-h6">
@@ -178,8 +220,14 @@
                           <q-card-section>
                             <div class="row flex justify-between">
                               <div class="col flex justify-start">
-                                <div class="flex no-wrap justify-between" style="width: 130px">
-                                  <q-icon size="1.6rem"  name="favorite_border" />
+                                <div
+                                  class="flex no-wrap justify-between"
+                                  style="width: 130px"
+                                >
+                                  <q-icon
+                                    size="1.6rem"
+                                    name="favorite_border"
+                                  />
                                   <q-icon size="1.6rem" name="mode_comment" />
                                   <q-icon size="1.6rem" name="send" />
                                 </div>
@@ -190,17 +238,32 @@
                             </div>
                             <div>
                               <div class="column q-my-md" style="height: 150px">
-                                <a class="col custom-link" href="#" style="width: fit-content">3, 300 likes</a>
-                                <p class="col" style=" margin: 0;">afimm_ Here we go, just randon text right here</p>
-                                <a class="col custom-link" style="width: fit-content" href="#">View all 3 comments</a>
-                                <q-input class="col custom-btn-none" v-model="text" label="Add a comment" dense/>
+                                <a
+                                  class="col custom-link"
+                                  href="#"
+                                  style="width: fit-content"
+                                  >3, 300 likes</a
+                                >
+                                <p class="col" style="margin: 0">
+                                  afimm_ Here we go, just randon text right here
+                                </p>
+                                <a
+                                  class="col custom-link"
+                                  style="width: fit-content"
+                                  href="#"
+                                  >View all 3 comments</a
+                                >
+                                <q-input
+                                  class="col custom-btn-none"
+                                  v-model="text"
+                                  label="Add a comment"
+                                  dense
+                                />
                               </div>
                             </div>
                           </q-card-section>
 
-                          <q-card-section class="q-pt-none">
-                            {{ lorem }}
-                          </q-card-section>
+                          <q-card-section class="q-pt-none"> </q-card-section>
                         </q-card>
                       </div>
                     </div>
@@ -213,7 +276,7 @@
                 <div class="column q-pa-md" style="height: 570px">
                   <div class="col-2 q-mt-lg">
                     <div class="row">
-                      <div class="col-2" style="margin-right: 10px;">
+                      <div class="col-2" style="margin-right: 10px">
                         <q-avatar size="52px">
                           <img
                             src="https://cdn.quasar.dev/img/boy-avatar.png"
@@ -370,12 +433,26 @@ import { ref } from "vue";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
+const dialog = ref(false);
+const addPost = ref(false);
+const position = ref("left");
+const text = ref("");
+const search = ref("");
 export default {
   name: "PageHome",
   components: { Footer, Header },
   data() {
     return {
       tab: ref("mails"),
+      position,
+      text,
+      dialog,
+      search,
+      addPost,
+      open: (pos) => {
+        position.value = pos;
+        dialog.value = true;
+      },
       posts: [
         {
           id: 1,
@@ -426,6 +503,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 .card-post .q-img {
   min-height: 200px;
@@ -454,13 +532,13 @@ export default {
   text-align: left;
 }
 
-.custom-center{
+.custom-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.custom-link{
+.custom-link {
   color: black;
   text-decoration: none;
 }

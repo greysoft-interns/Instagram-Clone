@@ -1,11 +1,12 @@
 <template>
   <q-page>
+    <Header />
     <div class="xs q-pa-xs example-column-variable-width">
       <div class="column" style="height: 100vh">
-        <div class="col" style="max-height: 3.4rem">
+        <div class="col q-my-md" style="max-height: 2.4rem; width: 400px">
           <div class="row">
-            <div class="col-10">
-              <div class="q-gutter-y-md column" style="max-width: 330px">
+            <div class="col-11">
+              <div class="q-gutter-y-md column" style="max-width: 100%">
                 <q-input 
                   filled 
                   class="q-px-sm"
@@ -17,13 +18,13 @@
                 />
               </div>
             </div>
-            <div class="col-2 q-pa-sm">
+            <div class="col-1 q-py-sm" style="">
               <q-icon name="qr_code" color="black" size="1.6rem" />
             </div>
           </div>
         </div>
         <div class="col" style="max-height: 3.4rem">
-          <q-scroll-area visible="false" style="height: 45px; max-width: 340px">
+          <q-scroll-area visible="false" style="height: 45px; max-width: 400px">
             <div class="row no-wrap q-my-xs">
               <div class="col-auto q-mr-sm">
                 <a href="#" class="q-px-sm q-py-xs border-1 rounded-borders">
@@ -96,6 +97,7 @@
 
 <script>
 import Footer from "../components/Footer.vue";
+import Header from "../components/Header.vue";
 import { ref } from "vue";
 const generateCells = () => Array(12).fill(null).map((_, cell) => (
   Array(2 + Math.ceil(3 * Math.random())).fill(null).map((_, text) => `Cell ${cell + 1} - ${text + 1}`)
@@ -103,6 +105,7 @@ const generateCells = () => Array(12).fill(null).map((_, cell) => (
 export default {
   name: "SearchPage",
   components: {
+    Header,
     Footer,
   },
   setup () {

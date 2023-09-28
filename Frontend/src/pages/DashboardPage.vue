@@ -4,7 +4,7 @@
       <div class="col-5">
         <div class="column" style="height: 100%">
           <div class="col-2 flex align-center justify-center">
-            <div class="row q-py-md" style="width: 100%">
+            <div class="row q-py-lg" style="width: 100%">
               <div class="col-7 text-right text-weight-medium">
                 <q-icon name="lock" />
                 afimm_

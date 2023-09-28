@@ -1,58 +1,365 @@
 <template>
-  <q-page class="constrain q-pa-md">
-    <Header />
-    <div class="row q-col-gutter-lg">
-      <div class="col-12 col-sm-8">
-        <q-card
-          class="card-post q-mb-md"
-          flat
-          bordered
-          v-for="post in posts"
-          :key="post.id"
-        >
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-              </q-avatar>
-            </q-item-section>
+  <q-page>
+    <div class="xs">
+      <Footer />
+    </div>
+    <div class="sm">
+      <Footer />
+    </div>
+    <div class="md" style="height: 100vh">
+      <div class="row" style="height: 100vh">
+        <div class="col-2 q-px-md q-py-xl">
+          <div style="height: 100vh; width: 200px">
+            <a href="#">Instagram</a>
+            <q-tabs v-model="tab" vertical class="text-black">
+              <!-- <q-icon name="home" /> -->
+              <q-tab class="flex flex-row" name="home" icon="home">
+                <p class="text-caption">home</p>
+              </q-tab>
+              <q-tab name="search" icon="search">
+                <p class="text-caption">search</p>
+              </q-tab>
+              <q-tab name="explore" icon="explore">
+                <p class="text-caption">explore</p>
+              </q-tab>
+              <q-tab name="smart_display" icon="smart_display">
+                <p class="text-caption">Reels</p>
+              </q-tab>
+              <q-tab name="chat" icon="chat">
+                <p class="text-caption">Messages</p>
+              </q-tab>
+              <q-tab name="favorite_border" icon="favorite_border">
+                <p class="text-caption">Notifications</p>
+              </q-tab>
+              <q-tab name="add_box" icon="add_box">
+                <p class="text-caption">Create</p>
+              </q-tab>
+              <q-tab name="perm_identity" icon="perm_identity">
+                <p class="text-caption">Profile</p>
+              </q-tab>
+            </q-tabs>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row" style="height: 100%">
+            <div class="col">
+              <div class="column" style="height: 100%">
+                <div class="col-2 justify-center q-mx-lg q-mt-lg">
+                  <q-scroll-area style="height: 100%; max-width: 790px">
+                    <div
+                      class="row no-wrap flex items-center justify-center"
+                      style="height: 110px; width: 100%"
+                    >
+                      <!-- <div v-for="n in 10" :key="n" style="width: 150px" class="q-pa-sm">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fuga quae veritatis blanditiis sequi id expedita amet esse aspernatur! Iure, doloribus!
+                      </div> -->
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
 
-            <q-item-section>
-              <q-item-label class="text-bold">Kaylah_rhay</q-item-label>
-              <q-item-label caption> {{ post.location }}</q-item-label>
-            </q-item-section>
-          </q-item>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                      <div
+                        class="q-mr-md story-outline flex justify-center"
+                        style="width: 66px"
+                      >
+                        <q-avatar size="60px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                    </div>
+                  </q-scroll-area>
+                </div>
+                <div class="col">
+                  <q-scroll-area
+                    style="height: 100vh; max-width: 100%"
+                    class="q-pa-sm custom-center"
+                  >
+                    <div class="column custom-center" style="height: 100%">
+                      <div class="col" style="width: 80%;">
+                        <q-card class="my-card q-my-lg">
+                          <q-card-section class="row justify-between q-pa-md">
+                            <div class="text-h6">
+                              <div class="row">
+                                <q-avatar
+                                  class="q-px-sm"
+                                  size="xl"
+                                  color="primary"
+                                  text-color="white"
+                                  icon="directions"
+                                />
+                                <div class="col q-mx-md" style="height: 30px">
+                                  <div class="text-caption">afimm_</div>
+                                  <div class="text-caption">Original audio</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="q-py-sm">
+                              <q-icon name="more_horiz" size="1.7rem" />
+                            </div>
+                          </q-card-section>
+                          <img src="https://cdn.quasar.dev/img/mountains.jpg" />
 
-          <q-separator />
-          <q-img :src="post.img" />
-          <q-card-section>
-            <div class="text-grey-10">{{ post.caption }}</div>
-            <div class="text-caption text-grey">{{ post.date | newDate }}</div>
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-4 large-screen">
-        <q-item class="fixed">
-          <q-item-section avatar>
-            <q-avatar size="48px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-          </q-item-section>
+                          <q-card-section>
+                            <div class="row flex justify-between">
+                              <div class="col flex justify-start">
+                                <div class="custom-border flex no-wrap justify-between" style="width: 130px">
+                                  <q-icon size="1.6rem"  name="favorite_border" />
+                                  <q-icon size="1.6rem" name="insert_comment" />
+                                  <q-icon size="1.6rem" name="send" />
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">
+                                <q-icon size="1.6rem" name="turned_in_not" />
+                              </div>
+                            </div>
+                            <div></div>
+                          </q-card-section>
 
-          <q-item-section>
-            <q-item-label class="text-bold">Kaylah_rhay</q-item-label>
-            <q-item-label caption> Developer</q-item-label>
-          </q-item-section>
-        </q-item>
+                          <q-card-section class="q-pt-none">
+                            {{ lorem }}
+                          </q-card-section>
+                        </q-card>
+                      </div>
+                    </div>
+                  </q-scroll-area>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="" style="height: 100vh">
+                <div class="column q-pa-md" style="height: 570px">
+                  <div class="col-2 q-mt-lg">
+                    <div class="row">
+                      <div class="col-2" style="margin-right: 10px;">
+                        <q-avatar size="52px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                      </div>
+                      <div class="col-6 flex column items-start justify-center">
+                        <div class="q-ma-none">afimm_</div>
+                        <div class="q-ma-none">Miracle Jigah</div>
+                      </div>
+                      <div class="col flex column items-center justify-center">
+                        Switch
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="column" style="height: 100%">
+                      <div class="col-1.5">
+                        <div class="row flex items-center justify-between">
+                          <div class="col">Suggested For You</div>
+                          <div class="col flex justify-end">See All</div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="column" style="height: 100%">
+                          <div class="col q-my-xs">
+                            <div class="row flex items-center">
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="col-3">
+                                    <q-avatar size="42px">
+                                      <img
+                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                      />
+                                    </q-avatar>
+                                  </div>
+                                  <div
+                                    class="col-8 flex column items-start justify-start"
+                                  >
+                                    <p class="q-ma-none">johnactive</p>
+                                    <p class="q-ma-none">Followed by more...</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">Follow</div>
+                            </div>
+                          </div>
+                          <div class="col q-my-xs">
+                            <div class="row flex items-center">
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="col-3">
+                                    <q-avatar size="42px">
+                                      <img
+                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                      />
+                                    </q-avatar>
+                                  </div>
+                                  <div
+                                    class="col-8 flex column items-start justify-start"
+                                  >
+                                    <p class="q-ma-none">johnactive</p>
+                                    <p class="q-ma-none">Followed by more...</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">Follow</div>
+                            </div>
+                          </div>
+                          <div class="col q-my-xs">
+                            <div class="row flex items-center">
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="col-3">
+                                    <q-avatar size="42px">
+                                      <img
+                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                      />
+                                    </q-avatar>
+                                  </div>
+                                  <div
+                                    class="col-8 flex column items-start justify-start"
+                                  >
+                                    <p class="q-ma-none">johnactive</p>
+                                    <p class="q-ma-none">Followed by more...</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">Follow</div>
+                            </div>
+                          </div>
+                          <div class="col q-my-xs">
+                            <div class="row flex items-center">
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="col-3">
+                                    <q-avatar size="42px">
+                                      <img
+                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                      />
+                                    </q-avatar>
+                                  </div>
+                                  <div
+                                    class="col-8 flex column items-start justify-start"
+                                  >
+                                    <p class="q-ma-none">johnactive</p>
+                                    <p class="q-ma-none">Followed by more...</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">Follow</div>
+                            </div>
+                          </div>
+                          <div class="col q-my-xs">
+                            <div class="row flex items-center">
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="col-3">
+                                    <q-avatar size="42px">
+                                      <img
+                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                      />
+                                    </q-avatar>
+                                  </div>
+                                  <div
+                                    class="col-8 flex column items-start justify-start"
+                                  >
+                                    <p class="q-ma-none">johnactive</p>
+                                    <p class="q-ma-none">Followed by more...</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col flex justify-end">Follow</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">1 of 2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <Footer />
   </q-page>
 </template>
 
 <script>
 import { date } from "quasar";
-// import { defineComponent } from "vue";
+import { ref } from "vue";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -61,6 +368,7 @@ export default {
   components: { Footer, Header },
   data() {
     return {
+      tab: ref("mails"),
       posts: [
         {
           id: 1,
@@ -114,5 +422,34 @@ export default {
 <style lang="scss">
 .card-post .q-img {
   min-height: 200px;
+}
+
+.custom-border {
+  border: 1px solid red;
+}
+
+.story-outline {
+  padding: 1px;
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 66px;
+}
+.q-tab__content {
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.q-tab__content p {
+  margin: 0;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.custom-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -8,7 +8,7 @@
     </div>
     <div class="md" style="height: 100vh">
       <div class="row" style="height: 100vh">
-        <div class="col-2 q-px-md q-py-xl">
+        <div class="col-2 q-px-md q-py-xl" style="border-right: 1px solid rgb(111, 111, 111);">
           <div style="height: 100vh; width: 200px">
             <a href="#">Instagram</a>
             <q-tabs v-model="tab" vertical class="text-black q-my-lg">

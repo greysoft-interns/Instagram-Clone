@@ -178,9 +178,9 @@
                           <q-card-section>
                             <div class="row flex justify-between">
                               <div class="col flex justify-start">
-                                <div class="custom-border flex no-wrap justify-between" style="width: 130px">
+                                <div class="flex no-wrap justify-between" style="width: 130px">
                                   <q-icon size="1.6rem"  name="favorite_border" />
-                                  <q-icon size="1.6rem" name="insert_comment" />
+                                  <q-icon size="1.6rem" name="mode_comment" />
                                   <q-icon size="1.6rem" name="send" />
                                 </div>
                               </div>
@@ -188,7 +188,14 @@
                                 <q-icon size="1.6rem" name="turned_in_not" />
                               </div>
                             </div>
-                            <div></div>
+                            <div>
+                              <div class="column q-my-md" style="height: 150px">
+                                <a class="col custom-link" href="#" style="width: fit-content">3, 300 likes</a>
+                                <p class="col" style=" margin: 0;">afimm_ Here we go, just randon text right here</p>
+                                <a class="col custom-link" style="width: fit-content" href="#">View all 3 comments</a>
+                                <q-input class="col custom-btn-none" v-model="text" label="Add a comment" dense/>
+                              </div>
+                            </div>
                           </q-card-section>
 
                           <q-card-section class="q-pt-none">
@@ -451,5 +458,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.custom-link{
+  color: black;
+  text-decoration: none;
 }
 </style>

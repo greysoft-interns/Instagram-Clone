@@ -9,12 +9,12 @@
     <div class="md" style="height: 100vh">
       <div class="row" style="height: 100vh">
         <div
-          class="col-2 q-px-md q-py-xl"
-          style="border-right: 1px solid rgb(111, 111, 111)"
+          class="col-2 q-px-md"
+          style="border-right: width: 230px; height: 100%; 1px solid rgb(111, 111, 111)"
         >
-          <div style="height: 100vh; width: 200px">
+          <div class="q-py-md" style="height: 100vh; width: 100%">
             <a class="text-grand-hotel text-bold text-h4 custom-link" href="#">Instagram</a>
-            <q-tabs v-model="tab" vertical class="text-black q-my-lg">
+            <q-tabs v-model="tab" vertical class="text-black q-pt-lg">
               <a href="#/" class="custom-link">
                 <q-tab class="flex flex-row" name="home" icon="home">
                   <p class="text-caption">home</p>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="col">
                   <q-scroll-area
-                    style="height: 100vh; max-width: 100%"
+                    style="height: 100%; max-width: 100%"
                     class="q-pa-sm custom-center"
                   >
                     <div class="column custom-center" style="height: 100%">
@@ -341,7 +341,7 @@
                               .col
                             </div>
                             <div class="col">
-                              <div class="column" style="height: 100%">
+                              <div class="column" style="height: 100vh">
                                 <div class="col-1 row justify-between q-px-md q-pb-sm">
                                   <div class="text-h6">
                                     <div class="row">

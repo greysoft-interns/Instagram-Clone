@@ -307,18 +307,45 @@
                 
                 <q-tab-panels class="bg-transparent no-shadow no-box-shadow" v-model="tab" animated>
                   <q-tab-panel name="posts">
-                    <div class="text-h6">Posts</div>
-                   
+                    <div class="row">
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                    </div> 
                   </q-tab-panel>
         
                   <q-tab-panel class="bg-transparent no-shadow no-box-shadow" name="saved">
-                    <div class="text-h6">Saved</div>
-                   
+                    <div class="row">
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                    </div>
                   </q-tab-panel>
         
                   <q-tab-panel class="bg-transparent no-shadow no-box-shadow" name="tags">
-                    <div class="text-h6">Tags</div>
-                   
+                    <div class="row">
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                      <div class="col">
+                        .col
+                      </div>
+                    </div>
                   </q-tab-panel>
                 </q-tab-panels>
               </q-card>

@@ -8,9 +8,12 @@
     </div>
     <div class="md" style="height: 100vh">
       <div class="row" style="height: 100vh">
-        <div class="col-2 q-px-md q-py-xl" style="border-right: 1px solid rgb(111, 111, 111);">
+        <div
+          class="col-2 q-px-md q-py-xl"
+          style="border-right: 1px solid rgb(111, 111, 111)"
+        >
           <div style="height: 100vh; width: 200px">
-            <a href="#">Instagram</a>
+            <a class="text-grand-hotel text-bold text-h4 custom-link" href="#">Instagram</a>
             <q-tabs v-model="tab" vertical class="text-black q-my-lg">
               <a href="#/" class="custom-link">
                 <q-tab class="flex flex-row" name="home" icon="home">
@@ -65,7 +68,10 @@
                     <q-btn icon="close" flat round dense v-close-popup />
                   </q-card-section>
 
-                  <q-card-section class="flex items-center justify-center" style="height: 400px">
+                  <q-card-section
+                    class="flex items-center justify-center"
+                    style="height: 400px"
+                  >
                     <q-file
                       bg-color="blue"
                       style="max-width: 300px"
@@ -198,24 +204,44 @@
                           <q-card-section class="row justify-between q-pa-md">
                             <div class="text-h6">
                               <div class="row">
-                                <q-avatar
-                                  class="q-px-sm"
-                                  size="xl"
-                                  color="primary"
-                                  text-color="white"
-                                  icon="directions"
-                                />
-                                <div class="col q-mx-md" style="height: 30px">
-                                  <div class="text-caption">afimm_</div>
+                                <!-- <q-skeleton bordered type="circle" /> -->
+                                <q-avatar size="40px">
+                                  <img
+                                    src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                  />
+                                </q-avatar>
+                                <div class="col q-mx-sm" style="height: 40px">
+                                  <div class="text-caption">
+                                    <a class="custom-link" href="#">afimm_</a>
+                                  </div>
                                   <div class="text-caption">Original audio</div>
                                 </div>
                               </div>
                             </div>
                             <div class="q-py-sm">
-                              <q-icon name="more_horiz" size="1.7rem" />
+                              <q-icon
+                                class="cursor-pointer"
+                                name="more_horiz"
+                                size="1.7rem"
+                              />
                             </div>
                           </q-card-section>
-                          <img src="https://cdn.quasar.dev/img/mountains.jpg" />
+                          <q-card-section
+                            class="q-pa-none"
+                            style="height: 400px"
+                          >
+                            <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
+                            <img
+                              class="cursor-pointer"
+                              @dblclick="clickLike"
+                              style="
+                                height: 100%;
+                                width: 100%;
+                                object-fit: contain;
+                              "
+                              src="https://cdn.quasar.dev/img/mountains.jpg"
+                            />
+                          </q-card-section>
 
                           <q-card-section>
                             <div class="row flex justify-between">
@@ -225,15 +251,38 @@
                                   style="width: 130px"
                                 >
                                   <q-icon
+                                    v-if="!liked"
+                                    class="cursor-pointer"
                                     size="1.6rem"
                                     name="favorite_border"
+                                    @click="clickLike"
                                   />
-                                  <q-icon size="1.6rem" name="mode_comment" />
-                                  <q-icon size="1.6rem" name="send" />
+                                  <q-icon
+                                    v-else
+                                    class="cursor-pointer text-red"
+                                    size="1.6rem"
+                                    name="favorite"
+                                    @click="clickLike"
+                                  />
+                                  <q-icon
+                                    class="cursor-pointer"
+                                    @click="commentDialog = true"
+                                    size="1.6rem"
+                                    name="chat_bubble_outline"
+                                  />
+                                  <q-icon
+                                    class="cursor-pointer"
+                                    size="1.6rem"
+                                    name="send"
+                                  />
                                 </div>
                               </div>
                               <div class="col flex justify-end">
-                                <q-icon size="1.6rem" name="turned_in_not" />
+                                <q-icon
+                                  class="cursor-pointer"
+                                  size="1.6rem"
+                                  name="turned_in_not"
+                                />
                               </div>
                             </div>
                             <div>
@@ -267,6 +316,126 @@
                         </q-card>
                       </div>
                     </div>
+                    <q-dialog v-model="commentDialog">
+                      <q-card
+                        style="
+                          width: 1100px;
+                          max-width: 90vw;
+                          height: 600px;
+                        "
+                      >
+                        <q-card-section
+                          style="height: 100%; width: 100%"
+                        >
+                          <div
+                            class="row"
+                            style="height: 100%; width: 100%"
+                          >
+                            <div
+                              class="col"
+                              style="
+                                border-right: 1px solid black;
+                                height: 100%;
+                              "
+                            >
+                              .col
+                            </div>
+                            <div class="col">
+                              <div class="column" style="height: 100%">
+                                <div class="col-1 row justify-between q-px-md q-pb-sm">
+                                  <div class="text-h6">
+                                    <div class="row">
+                                      <!-- <q-skeleton bordered type="circle" /> -->
+                                      <q-avatar size="40px">
+                                        <img
+                                          src="https://cdn.quasar.dev/img/boy-avatar.png"
+                                        />
+                                      </q-avatar>
+                                      <div
+                                        class="col q-mx-sm"
+                                        style="height: 40px"
+                                      >
+                                        <div class="text-caption">
+                                          <a
+                                            class="custom-link"
+                                            href="#"
+                                            >afimm_</a
+                                          >
+                                        </div>
+                                        <div class="text-caption">
+                                          Original audio
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="q-py-sm">
+                                    <q-icon
+                                      class="cursor-pointer"
+                                      name="more_horiz"
+                                      size="1.7rem"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col" style="border-top: 1px solid rgb(208, 208, 208); border-bottom: 1px solid rgb(208, 208, 208);">
+                                    1 of 4
+                                  </div>
+                                <div class="col-1">
+                                  <div class="row flex justify-between q-pa-md">
+                                    <div class="col flex justify-start">
+                                      <div
+                                        class="flex no-wrap justify-between"
+                                        style="width: 130px"
+                                      >
+                                        <q-icon
+                                          v-if="!liked"
+                                          class="cursor-pointer"
+                                          size="1.6rem"
+                                          name="favorite_border"
+                                          @click="clickLike"
+                                        />
+                                        <q-icon
+                                          v-else
+                                          class="cursor-pointer text-red"
+                                          size="1.6rem"
+                                          name="favorite"
+                                          @click="clickLike"
+                                        />
+                                        <q-icon
+                                          class="cursor-pointer"
+                                          @click="commentDialog = true"
+                                          size="1.6rem"
+                                          name="chat_bubble_outline"
+                                        />
+                                        <q-icon
+                                          class="cursor-pointer"
+                                          size="1.6rem"
+                                          name="send"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col flex justify-end">
+                                      <q-icon
+                                        class="cursor-pointer"
+                                        size="1.6rem"
+                                        name="turned_in_not"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-1">
+                                  <q-input
+                                    class="col custom-btn-none q-mx-md"
+                                    v-model="text"
+                                    label="Add a comment"
+                                    dense
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </q-card-section>
+                      </q-card>
+                    </q-dialog>
                   </q-scroll-area>
                 </div>
               </div>
@@ -434,7 +603,9 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const dialog = ref(false);
+const commentDialog = ref(false);
 const addPost = ref(false);
+const liked = ref(false);
 const position = ref("left");
 const text = ref("");
 const search = ref("");
@@ -447,8 +618,10 @@ export default {
       position,
       text,
       dialog,
+      commentDialog,
       search,
       addPost,
+      liked,
       open: (pos) => {
         position.value = pos;
         dialog.value = true;
@@ -495,6 +668,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    clickLike: () => {
+      liked.value = !liked.value;
+    },
   },
   filters: {
     newDate(value) {

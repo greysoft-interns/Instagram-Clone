@@ -169,81 +169,7 @@
           class="col-2 q-px-md q-py-xl"
           style="border-right: 1px solid rgb(211, 211, 211)"
         >
-          <div style="height: 100vh; width: 200px">
-            <a href="#">Instagram</a>
-            <q-tabs v-model="tab" vertical class="text-black q-my-lg">
-              <a href="#/" class="custom-link">
-                <q-tab class="flex flex-row" name="home" icon="home">
-                  <p class="text-caption">home</p>
-                </q-tab>
-              </a>
-              <q-tab name="search" icon="search" @click="open('left')">
-                <p class="text-caption">search</p>
-              </q-tab>
-              <q-tab name="add_box" icon="add_box" @click="addPost = true">
-                <p class="text-caption">Create</p>
-              </q-tab>
-              <a href="#/home" class="custom-link">
-                <q-tab name="perm_identity" icon="perm_identity">
-                  <p class="text-caption">Profile</p>
-                </q-tab>
-              </a>
-              <q-dialog v-model="dialog" :position="position">
-                <q-card style="width: 350px; height: 100vh">
-                  <!-- <q-linear-progress :value="0.6" color="pink" /> -->
-
-                  <q-card-section class="row items-center no-wrap">
-                    <div class="flex" style="width: 100%; height: 600px">
-                      <div style="width: 100%">
-                        <p class="text-h4 q-pa-md">Search</p>
-                        <q-input
-                          color="black"
-                          filled
-                          v-model="search"
-                          label="Search"
-                        >
-                          <template v-slot:append>
-                            <q-icon name="search" />
-                          </template>
-                        </q-input>
-                      </div>
-                      <div
-                        class="flex items-center justify-center"
-                        style="height: 100%; width: 100%"
-                      >
-                        <p class="text-caption">No Recent Searches</p>
-                      </div>
-                    </div>
-                  </q-card-section>
-                </q-card>
-              </q-dialog>
-              <q-dialog v-model="addPost">
-                <q-card style="height: 500px; width: 500px">
-                  <q-card-section class="row items-center q-pb-none">
-                    <div class="text-h6">Create New Post</div>
-                    <q-space />
-                    <q-btn icon="close" flat round dense v-close-popup />
-                  </q-card-section>
-
-                  <q-card-section
-                    class="flex items-center justify-center"
-                    style="height: 400px"
-                  >
-                    <q-file
-                      bg-color="blue"
-                      style="max-width: 300px"
-                      v-model="filesMaxSize"
-                      outlined
-                      label="Select From Computer (Not more than 2kb)"
-                      multiple
-                      max-file-size="2048"
-                      @rejected="onRejected"
-                    />
-                  </q-card-section>
-                </q-card>
-              </q-dialog>
-            </q-tabs>
-          </div>
+          <Search />
         </div>
         <div class="col">
           <div class="column" style="height: 100%">
@@ -359,11 +285,13 @@
 
 <script>
 import Footer from "../components/Footer.vue";
+import Search from "../components/Search.vue";
 import { ref } from 'vue'
 export default {
   name: "DashboardPage",
   components: {
     Footer,
+    Search
   },
   data(){
     return{

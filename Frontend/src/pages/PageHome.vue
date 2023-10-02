@@ -130,7 +130,7 @@
                   >
                     <div class="column custom-center" style="height: 100%">
                       <q-dialog v-model="commDialog">
-                        <CommentDialog :post="dialogContent" />
+                        <CommentDialog :post="dialogContent" :text="text" @clickLike="clickLike" @addComment="addComment"/>
                       </q-dialog>
                       <div
                         v-for="postData in getPostsData"
@@ -138,126 +138,7 @@
                         class="col"
                         style="width: 80%"
                       >
-                        <q-card class="my-card q-my-lg">
-                          <q-card-section class="row justify-between q-pa-md">
-                            <div class="text-h6">
-                              <div class="row">
-                                <!-- <q-skeleton bordered type="circle" /> -->
-                                <q-avatar size="40px">
-                                  <img
-                                    src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                  />
-                                </q-avatar>
-                                <div class="col q-mx-sm" style="height: 40px">
-                                  <div class="text-caption">
-                                    <a class="custom-link" href="#">afimm_</a>
-                                  </div>
-                                  <div class="text-caption">Original audio</div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="q-py-sm">
-                              <q-icon
-                                class="cursor-pointer"
-                                name="more_horiz"
-                                size="1.7rem"
-                              />
-                            </div>
-                          </q-card-section>
-                          <q-card-section
-                            class="q-pa-none"
-                            style="height: 400px"
-                          >
-                            <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
-                            <img
-                              class="cursor-pointer"
-                              @dblclick="clickLike"
-                              style="
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                              "
-                              :src="postData.url"
-                            />
-                          </q-card-section>
-
-                          <q-card-section>
-                            <div class="row flex justify-between">
-                              <div class="col flex justify-start">
-                                <div
-                                  class="flex no-wrap justify-between"
-                                  style="width: 130px"
-                                >
-                                  <q-icon
-                                    v-if="!liked"
-                                    class="cursor-pointer"
-                                    size="1.6rem"
-                                    name="favorite_border"
-                                    @click="clickLike(postData.id)"
-                                  />
-                                  <q-icon
-                                    v-else
-                                    class="cursor-pointer text-red"
-                                    size="1.6rem"
-                                    name="favorite"
-                                    @click="clickLike(postData.id)"
-                                  />
-                                  <q-icon
-                                    class="cursor-pointer"
-                                    @click="OpenCommentDialog(postData)"
-                                    size="1.6rem"
-                                    name="chat_bubble_outline"
-                                  />
-                                  <q-icon
-                                    class="cursor-pointer"
-                                    size="1.6rem"
-                                    name="send"
-                                  />
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">
-                                <q-icon
-                                  class="cursor-pointer"
-                                  size="1.6rem"
-                                  name="turned_in_not"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div class="column q-my-md" style="height: 150px">
-                                <a
-                                  class="col custom-link"
-                                  href="#"
-                                  style="width: fit-content"
-                                  >{{ postData.likes.length }} likes</a
-                                >
-                                <p class="col" style="margin: 0">
-                                  afimm_ <span>{{ postData.caption }}</span>
-                                </p>
-                                <a
-                                  class="col custom-link"
-                                  style="width: fit-content"
-                                  href="#"
-                                  @click="OpenCommentDialog(postData)"
-                                  >View all
-                                  {{ postData.comments.length }} comments</a
-                                >
-                                <q-input
-                                  class="col custom-btn-none"
-                                  v-model="text"
-                                  label="Add a comment"
-                                  dense
-                                >
-                                  <template v-slot:after>
-                                    <q-icon class="cursor-pointer" @click="addComment(postData.id)" name="send" />
-                                  </template>
-                                </q-input>
-                              </div>
-                            </div>
-                          </q-card-section>
-
-                          <q-card-section class="q-pt-none"> </q-card-section>
-                        </q-card>
+                      <TimelinePost :postData="postData" @addComment="addComment" @clickLike="clickLike" @OpenCommentDialog="OpenCommentDialog"/>
                       </div>
                     </div>
                   </q-scroll-area>
@@ -430,6 +311,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Search from "../components/Search.vue";
 import CommentDialog from "../components/CommentDialog.vue";
+import TimelinePost from "../components/TimelinePost.vue"
 
 const postStore = usePostStore();
 const userStore = useUserStore();
@@ -439,14 +321,14 @@ const { user, getUserDetails } = storeToRefs(userStore); // state and getters ne
 const dialog = ref(false);
 const commDialog = ref(false);
 const addPost = ref(false);
-const liked = ref(false);
+const postliked = ref(false);
 const position = ref("left");
 const text = ref("");
 const search = ref("");
 const dialogContent = ref({});
 export default {
   name: "PageHome",
-  components: { Footer, Header, Search, CommentDialog },
+  components: { Footer, Header, Search, CommentDialog, TimelinePost },
   data() {
     return {
       tab: ref("mails"),
@@ -455,7 +337,7 @@ export default {
       dialog,
       search,
       addPost,
-      liked,
+      postliked,
       open: (pos) => {
         position.value = pos;
         dialog.value = true;
@@ -468,34 +350,34 @@ export default {
     };
   },
   methods: {
-    clickLike: (id) => {
-      const foundElement = groupedPosts.value.findIndex((element) => element.id === id)
-      liked.value = !liked.value;
+    // liked(postId) {
+    //   const foundElement = groupedPosts.value.findIndex((element) => element.id === postId);
+    //   return groupedPosts[foundElement].likes.includes(postId);
+    // },
+    clickLike: () => {
+      // const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
+      // if(liked.value){
+      //   delete groupedPosts.value[foundElement];
+      // } else {
+      //   groupedPosts.value.push("afimm_")
+      // }
+      postliked.value = !postliked.value;
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
       commDialog.value = true;
     },
-    addComment: (id) => {
-      const foundElement = groupedPosts.value.findIndex((element) => element.id === id)
+    addComment: (id, textValue) => {
+      const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
       const commentData = {
         user: "real_5",
-        description: text.value
-      }
+        description: textValue,
+      };
       groupedPosts.value[foundElement].comments.push(commentData);
       text.value = "";
-    }
+    },
   },
   computed: {
-    // getTimelinePosts(){
-    //   const timeline = getPostsData;
-    //   return timeline;
-    // }
-    // getCommentsDialog(){
-    //   const newArray = groupedPosts.value.map(eachPost => false);
-    //   console.log(newArray);
-    //   return newArray;
-    // }
   },
   filters: {
     newDate(value) {

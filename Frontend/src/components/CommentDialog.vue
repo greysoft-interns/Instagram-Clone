@@ -1,8 +1,8 @@
 <template>
-  <q-card style="width: 1100px; max-width: 90vw; height: 600px">
+  <q-card style="width: 1100px; max-width: 90vw; height: 800px">
     <q-card-section style="height: 100%; width: 100%">
       <div class="row" style="height: 100%; width: 100%">
-        <div class="col" style="border-right: 1px solid black; height: 100%">
+        <div class="col q-mr-md" style="border-right: 1px solid rgb(208, 208, 208); height: 100%">
           <q-card-section
           class="q-pa-none q-ma-md"
           style="height: 600px"
@@ -10,7 +10,7 @@
           <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
           <img
             class="cursor-pointer"
-            @dblclick="clickLike"
+            @dblclick="$emit('clickLike')"
             style="
               height: 100%;
               width: 100%;
@@ -55,7 +55,7 @@
             >
               <div class="column q-pa-md" style="height: 100%">
                 <div class="column" style="height: 100%">
-                  <div class="col-1 row items-center q-my-sm">
+                  <div class="col-2 row items-center q-my-sm">
                     <q-avatar class="q-mr-sm" size="40px">
                       <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                     </q-avatar>
@@ -65,18 +65,21 @@
                     </p>
                   </div>
                   <div class="col">
-                    <div v-for="(comment, index) in post.comments" :key="index" class="flex row justify-between q-my-md">
-                      <div class="row">
-                        <q-avatar class="q-mr-sm" size="40px">
-                          <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                        </q-avatar>
-                        <p>
-                          <a class="custom-link q-mr-sm" href="#">{{comment.user}}</a>
-                        {{ comment.description }}
-                        </p>
+                    <q-scroll-area style="height: 100%; max-width: 100%;">
+                      <div v-for="(comment, index) in post.comments" :key="index" class="flex row justify-between q-my-md">
+                        <div class="row">
+                          <q-avatar class="q-mr-sm" size="40px">
+                            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                          </q-avatar>
+                          <p>
+                            <a class="custom-link q-mr-sm" href="#">{{comment.user}}</a>
+                          {{ comment.description }}
+                          </p>
+                        </div>
+                        <q-icon class="cursor-pointer" name="favorite_border"/>
                       </div>
-                      <q-icon class="cursor-pointer" name="favorite_border"/>
-                    </div>
+                    </q-scroll-area>
+                    
                   </div>
                 </div>
 
@@ -94,14 +97,14 @@
                       class="cursor-pointer"
                       size="1.6rem"
                       name="favorite_border"
-                      @click="clickLike"
+                      @click="$emit('clickLike')"
                     />
                     <q-icon
                       v-else
                       class="cursor-pointer text-red"
                       size="1.6rem"
                       name="favorite"
-                      @click="clickLike"
+                      @click="$emit('clickLike')"
                     />
                     <q-icon
                       class="cursor-pointer"
@@ -123,11 +126,19 @@
             </div>
             <div class="col-1">
               <q-input
-                class="col custom-btn-none q-mx-md"
-                v-model="text"
-                label="Add a comment"
-                dense
-              />
+              class="col custom-btn-none q-py-md q-px-sm"
+              v-model="newText"
+              label="Add a comment"
+              dense
+            >
+              <template v-slot:after>
+                <q-icon
+                  class="cursor-pointer"
+                  @click="$emit('addComment', post.id, newText); newText=''"
+                  name="send"
+                />
+              </template>
+            </q-input>
             </div>
           </div>
         </div>
@@ -137,21 +148,29 @@
 </template>
 
 <script>
-import ref from "quasar";
+import {ref} from "vue";
+const liked = ref(false);
+const newText = ref("");
+
 export default {
+  emits: ["clickLike", "addComment"],
   props: {
     post: {
       type: Object,
       default: (() => {})
+    },
+    text: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-
+      liked,
+      newText,
     };
   },
   created(){
-    console.log(this.post)
   }
 };
 </script>

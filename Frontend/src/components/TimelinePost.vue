@@ -23,7 +23,7 @@
       <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
       <img
         class="cursor-pointer"
-        @dblclick="$emit('clickLike')"
+        @dblclick="$emit('clickLike', postData.id)"
         style="height: 100%; width: 100%; object-fit: contain"
         :src="postData.url"
       />
@@ -34,18 +34,18 @@
         <div class="col flex justify-start">
           <div class="flex no-wrap justify-between" style="width: 130px">
             <q-icon
-              v-if="!postliked"
+              v-if="!checkLikedPost"
               class="cursor-pointer"
               size="1.6rem"
               name="favorite_border"
-              @click="$emit('clickLike')"
+              @click="$emit('clickLike', postData.id)"
             />
             <q-icon
               v-else
               class="cursor-pointer text-red"
               size="1.6rem"
               name="favorite"
-              @click="$emit('clickLike')"
+              @click="$emit('clickLike', postData.id)"
             />
             <q-icon
               class="cursor-pointer"
@@ -118,6 +118,11 @@ export default {
   },
   methods: {
   },
+  computed: {
+    checkLikedPost(){
+        return this.postData.likes.includes("afimm_");
+    }
+  }
 };
 </script>
 

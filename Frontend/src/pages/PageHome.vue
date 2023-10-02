@@ -354,14 +354,15 @@ export default {
     //   const foundElement = groupedPosts.value.findIndex((element) => element.id === postId);
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
-    clickLike: () => {
-      // const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
-      // if(liked.value){
-      //   delete groupedPosts.value[foundElement];
-      // } else {
-      //   groupedPosts.value.push("afimm_")
-      // }
-      postliked.value = !postliked.value;
+    clickLike: (id) => {
+        const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
+        const foundliked = groupedPosts.value[foundElement].likes.findIndex((element) => element === "afimm_");
+        const isLiked = groupedPosts.value[foundElement].likes.includes("afimm_");
+        if(isLiked){
+          groupedPosts.value[foundElement].likes = groupedPosts.value[foundElement].likes.filter(element => element !== "afimm_");
+        } else {
+          groupedPosts.value[foundElement].likes.push("afimm_")
+        }
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;

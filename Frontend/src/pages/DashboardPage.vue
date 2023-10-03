@@ -287,6 +287,10 @@
 import Footer from "../components/Footer.vue";
 import Search from "../components/Search.vue";
 import { ref } from 'vue'
+import { useUserStore } from "../stores/user";
+
+const userStore = useUserStore();
+const { fetchUserDetails } = userStore;
 export default {
   name: "DashboardPage",
   components: {
@@ -297,6 +301,9 @@ export default {
     return{
       tab: ref('posts'),
     }
+  },
+  mounted(){
+    fetchUserDetails();
   }
 };
 </script>

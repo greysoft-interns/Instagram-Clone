@@ -11,9 +11,9 @@ const userSignup = async (req, res) => {
     const {
       name,
       username,
-      gender,
       email,
       password,
+      gender,
       phoneNumber,
       website,
       bio,
@@ -37,8 +37,8 @@ const userSignup = async (req, res) => {
     const newUser = new User({
       name,
       username,
-      website,
-      bio,
+      website: website ? website : "",
+      bio: bio ? bio : "",
       accountType,
       privateInfo: privateInfoDetails,
       password: hashedPassword,

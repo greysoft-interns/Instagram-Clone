@@ -371,7 +371,7 @@ export default {
     addComment: (id, textValue) => {
       const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
       const commentData = {
-        user: "real_5",
+        user: "afimm_",
         description: textValue,
       };
       groupedPosts.value[foundElement].comments.push(commentData);

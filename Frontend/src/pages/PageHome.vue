@@ -130,7 +130,7 @@
                   >
                     <div class="column custom-center" style="height: 100%">
                       <q-dialog v-model="commDialog">
-                        <CommentDialog :post="dialogContent" :text="text" @clickLike="clickLike" @addComment="addComment"/>
+                        <CommentDialog :post="dialogContent" :user="user" :text="text" @clickLike="clickLike" @addComment="addComment"/>
                       </q-dialog>
                       <div
                         v-for="postData in getPostsData"
@@ -138,7 +138,7 @@
                         class="col"
                         style="width: 80%"
                       >
-                      <TimelinePost :postData="postData" @addComment="addComment" @clickLike="clickLike" @OpenCommentDialog="OpenCommentDialog"/>
+                      <TimelinePost :postData="postData" :user="user" @addComment="addComment" @clickLike="clickLike" @OpenCommentDialog="OpenCommentDialog"/>
                       </div>
                     </div>
                   </q-scroll-area>
@@ -158,8 +158,8 @@
                         </q-avatar>
                       </div>
                       <div class="col-6 flex column items-start justify-center">
-                        <div class="q-ma-none">{{ user.username }}</div>
-                        <div class="q-ma-none">{{ user.name }}</div>
+                        <div class="q-ma-none">{{ user?.username }}</div>
+                        <div class="q-ma-none">{{ user?.name }}</div>
                       </div>
                       <div class="col flex column items-center justify-center">
                         <a class="custom-link" href="#/login">Switch</a>
@@ -317,7 +317,7 @@ const postStore = usePostStore();
 const userStore = useUserStore();
 const { groupedPosts, getPostsData } = storeToRefs(postStore); // state and getters need "storeToRefs"
 const { user, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-// const { increment } = store; // actions can be destructured directly
+const { fetchUserDetails, reset } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const addPost = ref(false);
@@ -371,7 +371,7 @@ export default {
     addComment: (id, textValue) => {
       const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
       const commentData = {
-        user: "afimm_",
+        user: user.value.username,
         description: textValue,
       };
       groupedPosts.value[foundElement].comments.push(commentData);
@@ -379,6 +379,12 @@ export default {
     },
   },
   computed: {
+  },
+  mounted(){
+    fetchUserDetails();
+  },
+  unmounted(){
+    reset()
   },
   filters: {
     newDate(value) {

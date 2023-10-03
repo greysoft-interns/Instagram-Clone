@@ -9,7 +9,7 @@
           </q-avatar>
           <div class="col q-mx-sm" style="height: 40px">
             <div class="text-caption">
-              <a class="custom-link" href="#">afimm_</a>
+              <a class="custom-link" href="#">{{ postData?.user }}</a>
             </div>
             <div class="text-caption">Original audio</div>
           </div>
@@ -66,7 +66,7 @@
             >{{ postData.likes.length }} likes</a
           >
           <p class="col" style="margin: 0">
-            afimm_ <span>{{ postData.caption }}</span>
+            {{postData?.user}} <span>{{ postData.caption }}</span>
           </p>
           <a
             class="col custom-link"
@@ -106,6 +106,10 @@ export default {
   emits: ["addComment", "clickLike", "OpenCommentDialog"],
   props: {
     postData: {
+      type: Object,
+      default: (() => {})
+    },
+    user: {
       type: Object,
       default: (() => {})
     },

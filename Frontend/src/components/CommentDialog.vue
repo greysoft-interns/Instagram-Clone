@@ -31,7 +31,7 @@
                   </q-avatar>
                   <div class="col q-mx-sm" style="height: 40px">
                     <div class="text-caption">
-                      <a class="custom-link" href="#">{{ post.user}}</a>
+                      <a class="custom-link" href="#">{{ post.user }}</a>
                     </div>
                     <div class="text-caption">Original audio</div>
                   </div>
@@ -156,6 +156,10 @@ export default {
   emits: ["clickLike", "addComment"],
   props: {
     post: {
+      type: Object,
+      default: (() => {})
+    },
+    user: {
       type: Object,
       default: (() => {})
     },

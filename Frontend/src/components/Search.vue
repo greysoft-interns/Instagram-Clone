@@ -64,15 +64,24 @@
                 style="height: 400px"
               >
                 <q-file
-                  bg-color="blue"
-                  style="max-width: 300px"
-                  v-model="filesMaxSize"
-                  outlined
-                  label="Select From Computer (Not more than 2kb)"
-                  multiple
-                  max-file-size="2048"
-                  @rejected="onRejected"
-                />
+                  clearable
+                  color="blue"
+                  standout
+                  bottom-slots
+                  v-model="fileUpload"
+                  label="Label"
+                  counter
+                  @change="previewImage"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="attach_file" />
+                  </template>
+                </q-file>
+              </q-card-section>
+              <q-card-section v-if="preview">
+                <img :src="preview" class="img-fluid" />
+                <p class="mb-0">file name: {{ image.name }}</p>
+                <p class="mb-0">size: {{ image.size/1024 }}KB</p>
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -86,11 +95,17 @@
 import { ref } from "vue";
 
 const dialog = ref(false);
+const fileUpload = ref(null);
+const image = ref(null);
+const preview = ref(null);
 const commentDialog = ref(false);
 const addPost = ref(false);
 const position = ref("left");
 const text = ref("");
 const search = ref("");
+const step = ref("step-1");
+
+
 export default {
   name: "Search",
   data() {
@@ -102,13 +117,35 @@ export default {
       commentDialog,
       search,
       addPost,
+      fileUpload,
+      preview,
+      image,
+      step,
       open: (pos) => {
         position.value = pos;
-        dialog.value = true;
+        dialog.value = true
       },
     };
   },
-};
+  methods: {
+    previewImage: function(event) {
+      console.log("Here!");
+      var input = event.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          preview.value = e.target.result;
+        }
+        image.value=input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    reset: function() {
+      image.value = null;
+      preview.value = null;
+    },
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

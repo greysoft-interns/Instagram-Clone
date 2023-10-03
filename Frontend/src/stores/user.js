@@ -77,12 +77,16 @@ export const useUserStore = defineStore('user', {
         this.userSuccess = true;
         this.user = response.data.data
         await localStorage.setItem("userTokens", JSON.stringify(response.data.token))
-        this.router.push("/home");
       } catch (error) {
         this.userLoading = false;
         this.userError = true;
         console.log(error)
       }
+    },
+    reset(){
+      this.userError = false;
+      this.userLoading = false;
+      this.userSuccess = false;
     }
   }
 })

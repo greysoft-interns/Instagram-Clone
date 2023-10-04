@@ -52,7 +52,10 @@
             </q-card>
           </q-dialog>
           <q-dialog v-model="addPost">
-            <q-card style="height: 500px; width: 500px">
+            <q-card
+              v-if="step === 'step-1'"
+              style="height: 800px; width: 500px"
+            >
               <q-card-section class="row items-center q-pb-none">
                 <div class="text-h6">Create New Post</div>
                 <q-space />
@@ -60,28 +63,85 @@
               </q-card-section>
 
               <q-card-section
-                class="flex items-center justify-center"
-                style="height: 400px"
+                class="flex items-center justify-between q-pa-md"
+                style="height: 70px"
               >
                 <q-file
+                  class="q-pa-none"
+                  style="width: 250px"
+                  @input="previewImage"
+                  type="file"
                   clearable
                   color="blue"
                   standout
                   bottom-slots
+                  @clear="reset"
                   v-model="fileUpload"
-                  label="Label"
+                  label="Upload Image"
                   counter
-                  @change="previewImage"
                 >
                   <template v-slot:prepend>
                     <q-icon name="attach_file" />
                   </template>
                 </q-file>
+                <q-btn label="Next" @click="nextStep" />
               </q-card-section>
-              <q-card-section v-if="preview">
-                <img :src="preview" class="img-fluid" />
-                <p class="mb-0">file name: {{ image.name }}</p>
-                <p class="mb-0">size: {{ image.size/1024 }}KB</p>
+              <q-card-section
+                v-if="preview"
+                style="width: 100%; margin-top: 40px"
+                class="flex items-center justify-center"
+              >
+                <img
+                  :src="preview"
+                  style="width: 400px; height: auto; object-fit: cover"
+                  class="img-fluid"
+                />
+                <div
+                  class="flex items-center justify-between q-mx-md"
+                  style="width: 100%"
+                >
+                  <p class="mb-0">file name: {{ image.name }}</p>
+                  <p class="mb-0">size: {{ image.size / 1024 }}KB</p>
+                </div>
+              </q-card-section>
+            </q-card>
+            <q-card
+              v-else-if="step === 'step-2'"
+              style="height: 800px; width: 500px"
+            >
+              <q-card-section class="row items-center q-pb-none">
+                <div class="text-h6 text-black">
+                  <q-icon
+                    class="cursor-pointer"
+                    name="keyboard_backspace"
+                    @click="prevStep"
+                    size="2rem"
+                  />
+                </div>
+                <q-space />
+                <q-btn icon="close" flat round dense v-close-popup />
+              </q-card-section>
+              <q-card-section>
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="caption"
+                  label="Caption"
+                />
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="location"
+                  label="Location"
+                />
+                <q-btn
+                  class="q-my-md"
+                  style="width: 100%"
+                  outline
+                  color="primary"
+                  @click="postUpload"
+                  label="Post"
+                />
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -93,7 +153,12 @@
 
 <script>
 import { ref } from "vue";
+import { useUserStore } from "stores/user";
+import { storeToRefs } from "pinia";
 
+const userStore = useUserStore();
+const { user, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
+const { uploadPosts, reset } = userStore;
 const dialog = ref(false);
 const fileUpload = ref(null);
 const image = ref(null);
@@ -103,14 +168,18 @@ const addPost = ref(false);
 const position = ref("left");
 const text = ref("");
 const search = ref("");
+const stepState = ref(1);
 const step = ref("step-1");
-
+const caption = ref("Meeeeeeeeeeeee");
+const location = ref("Nigeria");
 
 export default {
   name: "Search",
   data() {
     return {
       tab: ref("mails"),
+      caption,
+      location,
       position,
       text,
       dialog,
@@ -121,31 +190,48 @@ export default {
       preview,
       image,
       step,
+      stepState,
       open: (pos) => {
         position.value = pos;
-        dialog.value = true
+        dialog.value = true;
       },
     };
   },
   methods: {
-    previewImage: function(event) {
-      console.log("Here!");
+    previewImage: (event) => {
       var input = event.target;
+      console.log(input.files);
+      console.log(fileUpload.value);
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (e) => {
           preview.value = e.target.result;
-        }
-        image.value=input.files[0];
+        };
+        image.value = input.files[0];
         reader.readAsDataURL(input.files[0]);
       }
     },
-    reset: function() {
+    reset: () => {
       image.value = null;
       preview.value = null;
     },
-  }
-}
+    nextStep: () => {
+      stepState.value = stepState.value + 1;
+      step.value = `step-${stepState.value}`;
+    },
+    prevStep: () => {
+      stepState.value = stepState.value - 1;
+      step.value = `step-${stepState.value}`;
+    },
+    postUpload: () => {
+      let formdata = new FormData();
+      formdata.append('posts', fileUpload.value);
+      formdata.append('caption', caption.value);
+      formdata.append('location', location.value);
+      uploadPosts(formdata);
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

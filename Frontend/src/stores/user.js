@@ -32,7 +32,10 @@ export const useUserStore = defineStore('user', {
       }
       try {
         const response = await axios.post(`${API_URL}auth/login`, userData);
-        await localStorage.setItem("userTokens", JSON.stringify(response.data.token))
+        // console.log(JSON.stringify(response.data.token));
+        console.log(response)
+        // localStorage.setItem("token", response?.data?.token)
+        await localStorage.setItem("userTokens", response?.data?.token);
         this.userLoading = false;
         this.userSuccess = true;
         this.router.push("/home");
@@ -54,7 +57,7 @@ export const useUserStore = defineStore('user', {
       }
       try {
         const response = await axios.post(`${API_URL}auth/register`, userData);
-        await localStorage.setItem("userTokens", JSON.stringify(response.data.token))
+        await localStorage.setItem("userTokens", response.data.token);
         this.userLoading = false;
         this.userSuccess = true;
         this.router.push("/home");
@@ -66,8 +69,9 @@ export const useUserStore = defineStore('user', {
     },
     async fetchUserDetails(){
       try {
-        const fetchToken = await localStorage.getItem("userTokens")
-        const tokens = fetchToken ? JSON.parse(fetchToken) : "";
+        const fetchToken = await localStorage.getItem("userTokens");
+        console.log(fetchToken);
+        const tokens = fetchToken ? fetchToken : "";
         const config = {
           headers: { 'Authorization': 'Bearer ' + tokens }
         }
@@ -76,7 +80,7 @@ export const useUserStore = defineStore('user', {
         this.userLoading = false;
         this.userSuccess = true;
         this.user = response.data.data
-        await localStorage.setItem("userTokens", JSON.stringify(response.data.token))
+        await localStorage.setItem("userTokens", response?.data?.token);
       } catch (error) {
         this.userLoading = false;
         this.userError = true;
@@ -87,6 +91,26 @@ export const useUserStore = defineStore('user', {
       this.userError = false;
       this.userLoading = false;
       this.userSuccess = false;
+    },
+    async uploadPosts(data){
+      console.log(data);
+      this.userLoading = true;
+      try {
+        const fetchToken = await localStorage.getItem("userTokens");
+        const tokens = fetchToken ? fetchToken : "";
+        const config = {
+          headers: { 'Authorization': 'Bearer ' + tokens }
+        }
+        const response = await axios.post(`${API_URL}user/posts`, data, config);
+        console.log(response.data);
+        this.userLoading = false;
+        this.userSuccess = true;
+        // this.user = response.data.data
+      } catch (error) {
+        this.userLoading = false;
+        this.userError = true;
+        console.log(error)
+      }
     }
   }
 })

@@ -54,39 +54,92 @@
   </q-page>
 </template>
 
-<script>
+<script setup>
 import Footer from "../components/Footer.vue";
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
+import { useQuasar } from 'quasar'
 
 const userStore = useUserStore();
-const { user, getUserDetails } = storeToRefs(userStore);
-const { loginUser } = userStore;
+const { user, userError, userLoading, userSuccess, userMessage, getUserDetails } = storeToRefs(userStore);
+const { loginUser, fetchUserDetails, reset } = userStore;
 const username = ref("jigah4thjuly@gmail.com");
 const password = ref("1234");
-export default {
-  name: "LoginPage",
-  components: {
-    Footer,
-  },
-  data(){
-    return {
-      username,
-      password,
-    }
-  },
-  methods: {
-    submitUser: () => {
+const $q = useQuasar();
+onBeforeUnmount(() => {
+  reset();
+});
+const submitUser = async() => {
       const data = {
         username: username.value,
         password: password.value,
       }
-      loginUser(data);
+      await loginUser(data);
+      if(userError.value && userMessage.value){
+        $q.notify({
+          message: userMessage.value,
+          color: 'red'
+        })
+      }
+      if(userSuccess.value && userMessage.value){
+        $q.notify({
+          message: userMessage.value,
+          color: 'green'
+        })
+      }
     }
-  }
-};
+// return {
+//   username,
+//   password,
+//   submitUser: () => {
+//       const data = {
+//         username: username.value,
+//         password: password.value,
+//       }
+//       loginUser(data);
+//       if(userError && userMessage){
+//         this.$q.notify({
+//           message: userMessage.value,
+//           color: 'purple'
+//         })
+//       }
+//     }
+// }
+// export default {
+//   name: "LoginPage",
+//   components: {
+//     Footer,
+//   },
+//   data(){
+//     return {
+//       username,
+//       password,
+//     }
+//   },
+//   methods: {
+//     submitUser: () => {
+//       const data = {
+//         username: username.value,
+//         password: password.value,
+//       }
+//       loginUser(data);
+//       if(userError && userMessage){
+//         $q.notify({
+//           message: userMessage.value,
+//           color: 'purple'
+//         })
+//       }
+//     },
+//     showNotif () {
+//       console.log('Here');
+//         $q.notify({
+//           message: userMessage.value,
+//           color: 'purple'
+//         })
+//       }
+//   }
+// };
 </script>
 
 <style lang="scss">

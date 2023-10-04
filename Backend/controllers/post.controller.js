@@ -9,7 +9,10 @@ const fetchUserTimeline = async (req, res) => {
       return res.status(404).json("User not found!");
     }
     const groupedPost = await Post.find({ user: { $ne: foundUser._id } }).populate(
-      "posts"
+      {
+        path: 'user likes comments posts',
+        select: 'username _id description likes url'
+      }
     );
     res.status(200).json({
         data: groupedPost

@@ -95,8 +95,6 @@
                   </div> 
 
 
-
-
                 <q-btn
                   class="q-my-md"
                   color="primary"

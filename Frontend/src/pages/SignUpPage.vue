@@ -23,30 +23,80 @@
                 </a>
               </div>
               <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Email"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Fullname"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Username"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Password"
-                />
+                <div class="row">
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    v-model="email"
+                    label="Email"
+                  />
+                  </div>
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    v-model="name"
+                    label="Fullname"
+                    :rules="[val => val.length > 0 || 'Please enter Fullname']"
+                  />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    v-model="username"
+                    label="Username"
+                  />
+                  </div>
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    v-model="phoneNumber"
+                    label="Phone Number"
+                  />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    type="password"
+                    v-model="password"
+                    label="Password"
+                  />
+                  </div>
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    type="password"
+                    v-model="confirmPassword"
+                    label="Confirm Password"
+                  />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <q-input
+                    class="q-my-md q-mx-sm"
+                    outlined
+                    type="text"
+                    v-model="gender"
+                    label="male or female"
+                  />
+                  </div>
+                  </div> 
+
+
+
+
                 <q-btn
                   class="q-my-md"
                   color="primary"

@@ -15,41 +15,58 @@
           >
             <div class="column flex items-center justify-center q-my-md">
               <div class="col">
-                <a href="#/" class="text-grand-hotel text-bold text-h4 custom-link">
+                <a
+                  href="#/"
+                  class="text-grand-hotel text-bold text-h4 custom-link"
+                >
                   Instagram
                 </a>
               </div>
               <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Email"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Fullname"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Username"
-                />
-                <q-input
-                  class="q-my-md"
-                  outlined
-                  v-model="text"
-                  label="Password"
-                />
-                <q-btn
-                  class="q-my-md"
-                  color="primary"
-                  label="Sign Up"
-                  style="width: 100%"
-                />
+                <q-form>
+                  <q-input
+                    class="q-my-md"
+                    outlined
+                    label="Email"
+                    :rules="[
+                      (val) => (val && val.length > 0) || 'please enter email',
+                    ]"
+                  />
+                  <q-input
+                    class="q-my-md"
+                    outlined
+                    label="Fullname"
+                    :rules="[
+                      (val) =>
+                        (val && val.length > 0) || 'please enter Fullname',
+                    ]"
+                  />
+                  <q-input
+                    class="q-my-md"
+                    outlined
+                    label="Username"
+                    :rules="[
+                      (val) =>
+                        (val && val.length > 0) || 'please enter Username',
+                    ]"
+                  />
+                  <q-input
+                    class="q-my-md"
+                    outlined
+                    label="Password"
+                    :rules="[
+                      (val) =>
+                        (val && val.length > 0) || 'please enter Password',
+                    ]"
+                  />
+                  <q-btn
+                    class="q-my-md"
+                    type="submit"
+                    color="primary"
+                    label="Sign Up"
+                    style="width: 100%"
+                  />
+                </q-form>
               </div>
             </div>
           </div>

@@ -1,6 +1,66 @@
 <template>
   <q-page>
     <div class="xs">
+      <div class="col">
+        <div class="column" style="height: 100%">
+          <div class="col-2 justify-center q-mx-lg q-mt-lg">
+            <div class="q-pa-md">
+              <q-scroll-area style="height: 130px; max-width: 790px">
+                <div
+                  class="row no-wrap flex justify-center align-items-center q-mb-lg"
+                >
+                  <div
+                    v-for="image in images"
+                    :key="image.id"
+                    style="width: 100px; height: 100px; background-color: #fff"
+                    class="q-pa-sm"
+                  >
+                    <div
+                      class="flex justify-center align-items-center"
+                      style="width: 66px"
+                    >
+                      <q-avatar size="60px">
+                        <img :src="image.url" />
+                      </q-avatar>
+                      <p>name</p>
+                    </div>
+                  </div>
+                </div>
+              </q-scroll-area>
+            </div>
+          </div>
+          <div class="col" style="height: auto; background-color: pink">
+            <q-scroll-area
+              style="height: 100%; max-width: 100%"
+              class="q-pa-sm custom-center"
+            >
+              <div class="column custom-center" style="height: 100%">
+                <q-dialog v-model="commDialog">
+                  <CommentDialog
+                    :post="dialogContent"
+                    :text="text"
+                    @clickLike="clickLike"
+                    @addComment="addComment"
+                  />
+                </q-dialog>
+                <div
+                  v-for="postData in getPostsData"
+                  :key="postData.id"
+                  class="col"
+                  style="width: 80%"
+                >
+                  <TimelinePost
+                    :postData="postData"
+                    @addComment="addComment"
+                    @clickLike="clickLike"
+                    @OpenCommentDialog="OpenCommentDialog"
+                  />
+                </div>
+              </div>
+            </q-scroll-area>
+          </div>
+        </div>
+      </div>
       <Footer />
     </div>
     <div class="sm">
@@ -23,105 +83,53 @@
             <div class="col">
               <div class="column" style="height: 100%">
                 <div class="col-2 justify-center q-mx-lg q-mt-lg">
-                  <q-scroll-area style="height: 100%; max-width: 790px">
+                  <div class="q-pa-md">
+                    <q-scroll-area style="height: 130px; max-width: 790px">
+                      <div
+                        class="row no-wrap flex justify-center align-items-center q-mb-lg"
+                      >
+                        <div
+                          v-for="image in images"
+                          :key="image.id"
+                          style="
+                            width: 100px;
+                            height: 100px;
+                            background-color: #fff;
+                          "
+                          class="q-pa-sm"
+                        >
+                          <div
+                            class="flex justify-center align-items-center"
+                            style="width: 66px"
+                          >
+                            <q-avatar size="60px">
+                              <img :src="image.url" />
+                            </q-avatar>
+                            <p>name</p>
+                          </div>
+                        </div>
+                      </div>
+                    </q-scroll-area>
+                  </div>
+                  <!-- <q-scroll-area style="height: 100%; max-width: 790px">
                     <div
-                      class="row no-wrap flex items-center justify-center"
-                      style="height: 110px; width: 100%"
+                      v-for="image in images"
+                      :key="image.id"
+                      class="row no-wrap"
+                      style="
+                        height: 110px;
+                        width: 100%;
+                        background-color: #751616;
+                      "
                     >
-                      <!-- <div v-for="n in 10" :key="n" style="width: 150px" class="q-pa-sm">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fuga quae veritatis blanditiis sequi id expedita amet esse aspernatur! Iure, doloribus!
-                      </div> -->
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
+                      <div class="" style="width: 66px">
                         <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                      <div
-                        class="q-mr-md story-outline flex justify-center"
-                        style="width: 66px"
-                      >
-                        <q-avatar size="60px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
+                          <img :src="image.url" />
                         </q-avatar>
                         <p>name</p>
                       </div>
                     </div>
-                  </q-scroll-area>
+                  </q-scroll-area> -->
                 </div>
                 <div class="col">
                   <q-scroll-area
@@ -130,7 +138,12 @@
                   >
                     <div class="column custom-center" style="height: 100%">
                       <q-dialog v-model="commDialog">
-                        <CommentDialog :post="dialogContent" :user="user" :text="text" @clickLike="clickLike" @addComment="addComment"/>
+                        <CommentDialog
+                          :post="dialogContent"
+                          :text="text"
+                          @clickLike="clickLike"
+                          @addComment="addComment"
+                        />
                       </q-dialog>
                       <div
                         v-for="postData in getPostsData"
@@ -138,7 +151,12 @@
                         class="col"
                         style="width: 80%"
                       >
-                      <TimelinePost :postData="postData" :user="user" @addComment="addComment" @clickLike="clickLike" @OpenCommentDialog="OpenCommentDialog"/>
+                        <TimelinePost
+                          :postData="postData"
+                          @addComment="addComment"
+                          @clickLike="clickLike"
+                          @OpenCommentDialog="OpenCommentDialog"
+                        />
                       </div>
                     </div>
                   </q-scroll-area>
@@ -311,7 +329,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Search from "../components/Search.vue";
 import CommentDialog from "../components/CommentDialog.vue";
-import TimelinePost from "../components/TimelinePost.vue"
+import TimelinePost from "../components/TimelinePost.vue";
 
 const postStore = usePostStore();
 const userStore = useUserStore();
@@ -347,6 +365,45 @@ export default {
       user,
       dialogContent,
       commDialog,
+
+      images: [
+        {
+          id: 1,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 2,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 3,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 4,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 5,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 6,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 7,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 8,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+        {
+          id: 9,
+          url: "https://cdn.quasar.dev/img/boy-avatar.png",
+        },
+      ],
     };
   },
   methods: {
@@ -355,21 +412,29 @@ export default {
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
     clickLike: (id) => {
-        const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
-        const foundliked = groupedPosts.value[foundElement].likes.findIndex((element) => element === "afimm_");
-        const isLiked = groupedPosts.value[foundElement].likes.includes("afimm_");
-        if(isLiked){
-          groupedPosts.value[foundElement].likes = groupedPosts.value[foundElement].likes.filter(element => element !== "afimm_");
-        } else {
-          groupedPosts.value[foundElement].likes.push("afimm_")
-        }
+      const foundElement = groupedPosts.value.findIndex(
+        (element) => element.id === id
+      );
+      const foundliked = groupedPosts.value[foundElement].likes.findIndex(
+        (element) => element === "afimm_"
+      );
+      const isLiked = groupedPosts.value[foundElement].likes.includes("afimm_");
+      if (isLiked) {
+        groupedPosts.value[foundElement].likes = groupedPosts.value[
+          foundElement
+        ].likes.filter((element) => element !== "afimm_");
+      } else {
+        groupedPosts.value[foundElement].likes.push("afimm_");
+      }
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
       commDialog.value = true;
     },
     addComment: (id, textValue) => {
-      const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
+      const foundElement = groupedPosts.value.findIndex(
+        (element) => element.id === id
+      );
       const commentData = {
         user: user.value.username,
         description: textValue,
@@ -378,14 +443,7 @@ export default {
       text.value = "";
     },
   },
-  computed: {
-  },
-  mounted(){
-    fetchUserDetails();
-  },
-  unmounted(){
-    reset()
-  },
+  computed: {},
   filters: {
     newDate(value) {
       return date.formatDate(value, "MMMM D h:mmA");

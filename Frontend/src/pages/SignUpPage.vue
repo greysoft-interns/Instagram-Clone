@@ -23,80 +23,35 @@
                 </a>
               </div>
               <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                      class="q-ma-sm"
-                      outlined
-                      v-model="email"
-                      label="Email*"
-                    />
-                  </div>
-                  <div class="col">
-                    <q-input
-                      class="q-ma-sm"
-                      outlined
-                      v-model="name"
-                      label="Fullname*"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                      class="q-ma-sm"
-                      outlined
-                      v-model="username"
-                      label="Username*"
-                    />
-                  </div>
-                  <div class="col">
-                    <q-input
-                      class="q-ma-sm"
-                      type="text"
-                      outlined
-                      v-model="gender"
-                      label="Gender"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                      type="password"
-                      class="q-ma-sm"
-                      outlined
-                      v-model="password"
-                      label="Password *"
-                    />
-                  </div>
-                  <div class="col">
-                    <q-input
-                      type="password"
-                      class="q-ma-sm"
-                      outlined
-                      v-model="confirmPassword"
-                      label="Confirm Password *"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                      class="q-ma-sm"
-                      outlined
-                      v-model="phoneNumber"
-                      label="Phone Number"
-                    />
-                  </div>
-                </div>
-
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="text"
+                  label="Email"
+                />
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="text"
+                  label="Fullname"
+                />
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="text"
+                  label="Username"
+                />
+                <q-input
+                  class="q-my-md"
+                  outlined
+                  v-model="text"
+                  label="Password"
+                />
                 <q-btn
                   class="q-my-md"
                   color="primary"
                   label="Sign Up"
                   style="width: 100%"
-                  @click="submitForm"
                 />
               </div>
             </div>
@@ -121,7 +76,7 @@ import Footer from "../components/Footer.vue";
 import { ref } from "vue";
 import { useUserStore } from "../stores/user";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 const { registerUser } = userStore;
 const name = ref("Test User1");
 const username = ref("_test_user1");
@@ -143,13 +98,13 @@ export default {
       password,
       gender,
       phoneNumber,
-      confirmPassword
+      confirmPassword,
     };
   },
-  methods:{
-    submitForm(){
-      if(password.value !== confirmPassword.value){
-        alert("Password don't match!")
+  methods: {
+    submitForm() {
+      if (password.value !== confirmPassword.value) {
+        alert("Password don't match!");
       }
       const userData = {
         name: name.value,
@@ -158,10 +113,10 @@ export default {
         password: password.value,
         gender: gender.value,
         phoneNumber: phoneNumber.value,
-      }
+      };
       registerUser(userData);
-    }
-  }
+    },
+  },
 };
 </script>
 

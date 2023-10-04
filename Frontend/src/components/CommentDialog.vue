@@ -10,7 +10,7 @@
           <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
           <img
             class="cursor-pointer"
-            @dblclick="$emit('clickLike')"
+            @dblclick="$emit('clickLike', post.id)"
             style="
               height: 100%;
               width: 100%;
@@ -31,7 +31,7 @@
                   </q-avatar>
                   <div class="col q-mx-sm" style="height: 40px">
                     <div class="text-caption">
-                      <a class="custom-link" href="#">{{ post.user}}</a>
+                      <a class="custom-link" href="#">{{ post.user }}</a>
                     </div>
                     <div class="text-caption">Original audio</div>
                   </div>
@@ -93,18 +93,18 @@
                     style="width: 130px"
                   >
                     <q-icon
-                      v-if="!liked"
+                      v-if="!checkLikedPost"
                       class="cursor-pointer"
                       size="1.6rem"
                       name="favorite_border"
-                      @click="$emit('clickLike')"
+                      @click="$emit('clickLike'. post.id)"
                     />
                     <q-icon
                       v-else
                       class="cursor-pointer text-red"
                       size="1.6rem"
                       name="favorite"
-                      @click="$emit('clickLike')"
+                      @click="$emit('clickLike', post.id)"
                     />
                     <q-icon
                       class="cursor-pointer"
@@ -159,6 +159,10 @@ export default {
       type: Object,
       default: (() => {})
     },
+    user: {
+      type: Object,
+      default: (() => {})
+    },
     text: {
       type: String,
       default: ""
@@ -170,7 +174,10 @@ export default {
       newText,
     };
   },
-  created(){
+  computed: {
+    checkLikedPost(){
+        return this.post.likes.includes("afimm_");
+    }
   }
 };
 </script>

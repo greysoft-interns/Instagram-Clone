@@ -176,8 +176,8 @@
                         </q-avatar>
                       </div>
                       <div class="col-6 flex column items-start justify-center">
-                        <div class="q-ma-none">{{ user.username }}</div>
-                        <div class="q-ma-none">{{ user.name }}</div>
+                        <div class="q-ma-none">{{ user?.username }}</div>
+                        <div class="q-ma-none">{{ user?.name }}</div>
                       </div>
                       <div class="col flex column items-center justify-center">
                         <a class="custom-link" href="#/login">Switch</a>
@@ -335,7 +335,7 @@ const postStore = usePostStore();
 const userStore = useUserStore();
 const { groupedPosts, getPostsData } = storeToRefs(postStore); // state and getters need "storeToRefs"
 const { user, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-// const { increment } = store; // actions can be destructured directly
+const { fetchUserDetails, reset } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const addPost = ref(false);
@@ -411,14 +411,21 @@ export default {
     //   const foundElement = groupedPosts.value.findIndex((element) => element.id === postId);
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
-    clickLike: () => {
-      // const foundElement = groupedPosts.value.findIndex((element) => element.id === id);
-      // if(liked.value){
-      //   delete groupedPosts.value[foundElement];
-      // } else {
-      //   groupedPosts.value.push("afimm_")
-      // }
-      postliked.value = !postliked.value;
+    clickLike: (id) => {
+      const foundElement = groupedPosts.value.findIndex(
+        (element) => element.id === id
+      );
+      const foundliked = groupedPosts.value[foundElement].likes.findIndex(
+        (element) => element === "afimm_"
+      );
+      const isLiked = groupedPosts.value[foundElement].likes.includes("afimm_");
+      if (isLiked) {
+        groupedPosts.value[foundElement].likes = groupedPosts.value[
+          foundElement
+        ].likes.filter((element) => element !== "afimm_");
+      } else {
+        groupedPosts.value[foundElement].likes.push("afimm_");
+      }
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
@@ -429,7 +436,7 @@ export default {
         (element) => element.id === id
       );
       const commentData = {
-        user: "real_5",
+        user: user.value.username,
         description: textValue,
       };
       groupedPosts.value[foundElement].comments.push(commentData);

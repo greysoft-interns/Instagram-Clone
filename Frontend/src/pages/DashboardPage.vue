@@ -191,7 +191,7 @@
                       class="flex items-center justify-between"
                       style="width: 250px"
                     >
-                      <a class="custom-link text-body1" href="#">afimm_</a>
+                      <a class="custom-link text-body1" href="#">{{user?.username}}</a>
                       <q-btn
                         class="q-px-md text-body1"
                         color="grey"
@@ -204,13 +204,14 @@
                     </div>
                     <div class="q-my-lg flex items-center justify-between">
                       <p style="margin: 0">3 posts</p>
-                      <a class="custom-link" href="#">500 followers</a>
-                      <a class="custom-link" href="#">500 followings</a>
+                      <a class="custom-link" href="#">{{ user.followers && user?.followers.length }} followers</a>
+                      <a class="custom-link" href="#">{{ user.followings && user?.followings.length }} followings</a>
                     </div>
                   </div>
                   <div class="q-my-lg">
-                    <p>Miracle Jigah</p>
-                    <p>This is a demo bio to follow and guide you</p>
+                    <p>{{user?.name}}</p>
+                    <p>{{user?.website}}</p>
+                    <p>{{user?.bio}}</p>
                   </div>
                 </div>
               </div>
@@ -287,6 +288,12 @@
 import Footer from "../components/Footer.vue";
 import Search from "../components/Search.vue";
 import { ref } from 'vue'
+import { useUserStore } from "../stores/user";
+import { storeToRefs } from 'pinia';
+
+const userStore = useUserStore();
+const { user, getUserDetails } = storeToRefs(userStore);
+const { fetchUserDetails, reset } = userStore;
 export default {
   name: "DashboardPage",
   components: {
@@ -296,7 +303,14 @@ export default {
   data(){
     return{
       tab: ref('posts'),
+      user,
     }
+  },
+  mounted(){
+    fetchUserDetails();
+  },
+  unmounted(){
+    reset()
   }
 };
 </script>

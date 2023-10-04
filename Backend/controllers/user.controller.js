@@ -177,6 +177,22 @@ const followAndUnfollowUser = async(req, res) => {
   }
 }
 
+const getUserDetails = async(req, res) => {
+  const { user, accessToken } = req.user;
+  const foundUser = await User.findById(user).select({
+    "password": 0,
+    "refreshToken" : 0
+  }).lean();
+  if (!foundUser) {
+    return res.status(404).json("User not found!");
+  }
+  return res.status(200).json({
+    message: "User Details",
+    data: foundUser,
+    token: accessToken
+  })
+}
+
 module.exports = {
   uploadDP,
   uploadPosts,
@@ -184,4 +200,5 @@ module.exports = {
   commentOnPost,
   likeAndUnlikeComment,
   followAndUnfollowUser,
+  getUserDetails,
 };

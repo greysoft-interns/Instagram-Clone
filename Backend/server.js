@@ -32,6 +32,10 @@ app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
 
+app.get('/test', (req, res) => {
+  res.json("You got here");
+})
+
 // app routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);

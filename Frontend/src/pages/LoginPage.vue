@@ -23,13 +23,13 @@
                 <q-input
                   class="q-my-md"
                   outlined
-                  v-model="text"
+                  v-model="username"
                   label="Username, Email"
                 />
                 <q-input
                   class="q-my-md"
                   outlined
-                  v-model="text"
+                  v-model="password"
                   label="Password"
                 />
                 <q-btn
@@ -37,6 +37,7 @@
                   color="primary"
                   label="Log in"
                   style="width: 100%"
+                  @click="submitUser"
                 />
               </div>
               <div class="col-2 flex items-center justify-center" style="height: 90px; width: 100%;">
@@ -55,11 +56,36 @@
 
 <script>
 import Footer from "../components/Footer.vue";
+import { ref } from "vue";
+import { useUserStore } from "../stores/user";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const { user, getUserDetails } = storeToRefs(userStore);
+const { loginUser } = userStore;
+const username = ref("jigah4thjuly@gmail.com");
+const password = ref("1234");
 export default {
   name: "LoginPage",
   components: {
     Footer,
   },
+  data(){
+    return {
+      username,
+      password,
+    }
+  },
+  methods: {
+    submitUser: () => {
+      const data = {
+        username: username.value,
+        password: password.value,
+      }
+      loginUser(data);
+    }
+  }
 };
 </script>
 

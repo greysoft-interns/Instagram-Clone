@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="xs">
-      <div class="col">
+      <div class="col" style="height: 100vh;">
         <div class="column" style="height: 100%">
           <div class="col-2 justify-center q-mx-lg q-mt-lg">
             <div class="q-pa-md">

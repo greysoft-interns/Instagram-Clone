@@ -35,13 +35,16 @@
               class="q-pa-sm custom-center"
             >
               <div class="column custom-center" style="height: 100%">
-                <q-dialog v-model="commDialog">
-                  <CommentDialog
-                    :post="dialogContent"
-                    :text="text"
-                    @clickLike="clickLike"
-                    @addComment="addComment"
-                  />
+                <q-dialog v-model="commDialogMobile" position="bottom">
+                  <q-card style="width: 1100px; max-width: 90vw; height: 400px">
+                    <CommentDialog
+                      :post="dialogContent"
+                      :text="text"
+                      @clickLike="clickLike"
+                      @addComment="addComment"
+                      :dialogHeight="dialogHeight"
+                    />
+                  </q-card>
                 </q-dialog>
                 <div
                   v-for="postData in getPostsData"
@@ -53,7 +56,7 @@
                     :postData="postData"
                     @addComment="addComment"
                     @clickLike="clickLike"
-                    @OpenCommentDialog="OpenCommentDialog"
+                    @OpenCommentDialog="OpenCommentDialogMobile"
                   />
                 </div>
               </div>
@@ -138,12 +141,14 @@
                   >
                     <div class="column custom-center" style="height: 100%">
                       <q-dialog v-model="commDialog">
-                        <CommentDialog
-                          :post="dialogContent"
-                          :text="text"
-                          @clickLike="clickLike"
-                          @addComment="addComment"
-                        />
+                        <q-card style="width: 1100px; max-width: 90vw; height: 800px">
+                          <CommentDialog
+                            :post="dialogContent"
+                            :text="text"
+                            @clickLike="clickLike"
+                            @addComment="addComment"
+                          />
+                        </q-card>
                       </q-dialog>
                       <div
                         v-for="postData in getPostsData"
@@ -338,11 +343,13 @@ const { user, getUserDetails } = storeToRefs(userStore); // state and getters ne
 const { fetchUserDetails, reset } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
+const commDialogMobile = ref(false);
 const addPost = ref(false);
 const postliked = ref(false);
 const position = ref("left");
 const text = ref("");
 const search = ref("");
+const dialogHeight = ref("md");
 const dialogContent = ref({});
 export default {
   name: "PageHome",
@@ -365,6 +372,7 @@ export default {
       user,
       dialogContent,
       commDialog,
+      commDialogMobile,
 
       images: [
         {
@@ -429,7 +437,14 @@ export default {
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
+      dialogHeight.value="md"
       commDialog.value = true;
+    },
+    OpenCommentDialogMobile: (post) => {
+      dialogHeight.value="xs"
+      dialogContent.value = post;
+      console.log(dialogHeight.value)
+      commDialogMobile.value = true;
     },
     addComment: (id, textValue) => {
       const foundElement = groupedPosts.value.findIndex(

@@ -225,11 +225,11 @@ export default {
     },
     postUpload: () => {
       let formdata = new FormData();
-      formdata.append('posts', fileUpload.value);
-      formdata.append('caption', caption.value);
-      formdata.append('location', location.value);
+      formdata.append("posts", fileUpload.value);
+      formdata.append("caption", caption.value);
+      formdata.append("location", location.value);
       uploadPosts(formdata);
-    }
+    },
   },
 };
 </script>

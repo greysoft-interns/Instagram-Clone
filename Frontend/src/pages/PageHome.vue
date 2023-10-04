@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="xs">
-      <div class="col" style="height: 100vh;">
+      <div class="col" style="height: 100vh">
         <div class="column" style="height: 100%">
           <div class="col-2 justify-center q-mx-lg q-mt-lg">
             <div class="q-pa-md">
@@ -141,7 +141,9 @@
                   >
                     <div class="column custom-center" style="height: 100%">
                       <q-dialog v-model="commDialog">
-                        <q-card style="width: 1100px; max-width: 90vw; height: 800px">
+                        <q-card
+                          style="width: 1100px; max-width: 90vw; height: 800px"
+                        >
                           <CommentDialog
                             :post="dialogContent"
                             :text="text"
@@ -437,13 +439,13 @@ export default {
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
-      dialogHeight.value="md"
+      dialogHeight.value = "md";
       commDialog.value = true;
     },
     OpenCommentDialogMobile: (post) => {
-      dialogHeight.value="xs"
+      dialogHeight.value = "xs";
       dialogContent.value = post;
-      console.log(dialogHeight.value)
+      console.log(dialogHeight.value);
       commDialogMobile.value = true;
     },
     addComment: (id, textValue) => {

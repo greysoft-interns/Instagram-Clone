@@ -1,122 +1,112 @@
 <template>
-  <q-pqge>
-    <div class="xs">
-      <Footer />
-    </div>
-    <div class="sm">
-      <Footer />
-    </div>
-    <div class="md">
-      <div class="flex items-center justify-center" style="height: 100vh">
-        <div class="column q-px-md q-py-lg" style="height: 100%; width: 650px">
-          <div
-            class="col-10 q-my-md"
-            style="border: 1px solid rgb(208, 208, 208)"
-          >
-            <div class="column flex items-center justify-center q-my-md">
-              <div class="col">
-                <a
-                  href="#/"
-                  class="text-grand-hotel text-bold text-h4 custom-link"
-                >
-                  Instagram
-                </a>
-              </div>
-              <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+  <q-page>
+    <div class="flex items-center justify-center" style="height: 100vh">
+      <div class="row q-px-md q-py-lg" style="height: 100%; width: 650px">
+        <div
+          class="col-12 q-my-md full-height"
+          style="border: 1px solid rgb(208, 208, 208)"
+        >
+          <div class="column flex items-center justify-center q-my-md">
+            <div class="col">
+              <a
+                href="#/"
+                class="text-grand-hotel text-bold text-h4 custom-link"
+              >
+                Instagram
+              </a>
+            </div>
+            <div class="col q-px-md q-mt-lg" style="width: 100%">
+              <div class="row q-col-gutter-md">
+                <div class="col-12 col-sm-6">
+                  <q-input
+                    hide-bottom-space
                     outlined
                     v-model="email"
                     label="Email"
+                    :rules="[requiredRule]"
                   />
-                  </div>
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+                </div>
+                <div class="col-12 col-sm-6">
+                  <q-input
+                    hide-bottom-space
                     outlined
                     v-model="name"
                     label="Fullname"
-                    :rules="[val => val.length > 0 || 'Please enter Fullname']"
+                    :rules="[requiredRule]"
                   />
-                  </div>
                 </div>
 
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
                     outlined
                     v-model="username"
                     label="Username"
+                    :rules="[requiredRule]"
                   />
-                  </div>
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+                </div>
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
                     outlined
                     v-model="phoneNumber"
                     label="Phone Number"
+                    :rules="[requiredRule]"
                   />
-                  </div>
                 </div>
 
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
                     outlined
                     type="password"
                     v-model="password"
                     label="Password"
+                    :rules="[requiredRule, minLengthRule, maxLengthRule]"
                   />
-                  </div>
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+                </div>
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
                     outlined
                     type="password"
                     v-model="confirmPassword"
                     label="Confirm Password"
+                    :rules="[requiredRule, matchPassword]"
                   />
-                  </div>
                 </div>
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                    class="q-my-md q-mx-sm"
+
+                <div class="col-12">
+                  <q-select
                     outlined
-                    type="text"
                     v-model="gender"
-                    label="male or female"
+                    :options="options"
+                    label="choose Gender"
                   />
-                  </div>
-                  </div> 
-
-
-                <q-btn
-                  class="q-my-md"
-                  color="primary"
-                  label="Sign Up"
-                  style="width: 100%"
-                />
+                </div>
               </div>
+
+              <q-btn
+                class="q-my-md"
+                color="primary"
+                label="Sign Up"
+                style="width: 100%"
+              />
             </div>
           </div>
-          <div
-            class="col q-my-xs flex items-center justify-center"
-            style="border: 1px solid rgb(208, 208, 208); height: 100px"
-          >
-            <p>
-              Already have an account?
-              <a class="custom-link text-blue" href="#/login">Log in</a>
-            </p>
-          </div>
+        </div>
+        <div
+          class="col-12 q-my-xs flex items-center justify-center"
+          style="border: 1px solid rgb(208, 208, 208); height: 100px"
+        >
+          <p>
+            Already have an account?
+            <a class="custom-link text-blue" href="#/login">Log in</a>
+          </p>
         </div>
       </div>
     </div>
-  </q-pqge>
+  </q-page>
 </template>
 
 <script>
@@ -147,6 +137,7 @@ export default {
       gender,
       phoneNumber,
       confirmPassword,
+      options: ["male", "female"],
     };
   },
   methods: {
@@ -164,6 +155,12 @@ export default {
       };
       registerUser(userData);
     },
+    requiredRule: (val) => !!val || "Required field",
+    minLengthRule: (v) =>
+      (v && v.length >= 3) || "Password must be at least 3 characters long",
+    maxLengthRule: (v) =>
+      (v && v.length <= 15) || "Password must not exceed 15 characters",
+    matchPassword: (v) => v === password.value || "Passwords do not match",
   },
 };
 </script>

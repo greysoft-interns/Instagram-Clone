@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="small-screen bg-white" bordered>
+  <q-footer class="bg-white" bordered>
     <q-tabs v-model="tab" outside-arrows=false class="bg-white text-black shadow-2">
       <q-route-tab name="home" to="/" icon="home" />
       <q-route-tab name="search" to="/search" icon="search" />

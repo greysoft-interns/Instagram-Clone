@@ -49,7 +49,7 @@
             />
             <q-icon
               class="cursor-pointer"
-              @click="$emit('OpenCommentDialog', postData)"
+              @click="$emit('OpenCommentDialog', postData, 'bottom')"
               size="1.6rem"
               name="chat_bubble_outline"
             />

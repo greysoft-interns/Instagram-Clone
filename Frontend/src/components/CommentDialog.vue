@@ -9,13 +9,13 @@
         <!-- <q-skeleton class="bg-grey" height="100%" square /> -->
         <img
           class="cursor-pointer"
-          @dblclick="$emit('clickLike', post.id)"
+          @dblclick="$emit('clickLike', post._id, username)"
           style="
             height: 100%;
             width: 100%;
             object-fit: contain;
           "
-          :src="post.url"
+          :src="post.posts[0]?.url"
         />
       </q-card-section>
       </div>
@@ -30,7 +30,7 @@
                 </q-avatar>
                 <div class="col q-mx-sm" style="height: 40px">
                   <div class="text-caption">
-                    <a class="custom-link" href="#">{{ post.user }}</a>
+                    <a class="custom-link" href="#">{{ post?.user?.username }}</a>
                   </div>
                   <div class="text-caption">Original audio</div>
                 </div>
@@ -59,7 +59,7 @@
                     <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                   </q-avatar>
                   <p>
-                    <a class="custom-link q-mr-sm" href="#">{{post.user}}</a>
+                    <a class="custom-link q-mr-sm" href="#">{{post?.user?.username}}</a>
                   {{ post.caption }}
                   </p>
                 </div>
@@ -71,7 +71,7 @@
                           <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                         </q-avatar>
                         <p>
-                          <a class="custom-link q-mr-sm" href="#">{{comment.user}}</a>
+                          <a class="custom-link q-mr-sm" href="#">{{comment.user.username}}</a>
                         {{ comment.description }}
                         </p>
                       </div>
@@ -96,14 +96,14 @@
                     class="cursor-pointer"
                     size="1.6rem"
                     name="favorite_border"
-                    @click="$emit('clickLike'. post.id)"
+                    @click="$emit('clickLike', post._id, username)"
                   />
                   <q-icon
                     v-else
                     class="cursor-pointer text-red"
                     size="1.6rem"
                     name="favorite"
-                    @click="$emit('clickLike', post.id)"
+                    @click="$emit('clickLike', post._id, username)"
                   />
                   <q-icon
                     class="cursor-pointer"
@@ -133,7 +133,7 @@
             <template v-slot:after>
               <q-icon
                 class="cursor-pointer"
-                @click="$emit('addComment', post.id, newText); newText=''"
+                @click="$emit('addComment', post._id, newText, username); newText=''"
                 name="send"
               />
             </template>
@@ -147,6 +147,11 @@
 
 <script>
 import {ref} from "vue";
+import { useUserStore } from "stores/user";
+import { storeToRefs } from "pinia";
+
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 const liked = ref(false);
 const newText = ref("");
 
@@ -154,10 +159,6 @@ export default {
   emits: ["clickLike", "addComment"],
   props: {
     post: {
-      type: Object,
-      default: (() => {})
-    },
-    user: {
       type: Object,
       default: (() => {})
     },
@@ -174,12 +175,17 @@ export default {
     return {
       liked,
       newText,
+      username: user.value.username,
     };
+  },
+  methods: {
+
   },
   computed: {
     checkLikedPost(){
-      console.log(this.dialogHeight);
-        return this.post.likes.includes("afimm_");
+      console.log(user.value.username);
+      const checkUsername = obj => obj.username === user.value.username
+      return this.post.likes.some(checkUsername);
     }
   }
 };

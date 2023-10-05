@@ -293,7 +293,7 @@ import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
 const { user, getUserDetails } = storeToRefs(userStore);
-const { fetchUserDetails, reset } = userStore;
+const { fetchUserDetails, userReset } = userStore;
 export default {
   name: "DashboardPage",
   components: {
@@ -310,7 +310,7 @@ export default {
     fetchUserDetails();
   },
   unmounted(){
-    reset()
+    userReset()
   }
 };
 </script>

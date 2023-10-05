@@ -104,7 +104,7 @@ const commentOnPost = async (req, res) => {
     if(!foundPost){
       return res.status(404).json("Post not found!");
     }
-    const newComment = await Comment.create({description: comment})
+    const newComment = await Comment.create({user: foundUser._id, description: comment})
     foundPost.comments.push(newComment._id);
     await foundPost.save();
     return res.status(200).json("Comment Successful!")

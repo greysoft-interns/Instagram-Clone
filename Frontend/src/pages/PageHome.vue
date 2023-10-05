@@ -152,7 +152,11 @@
                           />
                         </q-card>
                       </q-dialog>
+                      <div v-if="postLoading || !user">
+                        Post is Loading
+                      </div>
                       <div
+                      v-else
                         v-for="postData in getPostsData"
                         :key="postData.id"
                         class="col"
@@ -160,6 +164,7 @@
                       >
                         <TimelinePost
                           :postData="postData"
+                          :username="user?.üsername"
                           @addComment="addComment"
                           @clickLike="clickLike"
                           @OpenCommentDialog="OpenCommentDialog"
@@ -340,9 +345,10 @@ import TimelinePost from "../components/TimelinePost.vue";
 
 const postStore = usePostStore();
 const userStore = useUserStore();
-const { groupedPosts, getPostsData } = storeToRefs(postStore); // state and getters need "storeToRefs"
-const { user, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { fetchUserDetails, reset } = userStore;
+const { groupedPosts, getPostsData, postLoading } = storeToRefs(postStore); // state and getters need "storeToRefs"
+const { getTimelinePosts, reset } = postStore;
+const { user, userLoading, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
+const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const commDialogMobile = ref(false);
@@ -421,21 +427,8 @@ export default {
     //   const foundElement = groupedPosts.value.findIndex((element) => element.id === postId);
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
-    clickLike: (id) => {
-      const foundElement = groupedPosts.value.findIndex(
-        (element) => element.id === id
-      );
-      const foundliked = groupedPosts.value[foundElement].likes.findIndex(
-        (element) => element === "afimm_"
-      );
-      const isLiked = groupedPosts.value[foundElement].likes.includes("afimm_");
-      if (isLiked) {
-        groupedPosts.value[foundElement].likes = groupedPosts.value[
-          foundElement
-        ].likes.filter((element) => element !== "afimm_");
-      } else {
-        groupedPosts.value[foundElement].likes.push("afimm_");
-      }
+    clickLike: (id, user) => {
+      likeAndUnlikePost(id, user)
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
@@ -448,17 +441,13 @@ export default {
       console.log(dialogHeight.value);
       commDialogMobile.value = true;
     },
-    addComment: (id, textValue) => {
-      const foundElement = groupedPosts.value.findIndex(
-        (element) => element.id === id
-      );
-      const commentData = {
-        user: user.value.username,
-        description: textValue,
-      };
-      groupedPosts.value[foundElement].comments.push(commentData);
-      text.value = "";
+    addComment: (id, textValue, user) => {
+      addPostComment(id, textValue, user)
     },
+  },
+  created(){
+    fetchUserDetails();
+    getTimelinePosts();
   },
   computed: {},
   filters: {

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 const generateAccessToken = (id) => {
   return jwt.sign({ id }, process.env.ACCESS_SECRET_KEY, {
-    expiresIn: "15m",
+    expiresIn: "1m",
   });
 };
 
@@ -65,8 +65,9 @@ const protect = async (req, res, next) => {
       };
       next();
     } catch (error) {
+      console.log('Érror');
       if (error.name === "TokenExpiredError") {
-        const refreshToken = req.body.refreshToken;
+        const refreshToken = req.query.refreshToken;
         const checkUser = await User.findOne({ refreshToken: refreshToken });
         if (!checkUser) {
           return res

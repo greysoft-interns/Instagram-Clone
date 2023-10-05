@@ -8,14 +8,56 @@ const fetchUserTimeline = async (req, res) => {
     if (!foundUser) {
       return res.status(404).json("User not found!");
     }
-    const groupedPost = await Post.find({ user: { $ne: foundUser._id } }).populate(
+    const groupedPost = await Post.find({
+      user: { $ne: foundUser._id },
+    }).populate([
       {
-        path: 'user likes comments posts',
-        select: 'username _id description likes url'
-      }
-    );
+        path: "user",
+        select: {
+          username: 1,
+          _id: 0,
+        },
+      },
+      {
+        path: "likes",
+        select: {
+          username: 1,
+          _id: 0,
+        },
+      },
+      {
+        path: "comments",
+        select: {
+          description: 1,
+          _id: 0,
+        },
+        populate: [
+          {
+            path: "user",
+            select: {
+              username: 1,
+              _id: 0,
+            },
+          },
+          {
+            path: "likes",
+            select: {
+              username: 1,
+              _id: 0,
+            },
+          },
+        ],
+      },
+      {
+        path: "posts",
+        select: {
+          url: 1,
+          _id: 0,
+        },
+      },
+    ]);
     res.status(200).json({
-        data: groupedPost
+      data: groupedPost,
     });
   } catch (error) {
     console.log(error);
@@ -24,5 +66,5 @@ const fetchUserTimeline = async (req, res) => {
 };
 
 module.exports = {
-    fetchUserTimeline
-}
+  fetchUserTimeline,
+};

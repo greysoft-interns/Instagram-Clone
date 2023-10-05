@@ -1,217 +1,112 @@
 <template>
-  <q-pqge>
-    <div class="xs" v-if="1 == 0">
-      <div
-        class="flex items-center justify-center"
-        style="height: 100vh; width: 100%"
-      >
-        <div class="column q-px-md q-py-lg" style="height: 100%; width: 650px">
-          <div
-            class="q-mb-lg"
-            style="border: 1px solid rgb(208, 208, 208); height: auto"
-          >
-            <div class="column flex items-center justify-center q-my-md">
-              <div class="col">
-                <a
-                  href="#/"
-                  class="text-grand-hotel text-bold text-h4 custom-link"
-                >
-                  Instagram
-                </a>
-              </div>
-              <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <q-input
-                  class="q-"
-                  outlined
-                  v-model="email"
-                  label="Email"
-                  :rules="[requiredRule]"
-                />
-
-                <q-input
-                  class="q-"
-                  outlined
-                  v-model="name"
-                  label="Fullname"
-                  :rules="[requiredRule]"
-                />
-
-                <q-input
-                  class="q-"
-                  outlined
-                  v-model="username"
-                  label="Username"
-                  :rules="[requiredRule]"
-                />
-
-                <q-input
-                  class="q-"
-                  outlined
-                  v-model="phoneNumber"
-                  label="Phone Number"
-                  :rules="[requiredRule]"
-                />
-
-                <q-input
-                  class="q-"
-                  outlined
-                  type="password"
-                  v-model="password"
-                  label="Password"
-                  :rules="[requiredRule, minLengthRule, maxLengthRule]"
-                />
-
-                <q-input
-                  class="q-"
-                  outlined
-                  type="password"
-                  v-model="confirmPassword"
-                  label="Confirm Password"
-                  :rules="[requiredRule, matchPassword]"
-                />
-
-                <q-select
-                  outlined
-                  v-model="gender"
-                  :options="options"
-                  label="choose Gender"
-                />
-
-                <q-btn
-                  class="q-my-md"
-                  color="primary"
-                  label="Sign Up"
-                  style="width: 100%"
-                />
-              </div>
-              <div
-                class="col q-mb-xl flex items-center justify-center"
-                style="height: 100px"
+  <q-page>
+    <div class="flex items-center justify-center" style="height: 100vh">
+      <div class="row q-px-md q-py-lg" style="height: 100%; width: 650px">
+        <div
+          class="col-12 q-my-md full-height"
+          style="border: 1px solid rgb(208, 208, 208)"
+        >
+          <div class="column flex items-center justify-center q-my-md">
+            <div class="col">
+              <a
+                href="#/"
+                class="text-grand-hotel text-bold text-h4 custom-link"
               >
-                <p>
-                  Already have an account?
-                  <a class="custom-link text-blue" href="#/login">Log in</a>
-                </p>
-              </div>
+                Instagram
+              </a>
             </div>
-          </div>
-          <Footer />
-        </div>
-      </div>
-    </div>
-    <div class="sm" v-if="1 == 0">
-      <Footer />
-    </div>
-    <div class="md-">
-      <div class="flex items-center justify-center" style="height: 100vh">
-        <div class="row q-px-md q-py-lg" style="height: 100%; width: 650px">
-          <div
-            class="col-12 q-my-md full-height"
-            style="border: 1px solid rgb(208, 208, 208)"
-          >
-            <div class="column flex items-center justify-center q-my-md">
-              <div class="col">
-                <a
-                  href="#/"
-                  class="text-grand-hotel text-bold text-h4 custom-link"
-                >
-                  Instagram
-                </a>
-              </div>
-              <div class="col q-px-md q-mt-lg" style="width: 100%">
-                <div class="row q-col-gutter-md">
-                  <div class="col-12 col-sm-6">
-                    <q-input
-                      hide-bottom-space
-                      class="q-"
-                      outlined
-                      v-model="email"
-                      label="Email"
-                    />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input
-                      hide-bottom-space
-                      class="q-"
-                      outlined
-                      v-model="name"
-                      label="Fullname"
-                      :rules="[requiredRule]"
-                    />
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <q-input
-                      class="q-"
-                      outlined
-                      v-model="username"
-                      label="Username"
-                      :rules="[requiredRule]"
-                    />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <q-input
-                      class="q-"
-                      outlined
-                      v-model="phoneNumber"
-                      label="Phone Number"
-                      :rules="[requiredRule]"
-                    />
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <q-input
-                      class="q-"
-                      outlined
-                      type="password"
-                      v-model="password"
-                      label="Password"
-                      :rules="[requiredRule, minLengthRule, maxLengthRule]"
-                    />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <q-input
-                      class="q-"
-                      outlined
-                      type="password"
-                      v-model="confirmPassword"
-                      label="Confirm Password"
-                      :rules="[requiredRule, matchPassword]"
-                    />
-                  </div>
-
-                  <div class="col-12">
-                    <q-select
-                      outlined
-                      v-model="gender"
-                      :options="options"
-                      label="choose Gender"
-                    />
-                  </div>
+            <div class="col q-px-md q-mt-lg" style="width: 100%">
+              <div class="row q-col-gutter-md">
+                <div class="col-12 col-sm-6">
+                  <q-input
+                    hide-bottom-space
+                    outlined
+                    v-model="email"
+                    label="Email"
+                    :rules="[requiredRule]"
+                  />
+                </div>
+                <div class="col-12 col-sm-6">
+                  <q-input
+                    hide-bottom-space
+                    outlined
+                    v-model="name"
+                    label="Fullname"
+                    :rules="[requiredRule]"
+                  />
                 </div>
 
-                <q-btn
-                  class="q-my-md"
-                  color="primary"
-                  label="Sign Up"
-                  style="width: 100%"
-                />
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
+                    outlined
+                    v-model="username"
+                    label="Username"
+                    :rules="[requiredRule]"
+                  />
+                </div>
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
+                    outlined
+                    v-model="phoneNumber"
+                    label="Phone Number"
+                    :rules="[requiredRule]"
+                  />
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
+                    outlined
+                    type="password"
+                    v-model="password"
+                    label="Password"
+                    :rules="[requiredRule, minLengthRule, maxLengthRule]"
+                  />
+                </div>
+                <div class="col-12 col-md-6">
+                  <q-input
+                    class="q-"
+                    outlined
+                    type="password"
+                    v-model="confirmPassword"
+                    label="Confirm Password"
+                    :rules="[requiredRule, matchPassword]"
+                  />
+                </div>
+
+                <div class="col-12">
+                  <q-select
+                    outlined
+                    v-model="gender"
+                    :options="options"
+                    label="choose Gender"
+                  />
+                </div>
               </div>
+
+              <q-btn
+                class="q-my-md"
+                color="primary"
+                label="Sign Up"
+                style="width: 100%"
+              />
             </div>
           </div>
-          <div
-            class="col-12 q-my-xs flex items-center justify-center"
-            style="border: 1px solid rgb(208, 208, 208); height: 100px"
-          >
-            <p>
-              Already have an account?
-              <a class="custom-link text-blue" href="#/login">Log in</a>
-            </p>
-          </div>
+        </div>
+        <div
+          class="col-12 q-my-xs flex items-center justify-center"
+          style="border: 1px solid rgb(208, 208, 208); height: 100px"
+        >
+          <p>
+            Already have an account?
+            <a class="custom-link text-blue" href="#/login">Log in</a>
+          </p>
         </div>
       </div>
     </div>
-  </q-pqge>
+  </q-page>
 </template>
 
 <script>

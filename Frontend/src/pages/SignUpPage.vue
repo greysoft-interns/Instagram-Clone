@@ -91,6 +91,7 @@
                 color="primary"
                 label="Sign Up"
                 style="width: 100%"
+                :onclick="submitForm"
               />
             </div>
           </div>
@@ -113,22 +114,24 @@
 import Footer from "../components/Footer.vue";
 import { ref } from "vue";
 import { useUserStore } from "../stores/user";
+import { useQuasar } from "quasar";
 
+const $q = useQuasar();
 const userStore = useUserStore();
 const { registerUser } = userStore;
-const name = ref("Test User1");
-const username = ref("_test_user1");
-const email = ref("testuser@gmail.com");
-const password = ref("1234");
-const gender = ref("female");
-const phoneNumber = ref("+23459393300");
-const confirmPassword = ref("1234");
+const name = ref("");
+const username = ref("");
+const email = ref("");
+const password = ref("");
+const gender = ref("");
+const phoneNumber = ref("");
+const confirmPassword = ref("");
 export default {
   name: "SignUpPage",
   components: {
     Footer,
   },
-  data() {
+  setup() {
     return {
       name,
       username,
@@ -141,9 +144,12 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+    submitForm: () => {
       if (password.value !== confirmPassword.value) {
-        alert("Password don't match!");
+        $q.notify({
+          message: "Passwords don't match",
+          color: "red"
+        })
       }
       const userData = {
         name: name.value,

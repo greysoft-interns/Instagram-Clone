@@ -87,7 +87,7 @@
               <div class="column" style="height: 100%">
                 <div class="col-2 justify-center q-mx-lg q-mt-lg">
                   <div class="q-pa-md">
-                    <q-scroll-area style="height: 130px; max-width: 790px">
+                    <q-scroll-area style="height: 90px; max-width: 790px">
                       <div
                         class="row no-wrap flex justify-center align-items-center q-mb-lg"
                       >
@@ -152,8 +152,8 @@
                           />
                         </q-card>
                       </q-dialog>
-                      <div v-if="postLoading || !user">
-                        Post is Loading
+                      <div class="text-center q-ma-md" v-if="groupedPosts.length < 1">
+                        <h3>No Posts At the Time</h3>
                       </div>
                       <div
                       v-else
@@ -205,122 +205,9 @@
                         </div>
                       </div>
                       <div class="col">
-                        <div class="column" style="height: 100%">
-                          <div class="col q-my-xs">
-                            <div class="row flex items-center">
-                              <div class="col-8">
-                                <div class="row">
-                                  <div class="col-3">
-                                    <q-avatar size="42px">
-                                      <img
-                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                      />
-                                    </q-avatar>
-                                  </div>
-                                  <div
-                                    class="col-8 flex column items-start justify-start"
-                                  >
-                                    <p class="q-ma-none">johnactive</p>
-                                    <p class="q-ma-none">Followed by more...</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">Follow</div>
-                            </div>
-                          </div>
-                          <div class="col q-my-xs">
-                            <div class="row flex items-center">
-                              <div class="col-8">
-                                <div class="row">
-                                  <div class="col-3">
-                                    <q-avatar size="42px">
-                                      <img
-                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                      />
-                                    </q-avatar>
-                                  </div>
-                                  <div
-                                    class="col-8 flex column items-start justify-start"
-                                  >
-                                    <p class="q-ma-none">johnactive</p>
-                                    <p class="q-ma-none">Followed by more...</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">Follow</div>
-                            </div>
-                          </div>
-                          <div class="col q-my-xs">
-                            <div class="row flex items-center">
-                              <div class="col-8">
-                                <div class="row">
-                                  <div class="col-3">
-                                    <q-avatar size="42px">
-                                      <img
-                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                      />
-                                    </q-avatar>
-                                  </div>
-                                  <div
-                                    class="col-8 flex column items-start justify-start"
-                                  >
-                                    <p class="q-ma-none">johnactive</p>
-                                    <p class="q-ma-none">Followed by more...</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">Follow</div>
-                            </div>
-                          </div>
-                          <div class="col q-my-xs">
-                            <div class="row flex items-center">
-                              <div class="col-8">
-                                <div class="row">
-                                  <div class="col-3">
-                                    <q-avatar size="42px">
-                                      <img
-                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                      />
-                                    </q-avatar>
-                                  </div>
-                                  <div
-                                    class="col-8 flex column items-start justify-start"
-                                  >
-                                    <p class="q-ma-none">johnactive</p>
-                                    <p class="q-ma-none">Followed by more...</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">Follow</div>
-                            </div>
-                          </div>
-                          <div class="col q-my-xs">
-                            <div class="row flex items-center">
-                              <div class="col-8">
-                                <div class="row">
-                                  <div class="col-3">
-                                    <q-avatar size="42px">
-                                      <img
-                                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                                      />
-                                    </q-avatar>
-                                  </div>
-                                  <div
-                                    class="col-8 flex column items-start justify-start"
-                                  >
-                                    <p class="q-ma-none">johnactive</p>
-                                    <p class="q-ma-none">Followed by more...</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col flex justify-end">Follow</div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col">1 of 2</div>
                 </div>
               </div>
             </div>

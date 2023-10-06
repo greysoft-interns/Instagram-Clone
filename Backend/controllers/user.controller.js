@@ -193,6 +193,61 @@ const getUserDetails = async(req, res) => {
   })
 }
 
+const getUserPosts = async(req, res) => {
+  const { user, accessToken } = req.user;
+  const foundUser = await User.findById(user).select({
+    "password": 0,
+    "refreshToken" : 0
+  }).lean();
+  if (!foundUser) {
+    return res.status(404).json("User not found!");
+  }
+  const allUserPosts = await groupedPost.find({user: foundUser._id}).populate([
+    {
+      path: "posts",
+        select: {
+          url: 1,
+          _id: 0,
+        },
+    },
+    {
+      path: "comments",
+      select: {
+        description: 1,
+        _id: 0,
+      },
+      populate: [
+        {
+          path: "user",
+          select: {
+            username: 1,
+            _id: 0,
+          },
+        },
+        {
+          path: "likes",
+          select: {
+            username: 1,
+            _id: 0,
+          },
+        },
+      ],
+    },
+    {
+      path: "likes",
+      select: {
+        username: 1,
+        _id: 0,
+      },
+    }
+  ])
+  return res.status(200).json({
+    message: "User Posts",
+    data: allUserPosts,
+    token: accessToken
+  })
+}
+
 module.exports = {
   uploadDP,
   uploadPosts,
@@ -201,4 +256,5 @@ module.exports = {
   likeAndUnlikeComment,
   followAndUnfollowUser,
   getUserDetails,
+  getUserPosts,
 };

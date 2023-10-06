@@ -9,11 +9,8 @@ const API_URL = "http://localhost:8000/api/";
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: {
-      name: "Jigah Miracle",
-      username: "afimm_",
-      bio: "Hi, I am a software developer"
-    },
+    user: {},
+    userPosts: [],
     userLoading: false,
     userSuccess: false,
     userError: false,
@@ -37,7 +34,7 @@ export const useUserStore = defineStore('user', {
         const response = await axios.post(`${API_URL}auth/login`, userData);
         const tokenData = {
           value: response?.data?.token,
-          expiry: new Date().getTime() + (2 * 60 * 1000),
+          expiry: new Date().getTime() + (15 * 60 * 1000),
           // expiry: new Date().getTime() + (2 * 24 * 60 * 60 * 1000),
         }
         console.log(tokenData);
@@ -54,6 +51,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async registerUser(data){
+      console.log('Here!');
       this.userLoading = true;
       const userData = {
         name: data.name,
@@ -67,7 +65,7 @@ export const useUserStore = defineStore('user', {
         const response = await axios.post(`${API_URL}auth/register`, userData);
         const tokenData = {
           value: response?.data?.token,
-          expiry: new Date().getTime() + (2 * 60 * 1000),
+          expiry: new Date().getTime() + (15 * 60 * 1000),
           // expiry: new Date().getTime() + (2 * 24 * 60 * 60 * 1000),
         }
         await localStorage.setItem("userTokens", JSON.stringify(tokenData));
@@ -93,12 +91,6 @@ export const useUserStore = defineStore('user', {
         this.userLoading = false;
         this.userSuccess = true;
         this.user = response?.data?.data
-        const tokenData = {
-          value: response?.data?.token,
-          expiry: new Date().getTime() + (2 * 60 * 1000),
-          // expiry: new Date().getTime() + (2 * 24 * 60 * 60 * 1000),
-        }
-        await localStorage.setItem("userTokens", JSON.stringify(tokenData));
       } catch (error) {
         this.userLoading = false;
         this.userError = true;
@@ -163,13 +155,7 @@ export const useUserStore = defineStore('user', {
         console.log(error)
       }
     },
-    userReset(){
-      this.userError = false;
-      this.userLoading = false;
-      this.userSuccess = false;
-    },
     async uploadPosts(data){
-      console.log(data);
       this.userLoading = true;
       try {
         const fetchStorage = await localStorage.getItem("userTokens");
@@ -180,15 +166,49 @@ export const useUserStore = defineStore('user', {
           headers: { 'Authorization': 'Bearer ' + value }
         }
         const response = await axios.post(`${API_URL}user/posts`, data, config);
-        console.log(response.data);
+        this.userMessage = 'Post Created successfully'
+        this.fetchUserPosts();
+        this.router.push("/home");
         this.userLoading = false;
         this.userSuccess = true;
-        // this.user = response.data.data
       } catch (error) {
         this.userLoading = false;
         this.userError = true;
         console.log(error)
       }
-    }
+    },
+    async fetchUserPosts(){
+      try {
+        const fetchStorage = await localStorage.getItem("userTokens");
+        const fetchToken = JSON.parse(fetchStorage);
+        var { value } = fetchToken;
+        value = value ? value : "";
+        const config = {
+          headers: { 'Authorization': 'Bearer ' + value }
+        }
+        const response = await axios.get(`${API_URL}user/post/get`, config);
+        this.userLoading = false;
+        this.userSuccess = true;
+        this.userPosts = response?.data?.data
+      } catch (error) {
+        this.userLoading = false;
+        this.userError = true;
+        console.log(error)
+      }
+    },
+    async logoutUser(){
+      this.user = {};
+      const newTokenData = {
+        value: '',
+        expiry: ''
+      };
+      await localStorage.setItem("userTokens", JSON.stringify(newTokenData));
+      this.router.push("/login");
+    },
+    userReset(){
+      this.userError = false;
+      this.userLoading = false;
+      this.userSuccess = false;
+    },
   }
 })

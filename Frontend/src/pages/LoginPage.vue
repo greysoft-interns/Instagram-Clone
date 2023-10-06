@@ -29,6 +29,7 @@
                 <q-input
                   class="q-my-md"
                   outlined
+                  type="password"
                   v-model="password"
                   label="Password"
                 />
@@ -64,8 +65,8 @@ import { useQuasar } from 'quasar'
 const userStore = useUserStore();
 const { user, userError, userLoading, userSuccess, userMessage, getUserDetails } = storeToRefs(userStore);
 const { loginUser, fetchUserDetails, userReset } = userStore;
-const username = ref("jigah4thjuly@gmail.com");
-const password = ref("1234");
+const username = ref("");
+const password = ref("");
 const $q = useQuasar();
 onBeforeUnmount(() => {
   userReset();

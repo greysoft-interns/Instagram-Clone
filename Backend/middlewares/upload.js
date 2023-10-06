@@ -48,8 +48,6 @@ const handler = async (req, res, next) => {
 const postsHandler = async (req, res, next) => {
   try {
     await runMiddleware(req, res, myPostsUpload);
-    console.log(req.files);
-    console.log(req.body.caption);
     const allMedia = req.files;
     const newResponse = await allMedia.map(async (image) => {
       const b64 = Buffer.from(image.buffer).toString("base64");

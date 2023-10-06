@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const http = require("http");
 const socketIo = require("socket.io");
-const { join } = require('node:path');
+const path = require('path');
 const connectDB = require("./config/utils/db");
 
 const authRoutes = require("./routes/auth.routes");
@@ -20,6 +20,15 @@ const app = express();
 const server = http.createServer(app); 
 const io = socketIo(server);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("/", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "../", "frontend", "dist/spa", "index.html"))
+  );
+} else {
+  app.get('/', (req, res) => res.send('Please set to production environment'))
+}
 // ... other middleware and routes ...
 //app settings
 app.use(express.json());
@@ -28,9 +37,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.sendFile(join(__dirname, "index.html"));
-});
 
 app.get('/test', (req, res) => {
   res.json("You got here");

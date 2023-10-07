@@ -174,10 +174,10 @@
         <div class="col">
           <div class="column" style="height: 100%">
             <div
-              class="col flex items-center justify-center"
-              style="width: 100%; height: 100%"
+              class="col-5 flex items-center justify-center"
+              style="width: 100%"
             >
-              <div class="row" style="width: 65%; height: 350px">
+              <div class="row" style="width: 65%; height: 300px">
                 <div class="col flex items-center justify-center">
                   <div class="" style="">
                     <q-avatar size="170px">
@@ -205,7 +205,7 @@
                       <q-icon size="1.7rem" name="settings" />
                     </div>
                     <div class="q-my-lg flex items-center justify-between">
-                      <p style="margin: 0">3 posts</p>
+                      <p style="margin: 0">{{ userPosts.length }} posts</p>
                       <a class="custom-link" href="#"
                         >{{
                           user.followers && user?.followers.length
@@ -228,7 +228,7 @@
                 </div>
               </div>
             </div>
-            <div class="col custom-border-top">
+            <div class="col-5 custom-border-top">
               <q-card class="bg-transparent no-box-shadow no-shadow">
                 <q-tabs
                   v-model="tab"
@@ -282,7 +282,7 @@
                       </div>
                     </div>
                     <div v-else-if="userPosts.length > 0" class="row">
-                      <div v-for="post in userPosts" :key="post._id" class="col">
+                      <div v-for="post in userPosts" :key="post._id" class="col-3" style="width: 27%">
                         <q-card class="my-card" flat bordered>
                           <img :src="post.posts[0].url" />
 

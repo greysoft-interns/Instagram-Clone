@@ -23,8 +23,9 @@
                 <q-input
                   class="q-my-md"
                   outlined
+                  type="ëmail"
                   v-model="username"
-                  label="Username, Email"
+                  label="Email"
                 />
                 <q-input
                   class="q-my-md"
@@ -72,6 +73,12 @@ onBeforeUnmount(() => {
   userReset();
 });
 const submitUser = async() => {
+  if(username.value === "" || password.value === ""){
+    $q.notify({
+      message: "Enter all Required Fields",
+      color: 'red'
+    })
+  }
       const data = {
         username: username.value,
         password: password.value,

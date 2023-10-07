@@ -21,6 +21,7 @@
                   <q-input
                     hide-bottom-space
                     outlined
+                    type="ëmail"
                     v-model="email"
                     label="Email"
                     :rules="[requiredRule]"
@@ -110,15 +111,24 @@
   </q-page>
 </template>
 
-<script>
+<script setup>
 import Footer from "../components/Footer.vue";
 import { ref } from "vue";
 import { useUserStore } from "../stores/user";
 import { useQuasar } from "quasar";
+import { storeToRefs } from "pinia";
 
 const $q = useQuasar();
 const userStore = useUserStore();
-const { registerUser } = userStore;
+const {
+  user,
+  userError,
+  userLoading,
+  userSuccess,
+  userMessage,
+  getUserDetails,
+} = storeToRefs(userStore);
+const { registerUser, fetchUserDetails, userReset } = userStore;
 const name = ref("");
 const username = ref("");
 const email = ref("");
@@ -126,49 +136,56 @@ const password = ref("");
 const gender = ref("");
 const phoneNumber = ref("");
 const confirmPassword = ref("");
-export default {
-  name: "SignUpPage",
-  components: {
-    Footer,
-  },
-  setup() {
-    return {
-      name,
-      username,
-      email,
-      password,
-      gender,
-      phoneNumber,
-      confirmPassword,
-      options: ["male", "female"],
-    };
-  },
-  methods: {
-    submitForm: () => {
-      if (password.value !== confirmPassword.value) {
-        $q.notify({
-          message: "Passwords don't match",
-          color: "red"
-        })
-      }
-      const userData = {
-        name: name.value,
-        username: username.value,
-        email: email.value,
-        password: password.value,
-        gender: gender.value,
-        phoneNumber: phoneNumber.value,
-      };
-      registerUser(userData);
-    },
-    requiredRule: (val) => !!val || "Required field",
-    minLengthRule: (v) =>
-      (v && v.length >= 3) || "Password must be at least 3 characters long",
-    maxLengthRule: (v) =>
-      (v && v.length <= 15) || "Password must not exceed 15 characters",
-    matchPassword: (v) => v === password.value || "Passwords do not match",
-  },
+const options = ref(["male", "female"]);
+const submitForm = async () => {
+  console.log(gender.value);
+  if (password.value !== confirmPassword.value) {
+    $q.notify({
+      message: "Passwords don't match",
+      color: "red",
+    });
+  }
+  if (
+    name.value === "" ||
+    username.value === "" ||
+    email.value === "" ||
+    password.value === "" ||
+    gender.value === "" ||
+    phoneNumber.value === ""
+  ) {
+    $q.notify({
+      message: "Enter All Fields",
+      color: "red",
+    });
+  }
+  const userData = {
+    name: name.value,
+    username: username.value,
+    email: email.value,
+    password: password.value,
+    gender: gender.value,
+    phoneNumber: phoneNumber.value,
+  };
+  await registerUser(userData);
+  if (userError.value && userMessage.value) {
+    $q.notify({
+      message: userMessage.value,
+      color: "red",
+    });
+  }
+  if (userSuccess.value && userMessage.value) {
+    $q.notify({
+      message: userMessage.value,
+      color: "green",
+    });
+  }
 };
+const requiredRule = (val) => !!val || "Required field";
+const minLengthRule = (v) =>
+  (v && v.length >= 3) || "Password must be at least 3 characters long";
+const maxLengthRule = (v) =>
+  (v && v.length <= 15) || "Password must not exceed 15 characters";
+const matchPassword = (v) => v === password.value || "Passwords do not match";
 </script>
 
 <style lang="scss" scoped>

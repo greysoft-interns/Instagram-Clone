@@ -256,6 +256,9 @@ export default{
           formdata.append("caption", caption.value);
           formdata.append("location", location.value);
           await uploadPosts(formdata);
+          caption.value = "" ;
+          location.value = "";
+          fileUpload.value = "";
           if (userSuccess && userMessage) {
             $q.notify({
               message: userMessage.value,

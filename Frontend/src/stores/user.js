@@ -51,7 +51,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async registerUser(data){
-      console.log('Here!');
+      console.log(data);
       this.userLoading = true;
       const userData = {
         name: data.name,
@@ -71,10 +71,12 @@ export const useUserStore = defineStore('user', {
         await localStorage.setItem("userTokens", JSON.stringify(tokenData));
         this.userLoading = false;
         this.userSuccess = true;
+        this.userMessage = response?.data?.message;
         this.router.push("/home");
       } catch (error) {
         this.userLoading = false;
         this.userError = true;
+        this.userMessage = error?.response?.data?.message;
         console.log(error)
       }
     },

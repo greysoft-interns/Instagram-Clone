@@ -11,7 +11,7 @@
             <div class="text-caption">
               <a class="custom-link" href="#">{{ postData?.user?.username }}</a>
             </div>
-            <div class="text-caption">Original audio</div>
+            <div class="text-caption">{{ postData?.location }}</div>
           </div>
         </div>
       </div>

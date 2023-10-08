@@ -51,7 +51,6 @@ const userSignup = async (req, res) => {
     return res.status(200).json({
       message: "User created Successfully",
       accessToken,
-      refreshToken,
     });
   } catch (error) {
     console.log(error);
@@ -78,7 +77,6 @@ const userLogin = async (req, res) => {
     res.status(200).send({
       message: "Sign in Successful!",
       token: generateAccessToken(checkUser._id),
-      refreshToken: checkUser.refreshToken,
     });
   } catch (error) {
     console.log(error);

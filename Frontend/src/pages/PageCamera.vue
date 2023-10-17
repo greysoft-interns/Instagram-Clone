@@ -10,7 +10,7 @@
       <q-btn round color="grey-10" icon="eva-camera" />
     </div>
     <div class="row justify-center q-ma-md">
-      <q-input v-model="text" label="Caption" class="col col-sm-8" dense />
+      <q-input v-model="text" label="Caption" class="col col-sm-8" dense   />
     </div>
     <div class="row justify-center q-ma-md">
       <q-input v-model="text" label="Location" class="col-12 col-sm-8" dense>

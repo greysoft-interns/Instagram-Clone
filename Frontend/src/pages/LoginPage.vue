@@ -34,7 +34,16 @@
                   v-model="password"
                   label="Password"
                 />
-                <q-btn
+                <q-circular-progress
+                v-if="userLoading"
+                indeterminate
+                rounded
+                size="32px"
+                color="blue"
+                style="width: 100%"
+                class="q-my-md flex justify-center"
+                />
+                <q-btn v-else
                   class="q-my-md"
                   color="primary"
                   label="Log in"

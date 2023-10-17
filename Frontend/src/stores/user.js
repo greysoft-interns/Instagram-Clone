@@ -108,7 +108,6 @@ export const useUserStore = defineStore('user', {
         const config = {
           headers: { 'Authorization': 'Bearer ' + value }
         }
-        const response = await axios.patch(`${API_URL}user/like/${postId}`, {}, config);
         const foundElement = groupedPosts.value.findIndex((element) => element._id === postId);
         const checkUsername = obj => obj.username === username
         const isLiked = groupedPosts.value[foundElement].likes.some(checkUsername);
@@ -117,10 +116,19 @@ export const useUserStore = defineStore('user', {
         } else {
           groupedPosts.value[foundElement].likes.push({username: username});
         }
+        const response = await axios.patch(`${API_URL}user/like/${postId}`, {}, config);
         this.userLoading = false;
         this.userSuccess = true;
       } catch (error) {
         this.userLoading = false;
+        const foundElement = groupedPosts.value.findIndex((element) => element._id === postId);
+        const checkUsername = obj => obj.username === username
+        const isLiked = groupedPosts.value[foundElement].likes.some(checkUsername);
+        if (isLiked) {
+          groupedPosts.value[foundElement].likes = groupedPosts.value[foundElement].likes.filter((element) => element.username !== username);
+        } else {
+          groupedPosts.value[foundElement].likes.push({username: username});
+        }
         this.userError = true;
         console.log(error)
       }

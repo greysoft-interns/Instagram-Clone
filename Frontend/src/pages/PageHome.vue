@@ -39,7 +39,21 @@
                       class="flex column text-center justify-center items-center"
                       style="width: 100px; height: 100px"
                     >
-                      <q-avatar
+                      <q-circular-progress
+                        show-value
+                        font-size="10px"
+                        class="q-ma-md"
+                        :value="value"
+                        size="80px"
+                        :thickness="0.15"
+                        color="primary"
+                        track-color="red"
+                      >
+                        <q-avatar size="60px">
+                          <img :src="image.url" />
+                        </q-avatar>
+                      </q-circular-progress>
+                      <!-- <q-avatar
                         size="60px"
                         class="flex justify-center items-center"
                         style="
@@ -50,7 +64,7 @@
                         "
                       >
                         <img :src="image.url" />
-                      </q-avatar>
+                      </q-avatar> -->
                       <p>name</p>
                     </div>
                   </div>
@@ -100,10 +114,81 @@
       </div>
       <Footer />
     </div>
-    <div class="sm">
-      <Footer />
+    <div
+      class="q-drawer q-drawer-left flex justify-center"
+      :class="{ 'hidden-md': !$q.screen.md }"
+      v-if="$q.screen.sm"
+      style="width: 140px"
+    >
+      <q-list>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="home" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            <!-- Hide text for SM -->
+            Posts
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="search" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            Saved
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="add_box" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            Tagged
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="perm_identity" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            profile
+          </q-item-section>
+        </q-item>
+        <!-- Add more navigation icons as needed for SM screen -->
+      </q-list>
     </div>
-    <div class="md" style="height: 100vh">
+    <!-- <div class="sm">
+      <Footer />
+    </div> -->
+    <div style="height: 100vh">
       <div class="row" style="height: 100vh">
         <div
           class="col-2 q-px-md"

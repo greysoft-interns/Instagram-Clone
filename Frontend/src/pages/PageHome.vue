@@ -18,54 +18,40 @@
             </div>
 
             <div class="q-pa-sm q-mb-lg">
-              <q-scroll-area
-                style="height: 100px; max-width: 790px; background-color: red"
-              >
+              <q-scroll-area style="height: 200px; max-width: 790px">
                 <div
                   class="row no-wrap flex justify-center align-items-center q-mb-lg"
+                  style="height: 200px"
                 >
                   <div
                     v-for="image in images"
                     :key="image.id"
                     style="
                       width: 100px;
-                      height: auto;
-                      background-color: #fff;
+                      height: 120px;
                       z-index: 9999999999999999999999999;
                     "
-                    class="q-pa-xs q-mb-lg"
+                    class="q-pa-xs q-mb-lg flex items-center justify-center"
                   >
                     <div
-                      class="flex column text-center justify-center items-center"
-                      style="width: 100px; height: 100px"
+                      class="flex column inline text-center items-center wrap"
+                      style="width: 100px; height: 200px"
                     >
                       <q-circular-progress
                         show-value
                         font-size="10px"
-                        class="q-ma-md"
+                        class="q-mt-xs"
                         :value="value"
-                        size="80px"
+                        size="70px"
                         :thickness="0.15"
                         color="primary"
                         track-color="red"
                       >
-                        <q-avatar size="60px">
+                        <q-avatar size="50px">
                           <img :src="image.url" />
                         </q-avatar>
                       </q-circular-progress>
-                      <!-- <q-avatar
-                        size="60px"
-                        class="flex justify-center items-center"
-                        style="
-                          border: 5px solid red;
-                          border-radius: 100%;
-                          /* width: 100px; */
-                          object-fit: cover;
-                        "
-                      >
-                        <img :src="image.url" />
-                      </q-avatar> -->
-                      <p>name</p>
+                      <p class="q-mb-xs" style="align-self: center">name</p>
                     </div>
                   </div>
                 </div>
@@ -79,7 +65,7 @@
                 style="
                   height: 100%;
                   width: 100%;
-                  background-color: #fff;
+                  background-color: transparent;
                   padding: 0;
                 "
               >

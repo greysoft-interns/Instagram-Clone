@@ -17,32 +17,32 @@
               </div>
             </div>
 
-            <div class="q-pa-sm q-mb-lg">
-              <q-scroll-area style="height: 200px; max-width: 790px">
-                <div
-                  class="row no-wrap flex justify-center align-items-center q-mb-lg"
-                  style="height: 200px"
-                >
+            <div class="q-pa-sm">
+              <q-scroll-area
+                style="height: 120px; max-width: 790px"
+                class="q-mb-lg"
+              >
+                <div class="row no-wrap flex justify-center align-items-center">
                   <div
                     v-for="image in images"
                     :key="image.id"
                     style="
                       width: 100px;
-                      height: 120px;
+                      height: 100%;
                       z-index: 9999999999999999999999999;
                     "
-                    class="q-pa-xs q-mb-lg flex items-center justify-center"
+                    class="q-pa-xs flex items-center justify-center"
                   >
                     <div
-                      class="flex column inline text-center items-center wrap"
-                      style="width: 100px; height: 200px"
+                      class="flex column inline text-center items-center justify-center wrap"
+                      style="width: 100px; height: 100%"
                     >
                       <q-circular-progress
                         show-value
                         font-size="10px"
                         class="q-mt-xs"
                         :value="value"
-                        size="70px"
+                        size="75px"
                         :thickness="0.15"
                         color="primary"
                         track-color="red"

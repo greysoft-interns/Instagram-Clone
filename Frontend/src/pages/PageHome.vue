@@ -191,8 +191,8 @@
             <div class="col">
               <div class="column" style="height: 100%">
                 <div class="col-2 justify-center q-mx-lg q-mt-lg">
-                  <div class="q-pa-md">
-                    <q-scroll-area style="height: 90px; max-width: 790px">
+                  <div class="q-pa-sm">
+                    <q-scroll-area style="height: 120px; max-width: 790px">
                       <div
                         class="row no-wrap flex justify-center align-items-center q-mb-lg"
                       >
@@ -201,19 +201,32 @@
                           :key="image.id"
                           style="
                             width: 100px;
-                            height: 100px;
-                            background-color: #fff;
+                            height: 120px;
+                            z-index: 9999999999999999999999999;
                           "
-                          class="q-pa-sm"
+                          class="q-pa-xs flex items-center justify-center"
                         >
                           <div
-                            class="flex justify-center align-items-center"
-                            style="width: 66px"
+                            class="flex column inline text-center items-center wrap"
+                            style="width: 100px; height: 100%"
                           >
-                            <q-avatar size="60px">
-                              <img :src="image.url" />
-                            </q-avatar>
-                            <p>name</p>
+                            <q-circular-progress
+                              show-value
+                              font-size="10px"
+                              class="q-mt-xs"
+                              :value="value"
+                              size="70px"
+                              :thickness="0.15"
+                              color="primary"
+                              track-color="red"
+                            >
+                              <q-avatar size="50px">
+                                <img :src="image.url" />
+                              </q-avatar>
+                            </q-circular-progress>
+                            <p class="q-mb-xs" style="align-self: center">
+                              name
+                            </p>
                           </div>
                         </div>
                       </div>

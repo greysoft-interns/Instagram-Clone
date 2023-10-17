@@ -1,5 +1,116 @@
 <template>
   <q-page>
+    <q-header
+      class="flex items-center justify-center"
+      style="width: 100%; height: 100px; background-color: #fff"
+    >
+      <q-icon name="search" size="md" class="text-grey" />
+      <q-input
+        v-model="searchText"
+        @input="performSearch"
+        placeholder="Search..."
+        clearable
+        style="width: 80%"
+        class="q-pa-lg"
+      />
+    </q-header>
+    <q-row
+      cols-xs="3"
+      q-gutter="xs"
+      class="flex justify-center items-center wrap full-width"
+      style="margin-top: 10px; width: 100%; height: auto"
+    >
+      <div
+        v-for="post in posts"
+        :key="post.id"
+        class="q-col q-ma-xs"
+        style="width: 30%; height: 150"
+      >
+        <img :src="post.img" style="object-fit: cover cover; width: 100%" />
+      </div>
+    </q-row>
+  </q-page>
+</template>
+
+<script>
+export default {
+  name: "SearchPage",
+  data() {
+    return {
+      searchText: "",
+      posts: [
+        {
+          id: 1,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 2,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 3,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 4,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 5,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 6,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 7,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 8,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 9,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 10,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 11,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 12,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 13,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 14,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 15,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+      ],
+    };
+  },
+  methods: {
+    performSearch() {
+      // Handle your search logic here using this.searchText
+    },
+  },
+};
+</script>
+<!-- <template>
+  <q-page>
     <Header />
     <div class="xs q-pa-xs example-column-variable-width">
       <div class="column" style="height: 100vh">
@@ -152,4 +263,4 @@ a
       > div
         padding: 4px 8px
         box-shadow: inset 0 0 0 2px #9e9e9e
-</style>
+</style> -->

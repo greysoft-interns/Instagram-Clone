@@ -3,23 +3,52 @@
     <div class="xs">
       <div class="col" style="height: 100vh">
         <div class="column" style="height: 100%">
-          <div class="col-2 justify-center q-mx-lg q-mt-lg">
-            <div class="q-pa-md">
-              <q-scroll-area style="height: 130px; max-width: 790px">
+          <div class="col-2 justify-center q-mx-lg q-mb-lg q-mt-lg">
+            <div class="flex items-center justify-between" style="width: 100%">
+              <p
+                class="text-grand-hotel text-red text-bold text-h4 custom-link"
+              >
+                Instagram
+                <span> <q-icon size="lg" name="arrow_drop_down" /> </span>
+              </p>
+              <div class="flex justify-between items-center">
+                <q-icon name="add_box" size="md" />
+                <q-icon name="message" size="md" />
+              </div>
+            </div>
+
+            <div class="q-pa-sm q-mb-lg">
+              <q-scroll-area
+                style="height: 100px; max-width: 790px; background-color: red"
+              >
                 <div
                   class="row no-wrap flex justify-center align-items-center q-mb-lg"
                 >
                   <div
                     v-for="image in images"
                     :key="image.id"
-                    style="width: 100px; height: 100px; background-color: #fff"
-                    class="q-pa-sm"
+                    style="
+                      width: 100px;
+                      height: auto;
+                      background-color: #fff;
+                      z-index: 9999999999999999999999999;
+                    "
+                    class="q-pa-xs q-mb-lg"
                   >
                     <div
-                      class="flex justify-center align-items-center"
-                      style="width: 66px"
+                      class="flex column text-center justify-center items-center"
+                      style="width: 100px; height: 100px"
                     >
-                      <q-avatar size="60px">
+                      <q-avatar
+                        size="60px"
+                        class="flex justify-center items-center"
+                        style="
+                          border: 5px solid red;
+                          border-radius: 100%;
+                          /* width: 100px; */
+                          object-fit: cover;
+                        "
+                      >
                         <img :src="image.url" />
                       </q-avatar>
                       <p>name</p>
@@ -29,14 +58,19 @@
               </q-scroll-area>
             </div>
           </div>
-          <div class="col" style="height: auto; background-color: pink">
-            <q-scroll-area
-              style="height: 100%; max-width: 100%"
-              class="q-pa-sm custom-center"
-            >
-              <div class="column custom-center" style="height: 100%">
+          <div class="col" style="height: auto">
+            <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
+              <div
+                class="column flex items-center justify-center"
+                style="
+                  height: 100%;
+                  width: 100%;
+                  background-color: #fff;
+                  padding: 0;
+                "
+              >
                 <q-dialog v-model="commDialogMobile" position="bottom">
-                  <q-card style="width: 1100px; max-width: 90vw; height: 400px">
+                  <q-card style="height: 400px; width: 90%; min-width: 500px">
                     <CommentDialog
                       :post="dialogContent"
                       :text="text"
@@ -152,11 +186,14 @@
                           />
                         </q-card>
                       </q-dialog>
-                      <div class="text-center q-ma-md" v-if="groupedPosts.length < 1">
+                      <div
+                        class="text-center q-ma-md"
+                        v-if="groupedPosts.length < 1"
+                      >
                         <h3>No Posts At the Time</h3>
                       </div>
                       <div
-                      v-else
+                        v-else
                         v-for="postData in getPostsData"
                         :key="postData.id"
                         class="col"
@@ -204,8 +241,7 @@
                           <div class="col flex justify-end">See All</div>
                         </div>
                       </div>
-                      <div class="col">
-                      </div>
+                      <div class="col"></div>
                     </div>
                   </div>
                 </div>
@@ -235,7 +271,8 @@ const userStore = useUserStore();
 const { groupedPosts, getPostsData, postLoading } = storeToRefs(postStore); // state and getters need "storeToRefs"
 const { getTimelinePosts, reset } = postStore;
 const { user, userLoading, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } = userStore;
+const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } =
+  userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const commDialogMobile = ref(false);
@@ -315,7 +352,7 @@ export default {
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
     clickLike: (id, user) => {
-      likeAndUnlikePost(id, user)
+      likeAndUnlikePost(id, user);
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
@@ -329,10 +366,10 @@ export default {
       commDialogMobile.value = true;
     },
     addComment: (id, textValue, user) => {
-      addPostComment(id, textValue, user)
+      addPostComment(id, textValue, user);
     },
   },
-  created(){
+  created() {
     fetchUserDetails();
     getTimelinePosts();
   },

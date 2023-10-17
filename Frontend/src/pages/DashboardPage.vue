@@ -1,24 +1,85 @@
 <template>
   <q-page>
-    <q-page class="xs">
-      <div class="column" style="height: 100vh">
-        <div class="col-5">
-          <div class="column" style="height: 100%">
-            <div class="col-2 flex align-center justify-center">
-              <div class="row q-py-lg" style="width: 100%">
-                <div class="col-7 text-right text-weight-medium">
-                  <q-icon name="lock" />
-                  afimm_
-                  <q-icon name="keyboard_arrow_down" />
+    <div class="column" style="height: 100vh" v-if="$q.screen.lt.sm">
+      <div class="col-5">
+        <div class="column" style="height: 100%">
+          <div class="col-2 flex align-center justify-center">
+            <div class="row q-py-lg" style="width: 100%">
+              <div class="col-7 text-right text-weight-medium">
+                <q-icon name="lock" />
+                afimm_
+                <q-icon name="keyboard_arrow_down" />
+              </div>
+              <div class="col-5 text-right q-px-md">
+                <q-icon name="menu" />
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="row">
+              <div class="col-4 flex align-center justify-center">
+                <div
+                  class="border-rad flex items-center justify-center q-pa xs"
+                >
+                  <q-avatar size="4rem">
+                    <img src="https://cdn.quasar.dev/img/avatar.png" />
+                  </q-avatar>
                 </div>
-                <div class="col-5 text-right q-px-md">
-                  <q-icon name="menu" />
+              </div>
+              <div class="col">
+                <div class="column flex items-center justify-center">
+                  <div class="col text-weight-medium">54</div>
+                  <div class="col text-weight-light text-caption">Posts</div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="column flex items-center justify-center">
+                  <div class="col text-weight-medium">834</div>
+                  <div class="col text-weight-light text-caption">
+                    Followers
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="column flex items-center justify-center">
+                  <div class="col text-weight-medium">162</div>
+                  <div class="col text-weight-light text-caption">
+                    Following
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-3">
-              <div class="row">
-                <div class="col-4 flex align-center justify-center">
+          </div>
+          <div class="col-4 q-mx-md">
+            <div class="column">
+              <div class="col text-caption">Quasar dev</div>
+              <div class="col text-caption">Frontend Developer</div>
+              <div class="col text-caption">Aspiring Tech bro...</div>
+              <q-btn
+                size=".7rem"
+                no-caps
+                outline
+                class="q-my-sm border-grey"
+                text-color="black"
+                dense
+                label="Edit Profile"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <q-scroll-area
+              :visible="false"
+              style="height: 90px; max-width: 98%"
+            >
+              <div class="row no-wrap q-my-xs q-mx-md">
+                <div class="col q-mx-sm q-mx-md">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-icon name="add" color="grey" size="2.4rem" />
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
                   <div
                     class="border-rad flex items-center justify-center q-pa xs"
                   >
@@ -27,143 +88,206 @@
                     </q-avatar>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="column flex items-center justify-center">
-                    <div class="col text-weight-medium">54</div>
-                    <div class="col text-weight-light text-caption">Posts</div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="column flex items-center justify-center">
-                    <div class="col text-weight-medium">834</div>
-                    <div class="col text-weight-light text-caption">
-                      Followers
-                    </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="column flex items-center justify-center">
-                    <div class="col text-weight-medium">162</div>
-                    <div class="col text-weight-light text-caption">
-                      Following
-                    </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </div>
+                </div>
+                <div class="col q-mx-sm">
+                  <div
+                    class="border-rad flex items-center justify-center q-pa xs"
+                  >
+                    <q-avatar size="4rem">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-4 q-mx-md">
-              <div class="column">
-                <div class="col text-caption">Quasar dev</div>
-                <div class="col text-caption">Frontend Developer</div>
-                <div class="col text-caption">Aspiring Tech bro...</div>
-                <q-btn
-                  size=".7rem"
-                  no-caps
-                  outline
-                  class="q-my-sm border-grey"
-                  text-color="black"
-                  dense
-                  label="Edit Profile"
-                />
-              </div>
-            </div>
-            <div class="col">
-              <q-scroll-area
-                visible="false"
-                style="height: 90px; max-width: 98%"
-              >
-                <div class="row no-wrap q-my-xs q-mx-md">
-                  <div class="col q-mx-sm q-mx-md">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-icon name="add" color="grey" size="2.4rem" />
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                  <div class="col q-mx-sm">
-                    <div
-                      class="border-rad flex items-center justify-center q-pa xs"
-                    >
-                      <q-avatar size="4rem">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </div>
-                  </div>
-                </div>
-              </q-scroll-area>
-            </div>
-          </div>
-        </div>
-        <div class="col-7 q-py-md">
-          <div class="row">
-            <div class="col flex items-center justify-center">.col</div>
-            <div class="col flex items-center justify-center">.col</div>
-            <div class="col flex items-center justify-center">.col</div>
-          </div>
-          <div class="row">
-            <div class="col flex items-center justify-center">.col</div>
-            <div class="col flex items-center justify-center">.col</div>
-            <div class="col flex items-center justify-center">.col</div>
+            </q-scroll-area>
           </div>
         </div>
       </div>
-      <Footer />
-    </q-page>
-    <q-page class="md">
+      <div class="col-7 q-py-md">
+        <q-card>
+          <q-tabs
+            v-model="tab"
+            dense
+            class="text-grey"
+            active-color="black"
+            indicator-color="black"
+            inline-label
+            narrow-indicator
+          >
+            <q-tab name="posts">
+              <div class="flex justify-center full-width">
+                <q-icon size="md" name="grid_on" />
+              </div>
+            </q-tab>
+            <q-tab name="tags">
+              <div class="flex justify-center full-width">
+                <q-icon size="md" name="portrait" />
+              </div>
+            </q-tab>
+          </q-tabs>
+
+          <q-tab-panels v-model="tab">
+            <q-tab-panel
+              name="posts"
+              class="flex justify-center items-center wrap full-width"
+            >
+              <q-row
+                cols-xs="3"
+                q-gutter="xs"
+                class="flex justify-center items-center wrap full-width"
+                style="margin-top: 10px; width: 100%; height: auto"
+              >
+                <div
+                  v-for="post in posts"
+                  :key="post.id"
+                  class="q-col q-ma-xs"
+                  style="width: 30%; height: 150"
+                >
+                  <img
+                    :src="post.img"
+                    style="object-fit: cover cover; width: 100%"
+                  />
+                </div>
+              </q-row>
+            </q-tab-panel>
+
+            <q-tab-panel name="tags">
+              <div class="row">
+                <div class="col flex items-center justify-center">.col</div>
+                <div class="col flex items-center justify-center">.col</div>
+                <div class="col flex items-center justify-center">.col</div>
+              </div>
+              <div class="row">
+                <div class="col flex items-center justify-center">.col</div>
+                <div class="col flex items-center justify-center">.col</div>
+                <div class="col flex items-center justify-center">.col</div>
+              </div>
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card>
+      </div>
+    </div>
+
+    <Footer v-if="$q.screen.lt.sm" />
+
+    <div
+      class="q-drawer q-drawer-left flex justify-center"
+      :class="{ 'hidden-md': !$q.screen.md }"
+      v-if="$q.screen.sm"
+      style="width: 140px"
+    >
+      <q-list>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="home" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            <!-- Hide text for SM -->
+            Posts
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="search" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            Saved
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="add_box" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            Tagged
+          </q-item-section>
+        </q-item>
+        <q-item
+          to="#"
+          clickable
+          class="flex column justify-center items-center"
+        >
+          <q-item-section class="icon-center">
+            <q-icon name="perm_identity" size="md" />
+          </q-item-section>
+          <q-item-section
+            class="q-item-label"
+            style="color: transparent; text-align: center"
+          >
+            profile
+          </q-item-section>
+        </q-item>
+        <!-- Add more navigation icons as needed for SM screen -->
+      </q-list>
+    </div>
+
+    <div class="q-page-container">
+      <!-- Content -->
       <div class="row" style="height: 100vh">
         <div
           class="col-2 q-px-md q-py-xl"
@@ -172,6 +296,7 @@
           <Search />
         </div>
         <div class="col">
+          <!-- Rest of your content -->
           <div class="column" style="height: 100%">
             <div
               class="col-5 flex items-center justify-center"
@@ -245,7 +370,7 @@
                 </q-tabs>
 
                 <q-tab-panels
-                  class="flex bg-transparent no-shadow no-box-shadow q-mx-md justify-center"
+                  class="flex bg-transparent no-box-shadow q-mx-md justify-center"
                   v-model="tab"
                   animated
                 >
@@ -259,7 +384,6 @@
                                 <q-item-section avatar>
                                   <q-skeleton type="QAvatar" />
                                 </q-item-section>
-                        
                                 <q-item-section>
                                   <q-item-label>
                                     <q-skeleton type="text" />
@@ -269,9 +393,7 @@
                                   </q-item-label>
                                 </q-item-section>
                               </q-item>
-                        
                               <q-skeleton height="200px" square />
-                        
                               <q-card-actions align="right" class="q-gutter-md">
                                 <q-skeleton type="QBtn" />
                                 <q-skeleton type="QBtn" />
@@ -282,10 +404,14 @@
                       </div>
                     </div>
                     <div v-else-if="userPosts.length > 0" class="row">
-                      <div v-for="post in userPosts" :key="post._id" class="col-3" style="width: 27%">
+                      <div
+                        v-for="post in userPosts"
+                        :key="post._id"
+                        class="col-3"
+                        style="width: 27%"
+                      >
                         <q-card class="my-card" flat bordered>
                           <img :src="post.posts[0].url" />
-
                           <q-card-actions align="right">
                             <q-btn flat round color="red" icon="favorite" />
                             <q-btn flat round color="teal" icon="bookmark" />
@@ -298,9 +424,8 @@
                       You have No Posts!
                     </div>
                   </q-tab-panel>
-
                   <q-tab-panel
-                    class="bg-transparent no-shadow no-box-shadow"
+                    class="bg-transparent no-box-shadow"
                     name="saved"
                   >
                     <div class="row">
@@ -309,11 +434,7 @@
                       <div class="col">.col</div>
                     </div>
                   </q-tab-panel>
-
-                  <q-tab-panel
-                    class="bg-transparent no-shadow no-box-shadow"
-                    name="tags"
-                  >
+                  <q-tab-panel class="bg-transparent no-box-shadow" name="tags">
                     <div class="row">
                       <div class="col">.col</div>
                       <div class="col">.col</div>
@@ -326,7 +447,7 @@
           </div>
         </div>
       </div>
-    </q-page>
+    </div>
   </q-page>
 </template>
 
@@ -352,6 +473,45 @@ export default {
       user,
       userPosts,
       userLoading,
+      drawer: false,
+      posts: [
+        {
+          id: 1,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 2,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 3,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 4,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 5,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 6,
+          img: "https://picsum.photos/150/150?blur",
+        },
+        {
+          id: 7,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 8,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+        {
+          id: 9,
+          img: "https://picsum.photos/150/150?grayscale",
+        },
+      ],
     };
   },
   mounted() {
@@ -360,9 +520,9 @@ export default {
   unmounted() {
     userReset();
   },
-  created(){
+  created() {
     fetchUserPosts();
-  }
+  },
 };
 </script>
 
@@ -377,7 +537,15 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
-
+.icon-center {
+  display: flex;
+  background-color: rgb(238, 231, 231);
+  color: black;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin: 10px auto;
+}
 .q-tab__content p {
   margin: 0;
   margin-left: 10px;

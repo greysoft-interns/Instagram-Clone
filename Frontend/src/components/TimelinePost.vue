@@ -1,5 +1,5 @@
 <template>
-  <q-card class="my-card q-my-lg">
+  <q-card class="my-card q-my-lg shadow-0">
     <q-card-section class="row justify-between q-pa-md">
       <div class="text-h6">
         <div class="row">
@@ -106,7 +106,6 @@ import { ref } from "vue";
 import { useUserStore } from "stores/user";
 import { storeToRefs } from "pinia";
 
-
 const postliked = ref(false);
 const newText = ref("");
 const userStore = useUserStore();
@@ -127,16 +126,14 @@ export default {
       username: user.value.username,
     };
   },
-  methods: {
-
-  },
+  methods: {},
   computed: {
-    checkLikedPost(){
-      const checkUsername = obj => {
-        return obj.username === user.value.username
+    checkLikedPost() {
+      const checkUsername = (obj) => {
+        return obj.username === user.value.username;
       };
       return this.postData.likes.some(checkUsername);
-    }
+    },
   },
 };
 </script>

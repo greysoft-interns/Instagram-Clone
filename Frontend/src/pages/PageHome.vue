@@ -1,26 +1,35 @@
 <template>
   <q-page>
-    <div class="xs">
-      <div class="col" style="height: 100vh">
-        <div class="column" style="height: 100%">
-          <div class="col-2 justify-center q-mx-lg q-mb-lg q-mt-lg">
-            <div class="flex items-center justify-between" style="width: 100%">
-              <p
-                class="text-grand-hotel text-red text-bold text-h4 custom-link"
-              >
-                Instagram
-                <span> <q-icon size="lg" name="arrow_drop_down" /> </span>
-              </p>
-              <div class="flex justify-between items-center">
-                <q-icon name="add_box" size="md" />
-                <q-icon name="message" size="md" />
-              </div>
+    <div class="xs" style="height: 100vh; width: 100%; position: relative">
+      <div class="col" style="height: 100%">
+        <div
+          class="column flex justify-between"
+          style="height: 100%; width: 100%; background-color: #fff"
+        >
+          <div
+            class="flex items-center justify-between q-pa-md q-mb-xs"
+            style="
+              width: 100%;
+              height: 100px;
+              background-color: #faf5f5;
+              z-index: 999999;
+            "
+          >
+            <p class="text-grand-hotel text-bold text-h4 custom-link">
+              Instagram
+              <span> <q-icon size="lg" name="arrow_drop_down" /> </span>
+            </p>
+            <div class="flex justify-between items-center">
+              <q-icon name="add_box" size="md" />
+              <q-icon name="message" size="md" />
             </div>
+          </div>
 
-            <div class="q-pa-sm">
+          <div class="col" style="height: ">
+            <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
               <q-scroll-area
-                style="height: 120px; max-width: 790px"
-                class="q-mb-xl"
+                style="height: 120px; max-width: 790px; width: 100%"
+                class="q-mb-sm"
               >
                 <div class="row no-wrap flex justify-center align-items-center">
                   <div
@@ -42,12 +51,12 @@
                         font-size="10px"
                         class="q-mt-xs"
                         :value="value"
-                        size="75px"
-                        :thickness="0.15"
+                        size="85px"
+                        :thickness="0.1"
                         color="primary"
                         track-color="red"
                       >
-                        <q-avatar size="50px">
+                        <q-avatar size="70px">
                           <img :src="image.url" />
                         </q-avatar>
                       </q-circular-progress>
@@ -56,10 +65,7 @@
                   </div>
                 </div>
               </q-scroll-area>
-            </div>
-          </div>
-          <div class="col" style="height: auto; margin-top: 2rem">
-            <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
+
               <div
                 class="column flex items-center justify-center"
                 style="
@@ -70,7 +76,7 @@
                 "
               >
                 <q-dialog v-model="commDialogMobile" position="bottom">
-                  <q-card style="height: 400px; width: 90%; min-width: 500px">
+                  <q-card style="height: 400px; width: 100%">
                     <CommentDialog
                       :post="dialogContent"
                       :text="text"
@@ -84,7 +90,7 @@
                   v-for="postData in getPostsData"
                   :key="postData.id"
                   class="col"
-                  style="width: 80%"
+                  style="width: 100%"
                 >
                   <TimelinePost
                     :postData="postData"

@@ -29,12 +29,18 @@
         <img :src="post.img" style="object-fit: cover cover; width: 100%" />
       </div>
     </q-row>
+    <Footer v-if="$q.screen.lt.sm" />
   </q-page>
 </template>
 
 <script>
+import Footer from "../components/Footer.vue";
+
 export default {
   name: "SearchPage",
+  components: {
+    Footer,
+  },
   data() {
     return {
       searchText: "",

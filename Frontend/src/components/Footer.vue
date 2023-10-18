@@ -5,7 +5,7 @@
       <q-route-tab name="search" to="/search" icon="search" />
       <q-route-tab class="text-black" name="add" to="/create" icon="add_box" />
       <q-route-tab name="favorite" to="/favorite" icon="favorite_border" />
-      <q-route-tab  to="/home" name="dashboard">
+      <q-route-tab  to="/dashboard" name="dashboard">
         <q-avatar size="32px">
           <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
         </q-avatar>

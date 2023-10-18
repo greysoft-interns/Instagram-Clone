@@ -12,7 +12,7 @@ const routes = [
       },
       {
         path: "/home",
-        component: () => import("pages/DashboardPage.vue"),
+        component: () => import("pages/PageHome.vue"),
         beforeEnter: authMiddleware,
       },
       { path: "/favorite", component: () => import("pages/FavoritePage.vue") },
@@ -21,6 +21,10 @@ const routes = [
       { path: "/login", component: () => import("pages/LoginPage.vue") },
       { path: "/register", component: () => import("pages/SignUpPage.vue") },
       { path: "/camera", component: () => import("pages/PageCamera.vue") },
+      {
+        path: "/dashboard",
+        component: () => import("pages/DashboardPage.vue"),
+      },
     ],
   },
 

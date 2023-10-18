@@ -210,9 +210,8 @@
           </q-tab-panels>
         </q-card>
       </div>
+      <Footer v-if="$q.screen.lt.sm" />
     </div>
-
-    <Footer v-if="$q.screen.lt.sm" />
 
     <div
       class="q-drawer q-drawer-left flex justify-center"
@@ -286,7 +285,7 @@
       </q-list>
     </div>
 
-    <div class="q-page-container">
+    <div class="q-page-container" v-if="$q.screen.gt.xs">
       <!-- Content -->
       <div class="row" style="height: 100vh">
         <div

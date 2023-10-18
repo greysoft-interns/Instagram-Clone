@@ -20,7 +20,7 @@
             <div class="q-pa-sm">
               <q-scroll-area
                 style="height: 120px; max-width: 790px"
-                class="q-mb-lg"
+                class="q-mb-xl"
               >
                 <div class="row no-wrap flex justify-center align-items-center">
                   <div
@@ -58,7 +58,7 @@
               </q-scroll-area>
             </div>
           </div>
-          <div class="col" style="height: auto">
+          <div class="col" style="height: auto; margin-top: 2rem">
             <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
               <div
                 class="column flex items-center justify-center"
@@ -171,10 +171,8 @@
         <!-- Add more navigation icons as needed for SM screen -->
       </q-list>
     </div>
-    <!-- <div class="sm">
-      <Footer />
-    </div> -->
-    <div style="height: 100vh">
+
+    <div style="height: 100vh" v-if="$q.screen.gt.xs">
       <div class="row" style="height: 100vh">
         <div
           class="col-2 q-px-md"
@@ -232,25 +230,6 @@
                       </div>
                     </q-scroll-area>
                   </div>
-                  <!-- <q-scroll-area style="height: 100%; max-width: 790px">
-                    <div
-                      v-for="image in images"
-                      :key="image.id"
-                      class="row no-wrap"
-                      style="
-                        height: 110px;
-                        width: 100%;
-                        background-color: #751616;
-                      "
-                    >
-                      <div class="" style="width: 66px">
-                        <q-avatar size="60px">
-                          <img :src="image.url" />
-                        </q-avatar>
-                        <p>name</p>
-                      </div>
-                    </div>
-                  </q-scroll-area> -->
                 </div>
                 <div class="col">
                   <q-scroll-area

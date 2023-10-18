@@ -2,7 +2,10 @@
   <q-page>
     <div>
       <div class="flex items-center justify-center" style="height: 100vh">
-        <div class="column q-px-md q-py-lg" style="height: 100%; width: 480px">
+        <div
+          class="flex column q-px-md q-py-lg"
+          style="height: 100%; width: 480px"
+        >
           <div
             class="col-8 q-my-md"
             style="border: 1px solid rgb(208, 208, 208)"

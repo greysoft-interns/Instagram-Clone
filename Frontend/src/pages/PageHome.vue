@@ -1,6 +1,6 @@
 <template>
-  <q-page>
-    <div class="xs" style="height: 100vh; width: 100%; position: relative">
+  <q-page style="padding: 0">
+    <div class="xs" style="height: 100vh; width: 100%">
       <div class="col" style="height: 100%">
         <div
           class="column flex justify-between"
@@ -8,20 +8,15 @@
         >
           <div
             class="flex items-center justify-between q-pa-md q-mb-xs"
-            style="
-              width: 100%;
-              height: 100px;
-              background-color: #faf5f5;
-              z-index: 999999;
-            "
+            style="width: 100%; height: 100px; z-index: 999999"
           >
             <p class="text-grand-hotel text-bold text-h4 custom-link">
               Instagram
               <span> <q-icon size="lg" name="arrow_drop_down" /> </span>
             </p>
-            <div class="flex justify-between items-center">
-              <q-icon name="add_box" size="md" />
-              <q-icon name="message" size="md" />
+            <div class="flex justify-around items-center" style="width: 20%">
+              <q-icon name="add_box" size="30px" />
+              <q-icon size="30px" name="svguse:/icons.svg#message" alt="" />
             </div>
           </div>
 
@@ -53,7 +48,7 @@
                         :value="value"
                         size="85px"
                         :thickness="0.1"
-                        color="primary"
+                        color="white"
                         track-color="red"
                       >
                         <q-avatar size="70px">
@@ -364,6 +359,7 @@ export default {
       search,
       addPost,
       postliked,
+      value: 30,
       open: (pos) => {
         position.value = pos;
         dialog.value = true;

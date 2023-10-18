@@ -8,7 +8,7 @@
         >
           <div
             class="col-8 q-my-md"
-            style="border: 1px solid rgb(208, 208, 208)"
+            style="border: 1px solid rgb(208, 208, 208); width: 100%"
           >
             <div class="column flex items-center justify-center q-my-md">
               <div class="col">
@@ -62,7 +62,11 @@
           </div>
           <div
             class="col-2 q-my-md flex items-center justify-center"
-            style="border: 1px solid rgb(208, 208, 208); height: 100px"
+            style="
+              border: 1px solid rgb(208, 208, 208);
+              height: 100px;
+              width: 100%;
+            "
           >
             <p class="q-mt-xs xs:column">
               Don't have an account?

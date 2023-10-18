@@ -64,7 +64,7 @@
             class="col-2 q-my-md flex items-center justify-center"
             style="border: 1px solid rgb(208, 208, 208); height: 100px"
           >
-            <p>
+            <p class="q-mt-xs xs:column">
               Don't have an account?
               <a class="custom-link text-blue" href="#/register">Sign up</a>
             </p>

@@ -6,7 +6,7 @@
           class="column flex justify-between"
           style="height: 100%; width: 100%; background-color: #fff"
         >
-          <div
+          <!-- <div
             class="flex items-center justify-between q-pa-md q-mb-xs"
             style="width: 100%; height: 100px; z-index: 999999"
           >
@@ -18,9 +18,10 @@
               <q-icon name="add_box" size="30px" />
               <q-icon size="30px" name="svguse:/icons.svg#message" alt="" />
             </div>
-          </div>
+          </div> -->
+          <Home />
 
-          <div class="col" style="height: ">
+          <!-- <div class="col" style="height: ">
             <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
               <q-scroll-area
                 style="height: 120px; max-width: 790px; width: 100%"
@@ -96,187 +97,26 @@
                 </div>
               </div>
             </q-scroll-area>
-          </div>
+          </div> -->
         </div>
       </div>
       <Footer />
-    </div>
-    <div
-      class="q-drawer q-drawer-left flex justify-center"
-      :class="{ 'hidden-md': !$q.screen.md }"
-      v-if="$q.screen.sm"
-      style="width: 140px"
-    >
-      <q-list>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="home" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            <!-- Hide text for SM -->
-            Posts
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="search" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Saved
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="add_box" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Tagged
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="perm_identity" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            profile
-          </q-item-section>
-        </q-item>
-        <!-- Add more navigation icons as needed for SM screen -->
-      </q-list>
     </div>
 
     <div style="height: 100vh" v-if="$q.screen.gt.xs">
       <div class="row" style="height: 100vh">
         <div
-          class="col-2 q-px-md"
-          style="
-            width: 230px;
-            height: 100%;
-            border-right: 1px solid rgb(111, 111, 111);
-          "
+          :style="{ width: $q.screen.gt.sm ? '200px' : '100px' }"
+          class="col-2"
+          style="height: 100vh; border-right: 1px solid rgb(216, 151, 151)"
         >
           <Search />
         </div>
         <div class="col">
           <div class="row" style="height: 100%">
-            <div class="col">
-              <div class="column" style="height: 100%">
-                <div class="col-2 justify-center q-mx-lg q-mt-lg">
-                  <div class="q-pa-sm">
-                    <q-scroll-area style="height: 120px; max-width: 790px">
-                      <div
-                        class="row no-wrap flex justify-center align-items-center q-mb-lg"
-                      >
-                        <div
-                          v-for="image in images"
-                          :key="image.id"
-                          style="
-                            width: 100px;
-                            height: 120px;
-                            z-index: 9999999999999999999999999;
-                          "
-                          class="q-pa-xs flex items-center justify-center"
-                        >
-                          <div
-                            class="flex column inline text-center items-center wrap"
-                            style="width: 100px; height: 100%"
-                          >
-                            <q-circular-progress
-                              show-value
-                              font-size="10px"
-                              class="q-mt-xs"
-                              :value="value"
-                              size="70px"
-                              :thickness="0.15"
-                              color="primary"
-                              track-color="red"
-                            >
-                              <q-avatar size="50px">
-                                <img :src="image.url" />
-                              </q-avatar>
-                            </q-circular-progress>
-                            <p class="q-mb-xs" style="align-self: center">
-                              name
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </q-scroll-area>
-                  </div>
-                </div>
-                <div class="col">
-                  <q-scroll-area
-                    style="height: 100%; max-width: 100%"
-                    class="q-pa-sm custom-center"
-                  >
-                    <div class="column custom-center" style="height: 100%">
-                      <q-dialog v-model="commDialog">
-                        <q-card
-                          style="width: 1100px; max-width: 90vw; height: 800px"
-                        >
-                          <CommentDialog
-                            :post="dialogContent"
-                            :text="text"
-                            @clickLike="clickLike"
-                            @addComment="addComment"
-                          />
-                        </q-card>
-                      </q-dialog>
-                      <div
-                        class="text-center q-ma-md"
-                        v-if="groupedPosts.length < 1"
-                      >
-                        <h3>No Posts At the Time</h3>
-                      </div>
-                      <div
-                        v-else
-                        v-for="postData in getPostsData"
-                        :key="postData.id"
-                        class="col"
-                        style="width: 80%"
-                      >
-                        <TimelinePost
-                          :postData="postData"
-                          :username="user?.üsername"
-                          @addComment="addComment"
-                          @clickLike="clickLike"
-                          @OpenCommentDialog="OpenCommentDialog"
-                        />
-                      </div>
-                    </div>
-                  </q-scroll-area>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
+            <Home />
+
+            <div class="col-4" v-if="$q.screen.gt.sm">
               <div class="" style="height: 100vh">
                 <div class="column q-pa-md" style="height: 570px">
                   <div class="col-2 q-mt-lg">
@@ -326,6 +166,7 @@ import { useUserStore } from "stores/user";
 import { storeToRefs } from "pinia";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Home from "../components/HomeContent.vue";
 import Search from "../components/Search.vue";
 import CommentDialog from "../components/CommentDialog.vue";
 import TimelinePost from "../components/TimelinePost.vue";
@@ -349,7 +190,7 @@ const dialogHeight = ref("md");
 const dialogContent = ref({});
 export default {
   name: "PageHome",
-  components: { Footer, Header, Search, CommentDialog, TimelinePost },
+  components: { Footer, Header, Search, CommentDialog, TimelinePost, Home },
   data() {
     return {
       tab: ref("mails"),

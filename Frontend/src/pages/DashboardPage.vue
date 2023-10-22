@@ -215,162 +215,152 @@
 
     <div class="q-page-container" v-if="$q.screen.gt.xs">
       <!-- Content -->
-      <div class="row" style="height: 100vh">
-        <div
-          class="col-2 q-px-md q-py-xl"
-          style="border-right: 1px solid rgb(211, 211, 211)"
-        >
-          <Search />
-        </div>
-        <div class="col">
-          <!-- Rest of your content -->
-          <div class="column" style="height: 100%">
-            <div
-              class="col-5 flex items-center justify-center"
-              style="width: 100%"
-            >
-              <div class="row" style="width: 65%; height: 300px">
-                <div class="col flex items-center justify-center">
-                  <div class="" style="">
-                    <q-avatar size="170px">
-                      <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                    </q-avatar>
+
+      <div class="col">
+        <!-- Rest of your content -->
+        <div class="column" style="height: 100%">
+          <div
+            class="col-5 flex items-center justify-center"
+            style="width: 100%"
+          >
+            <div class="row" style="width: 65%; height: 300px">
+              <div class="col flex items-center justify-center">
+                <div class="" style="">
+                  <q-avatar size="170px">
+                    <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                  </q-avatar>
+                </div>
+              </div>
+              <div class="col q-pa-lg">
+                <div>
+                  <div
+                    class="flex items-center justify-between"
+                    style="width: 250px"
+                  >
+                    <a class="custom-link text-body1" href="#">{{
+                      user?.username
+                    }}</a>
+                    <q-btn
+                      class="q-px-md text-body1"
+                      color="grey"
+                      dense
+                      no-shadow
+                      no-caps
+                      label="Edit Profile"
+                    />
+                    <q-icon size="1.7rem" name="settings" />
+                  </div>
+                  <div class="q-my-lg flex items-center justify-between">
+                    <p style="margin: 0">{{ userPosts.length }} posts</p>
+                    <a class="custom-link" href="#"
+                      >{{
+                        user.followers && user?.followers.length
+                      }}
+                      followers</a
+                    >
+                    <a class="custom-link" href="#"
+                      >{{
+                        user.followings && user?.followings.length
+                      }}
+                      followings</a
+                    >
                   </div>
                 </div>
-                <div class="col q-pa-lg">
-                  <div>
-                    <div
-                      class="flex items-center justify-between"
-                      style="width: 250px"
-                    >
-                      <a class="custom-link text-body1" href="#">{{
-                        user?.username
-                      }}</a>
-                      <q-btn
-                        class="q-px-md text-body1"
-                        color="grey"
-                        dense
-                        no-shadow
-                        no-caps
-                        label="Edit Profile"
-                      />
-                      <q-icon size="1.7rem" name="settings" />
-                    </div>
-                    <div class="q-my-lg flex items-center justify-between">
-                      <p style="margin: 0">{{ userPosts.length }} posts</p>
-                      <a class="custom-link" href="#"
-                        >{{
-                          user.followers && user?.followers.length
-                        }}
-                        followers</a
-                      >
-                      <a class="custom-link" href="#"
-                        >{{
-                          user.followings && user?.followings.length
-                        }}
-                        followings</a
-                      >
-                    </div>
-                  </div>
-                  <div class="q-my-lg">
-                    <p>{{ user?.name }}</p>
-                    <p>{{ user?.website }}</p>
-                    <p>{{ user?.bio }}</p>
-                  </div>
+                <div class="q-my-lg">
+                  <p>{{ user?.name }}</p>
+                  <p>{{ user?.website }}</p>
+                  <p>{{ user?.bio }}</p>
                 </div>
               </div>
             </div>
-            <div class="col-5 custom-border-top">
-              <q-card class="bg-transparent no-box-shadow no-shadow">
-                <q-tabs
-                  v-model="tab"
-                  dense
-                  class="text-grey"
-                  active-color="black"
-                  indicator-color="black"
-                  inline-label
-                  narrow-indicator
-                >
-                  <q-tab name="posts" icon="grid_on" label="Posts" />
-                  <q-tab name="saved" icon="turned_in_not" label="Saved" />
-                  <q-tab name="tags" icon="portrait" label="Tagged" />
-                </q-tabs>
+          </div>
+          <div class="col-5 custom-border-top">
+            <q-card class="bg-transparent no-box-shadow no-shadow">
+              <q-tabs
+                v-model="tab"
+                dense
+                class="text-grey"
+                active-color="black"
+                indicator-color="black"
+                inline-label
+                narrow-indicator
+              >
+                <q-tab name="posts" icon="grid_on" label="Posts" />
+                <q-tab name="saved" icon="turned_in_not" label="Saved" />
+                <q-tab name="tags" icon="portrait" label="Tagged" />
+              </q-tabs>
 
-                <q-tab-panels
-                  class="flex bg-transparent no-box-shadow q-mx-md justify-center"
-                  v-model="tab"
-                  animated
-                >
-                  <q-tab-panel name="posts">
-                    <div v-if="userLoading">
-                      <div class="row">
-                        <div class="col">
-                          <div class="">
-                            <q-card style="max-width: 300px">
-                              <q-item>
-                                <q-item-section avatar>
-                                  <q-skeleton type="QAvatar" />
-                                </q-item-section>
-                                <q-item-section>
-                                  <q-item-label>
-                                    <q-skeleton type="text" />
-                                  </q-item-label>
-                                  <q-item-label caption>
-                                    <q-skeleton type="text" />
-                                  </q-item-label>
-                                </q-item-section>
-                              </q-item>
-                              <q-skeleton height="200px" square />
-                              <q-card-actions align="right" class="q-gutter-md">
-                                <q-skeleton type="QBtn" />
-                                <q-skeleton type="QBtn" />
-                              </q-card-actions>
-                            </q-card>
-                          </div>
+              <q-tab-panels
+                class="flex bg-transparent no-box-shadow q-mx-md justify-center"
+                v-model="tab"
+                animated
+              >
+                <q-tab-panel name="posts">
+                  <div v-if="userLoading">
+                    <div class="row">
+                      <div class="col">
+                        <div class="">
+                          <q-card style="max-width: 300px">
+                            <q-item>
+                              <q-item-section avatar>
+                                <q-skeleton type="QAvatar" />
+                              </q-item-section>
+                              <q-item-section>
+                                <q-item-label>
+                                  <q-skeleton type="text" />
+                                </q-item-label>
+                                <q-item-label caption>
+                                  <q-skeleton type="text" />
+                                </q-item-label>
+                              </q-item-section>
+                            </q-item>
+                            <q-skeleton height="200px" square />
+                            <q-card-actions align="right" class="q-gutter-md">
+                              <q-skeleton type="QBtn" />
+                              <q-skeleton type="QBtn" />
+                            </q-card-actions>
+                          </q-card>
                         </div>
                       </div>
                     </div>
-                    <div v-else-if="userPosts.length > 0" class="row">
-                      <div
-                        v-for="post in userPosts"
-                        :key="post._id"
-                        class="col-3"
-                        style="width: 27%"
-                      >
-                        <q-card class="my-card" flat bordered>
-                          <img :src="post.posts[0].url" />
-                          <q-card-actions align="right">
-                            <q-btn flat round color="red" icon="favorite" />
-                            <q-btn flat round color="teal" icon="bookmark" />
-                            <q-btn flat round color="primary" icon="share" />
-                          </q-card-actions>
-                        </q-card>
-                      </div>
+                  </div>
+                  <div v-else-if="userPosts.length > 0" class="row">
+                    <div
+                      v-for="post in userPosts"
+                      :key="post._id"
+                      class="col-3"
+                      style="width: 27%"
+                    >
+                      <q-card class="my-card" flat bordered>
+                        <img :src="post.posts[0].url" />
+                        <q-card-actions align="right">
+                          <q-btn flat round color="red" icon="favorite" />
+                          <q-btn flat round color="teal" icon="bookmark" />
+                          <q-btn flat round color="primary" icon="share" />
+                        </q-card-actions>
+                      </q-card>
                     </div>
-                    <div v-else class="q-ma-md text-center">
-                      You have No Posts!
-                    </div>
-                  </q-tab-panel>
-                  <q-tab-panel
-                    class="bg-transparent no-box-shadow"
-                    name="saved"
-                  >
-                    <div class="row">
-                      <div class="col">.col</div>
-                      <div class="col">.col</div>
-                      <div class="col">.col</div>
-                    </div>
-                  </q-tab-panel>
-                  <q-tab-panel class="bg-transparent no-box-shadow" name="tags">
-                    <div class="row">
-                      <div class="col">.col</div>
-                      <div class="col">.col</div>
-                      <div class="col">.col</div>
-                    </div>
-                  </q-tab-panel>
-                </q-tab-panels>
-              </q-card>
-            </div>
+                  </div>
+                  <div v-else class="q-ma-md text-center">
+                    You have No Posts!
+                  </div>
+                </q-tab-panel>
+                <q-tab-panel class="bg-transparent no-box-shadow" name="saved">
+                  <div class="row">
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                  </div>
+                </q-tab-panel>
+                <q-tab-panel class="bg-transparent no-box-shadow" name="tags">
+                  <div class="row">
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                  </div>
+                </q-tab-panel>
+              </q-tab-panels>
+            </q-card>
           </div>
         </div>
       </div>

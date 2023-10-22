@@ -103,51 +103,39 @@
       <Footer />
     </div>
 
-    <div style="height: 100vh" v-if="$q.screen.gt.xs">
-      <div class="row" style="height: 100vh">
-        <div
-          :style="{ width: $q.screen.gt.sm ? '200px' : '100px' }"
-          class="col-2"
-          style="height: 100vh; border-right: 1px solid rgb(216, 151, 151)"
-        >
-          <Search />
-        </div>
-        <div class="col">
-          <div class="row" style="height: 100%">
-            <Home />
+    
+    <div class="col" style="height: 100vh" v-if="$q.screen.gt.xs">
+      <div class="row" style="height: 100%">
+        <Home />
 
-            <div class="col-4" v-if="$q.screen.gt.sm">
-              <div class="" style="height: 100vh">
-                <div class="column q-pa-md" style="height: 570px">
-                  <div class="col-2 q-mt-lg">
-                    <div class="row">
-                      <div class="col-2" style="margin-right: 10px">
-                        <q-avatar size="52px">
-                          <img
-                            src="https://cdn.quasar.dev/img/boy-avatar.png"
-                          />
-                        </q-avatar>
-                      </div>
-                      <div class="col-6 flex column items-start justify-center">
-                        <div class="q-ma-none">{{ user?.username }}</div>
-                        <div class="q-ma-none">{{ user?.name }}</div>
-                      </div>
-                      <div class="col flex column items-center justify-center">
-                        <a class="custom-link" href="#/login">Switch</a>
-                      </div>
+        <div class="col-3" v-if="$q.screen.gt.sm">
+          <div class="" style="height: 100vh">
+            <div class="column q-pa-md" style="height: 570px">
+              <div class="col-2 q-mt-lg">
+                <div class="row">
+                  <div class="col-2" style="margin-right: 10px">
+                    <q-avatar size="52px">
+                      <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                    </q-avatar>
+                  </div>
+                  <div class="col-6 flex column items-start justify-center">
+                    <div class="q-ma-none">{{ user?.username }}</div>
+                    <div class="q-ma-none">{{ user?.name }}</div>
+                  </div>
+                  <div class="col flex column items-center justify-center">
+                    <a class="custom-link" href="#/login">Switch</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="column" style="height: 100%">
+                  <div class="col-1.5">
+                    <div class="row flex items-center justify-between">
+                      <div class="col">Suggested For You</div>
+                      <div class="col flex justify-end">See All</div>
                     </div>
                   </div>
-                  <div class="col-8">
-                    <div class="column" style="height: 100%">
-                      <div class="col-1.5">
-                        <div class="row flex items-center justify-between">
-                          <div class="col">Suggested For You</div>
-                          <div class="col flex justify-end">See All</div>
-                        </div>
-                      </div>
-                      <div class="col"></div>
-                    </div>
-                  </div>
+                  <div class="col"></div>
                 </div>
               </div>
             </div>

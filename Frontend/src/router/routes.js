@@ -3,24 +3,33 @@ import authMiddleware from "./authMiddleware";
 const routes = [
   {
     path: "/",
+    component: () => import("layouts/AuthLayout.vue"),
+
+    children: [
+      { path: "/login", component: () => import("pages/LoginPage.vue") },
+      { path: "/register", component: () => import("pages/SignUpPage.vue") },
+    ],
+  },
+  {
+    path: "/",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter: authMiddleware,
+
     children: [
       {
         path: "/",
         component: () => import("pages/PageHome.vue"),
-        beforeEnter: authMiddleware,
       },
       {
         path: "/home",
         component: () => import("pages/PageHome.vue"),
-        beforeEnter: authMiddleware,
       },
       { path: "/favorite", component: () => import("pages/FavoritePage.vue") },
       { path: "/create", component: () => import("pages/CreatePage.vue") },
       { path: "/search", component: () => import("pages/SearchPage.vue") },
-      { path: "/login", component: () => import("pages/LoginPage.vue") },
-      { path: "/register", component: () => import("pages/SignUpPage.vue") },
+
       { path: "/camera", component: () => import("pages/PageCamera.vue") },
+
       {
         path: "/dashboard",
         component: () => import("pages/DashboardPage.vue"),

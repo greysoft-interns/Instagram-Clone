@@ -1,35 +1,42 @@
 <template>
   <q-page>
-    <q-header
-      class="flex items-center justify-center"
-      style="width: 100%; height: 100px; background-color: #fff"
-    >
-      <q-icon name="search" size="md" class="text-grey" />
-      <q-input
-        v-model="searchText"
-        @input="performSearch"
-        placeholder="Search..."
-        clearable
-        style="width: 80%"
-        class="q-pa-lg"
-      />
-    </q-header>
-    <q-row
-      cols-xs="3"
-      q-gutter="xs"
-      class="flex justify-center items-center wrap full-width"
-      style="margin-top: 10px; width: 100%; height: auto"
-    >
+    <div class="col bg-grey-1" style="height: 100vh">
       <div
-        v-for="post in posts"
-        :key="post.id"
-        class="q-col q-ma-xs"
-        style="width: 30%; height: 150"
+        class="flex items-center justify-center wrap"
+        style="height: 100px; background-color: #fff"
       >
-        <img :src="post.img" style="object-fit: cover cover; width: 100%" />
+        <q-icon name="search" size="md" class="text-grey" />
+        <q-input
+          v-model="searchText"
+          @input="performSearch"
+          placeholder="Search..."
+          clearable
+          style="width: 80%"
+          class="q-pa-lg"
+        />
       </div>
-    </q-row>
-    <Footer v-if="$q.screen.lt.sm" />
+      <q-scroll-area
+        style="height: 80%; width: 100%"
+        class="q-pa-sm custom-center"
+      >
+        <q-row
+          cols-xs="3"
+          q-gutter="xs"
+          class="flex justify-center items-center wrap full-width"
+          style="margin-top: 10px; width: 100%; height: auto"
+        >
+          <div
+            v-for="post in posts"
+            :key="post.id"
+            class="q-col q-ma-xs"
+            style="width: 30%; height: 150"
+          >
+            <img :src="post.img" style="object-fit: cover cover; width: 100%" />
+          </div>
+        </q-row>
+      </q-scroll-area>
+      <Footer v-if="$q.screen.lt.sm" />
+    </div>
   </q-page>
 </template>
 

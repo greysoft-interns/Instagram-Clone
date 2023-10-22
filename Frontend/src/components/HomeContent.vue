@@ -1,5 +1,5 @@
 <template>
-  <div class="col" style="width: 100%">
+  <div class="col">
     <div class="column" style="height: 100%">
       <div class="col">
         <q-toolbar class="bg-white text-black" v-if="$q.screen.lt.md">

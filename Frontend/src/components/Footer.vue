@@ -16,6 +16,7 @@
         :class="{ 'text-red-14': tab === 'home' }"
       >
         <q-icon size="70px" name="svguse:/icons.svg#home|0 0 75 50" alt="" />
+        <span class="label" v-if="$q.screen.gt.xs">home</span>
       </q-route-tab>
 
       <q-route-tab

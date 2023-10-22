@@ -15,17 +15,20 @@
         </q-page-container>
       </div>
     </div>
+    <Footer v-if="$q.screen.lt.sm" />
   </q-layout>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import search from "../components/Search.vue";
+import Footer from "../components/Footer.vue";
 
 export default defineComponent({
   name: "MainLayout",
   components: {
     search,
+    Footer,
   },
   setup() {
     return {};

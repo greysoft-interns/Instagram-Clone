@@ -33,38 +33,29 @@
         vertical
         style="height: auto"
       >
-        <!-- <div
-          class="flex column text-center justify-around items-center"
-          style="height: 80%; width: 100%"
+        <q-route-tab
+          :name="link.name"
+          :to="link.path"
+          :class="{
+            'text-red-14 ': link.path === $route.path,
+            'tab-below': $q.screen.lt.sm,
+            'red-border': $q.screen.gt.xs,
+          }"
         >
-          <a href="#/" class="custom-link">
-            <q-tab class="flex flex-row" name="home" icon="home">
-              <p class="text-caption" v-if="$q.screen.gt.sm">home</p>
-            </q-tab>
-          </a>
-          <div>
-            <q-tab name="search" icon="search" @click="open('left')">
-              <p class="text-caption" v-if="$q.screen.gt.sm">search</p>
-            </q-tab>
-          </div>
-          <div>
-            <q-tab name="add_box" icon="add_box" @click="addPost = true">
-              <p class="text-caption" v-if="$q.screen.gt.sm">Create</p>
-            </q-tab>
-          </div>
-          <a href="#/dashboard" class="custom-link">
-            <q-tab name="perm_identity" icon="perm_identity">
-              <p class="text-caption" v-if="$q.screen.gt.sm">Profile</p>
-            </q-tab>
-          </a>
-        </div> -->
+          <q-icon size="70px" :name="link.iconUrl" alt="" />
+          <span class="label" v-if="$q.screen.gt.sm">{{ link.name }}</span>
+        </q-route-tab>
+      </q-tabs>
 
-        <!-- <q-tabs
-      v-model="tab"
-      :outside-arrows="false"
-      class="bg-grey-1 text-black shadow-2"
-      dense
-    > -->
+      <!-- <q-tabs
+        v-model="tab"
+        class="text-black q-pa-none flex items-center justify-around"
+        v-for="link in links"
+        :key="link.name"
+        vertical
+        style="height: auto"
+      >
+        
         <q-route-tab
           :name="link.name"
           :to="link.path"
@@ -73,8 +64,8 @@
           <q-icon size="70px" :name="link.iconUrl" alt="" />
           <span class="label" v-if="$q.screen.gt.sm">{{ link.name }}</span>
         </q-route-tab>
-
-        <!-- <q-route-tab
+   </q-tabs> -->
+      <!-- <q-route-tab
           name="search"
           to="/search"
           :class="{ 'text-red-14': tab === 'search' }"
@@ -105,9 +96,8 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
         </q-route-tab> -->
-      </q-tabs>
 
-      <q-dialog v-model="dialog" :position="position">
+      <!-- <q-dialog v-model="dialog" :position="position">
         <q-card style="width: 350px; height: 100vh">
           <q-card-section class="row items-center no-wrap">
             <div class="flex" style="width: 100%; height: 600px">
@@ -128,8 +118,8 @@
             </div>
           </q-card-section>
         </q-card>
-      </q-dialog>
-      <q-dialog v-model="addPost">
+      </q-dialog> -->
+      <!-- <q-dialog v-model="addPost">
         <q-card v-if="step === 'step-1'" style="height: 800px; width: 500px">
           <q-card-section class="row items-center q-pb-none">
             <div class="text-h6">Create New Post</div>
@@ -182,7 +172,7 @@
         </q-card>
         <q-card
           v-else-if="step === 'step-2'"
-          style="height: 800px; width: 500px"
+          style="height: 800px; width: 100%"
         >
           <q-card-section class="row items-center q-pb-none">
             <div class="text-h6 text-black">
@@ -229,7 +219,7 @@
             />
           </q-card-section>
         </q-card>
-      </q-dialog>
+      </q-dialog> -->
     </div>
 
     <div class="">
@@ -246,48 +236,12 @@ import { useQuasar } from "quasar";
 
 const $q = useQuasar();
 const userStore = useUserStore();
-const {
-  user,
-  getUserDetails,
-  userLoading,
-  userSuccess,
-  userError,
-  userMessage,
-} = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { uploadPosts, reset, logoutUser } = userStore;
-const dialog = ref(false);
-const fileUpload = ref(null);
-const image = ref(null);
-const preview = ref(null);
-const commentDialog = ref(false);
-const addPost = ref(false);
-const position = ref("left");
-const tab = ref("left");
-const text = ref("");
-const search = ref("");
-const stepState = ref(1);
-const step = ref("step-1");
-const caption = ref("Meeeeeeeeeeeee");
-const location = ref("Nigeria");
+
+const { logoutUser } = userStore;
 
 export default {
   setup() {
     return {
-      tab,
-      dialog,
-      fileUpload,
-      image,
-      preview,
-      commentDialog,
-      addPost,
-      position,
-      text,
-      search,
-      stepState,
-      step,
-      caption,
-      location,
-      userLoading,
       logoutUser,
       links: [
         {
@@ -297,75 +251,26 @@ export default {
         },
         {
           name: "search",
-          iconUrl: "svguse:/icons.svg#home|0 0 75 50",
+          iconUrl: "svguse:/icons.svg#search|0 0 75 50",
           path: "/search",
         },
         {
           name: "create",
-          iconUrl: "svguse:/icons.svg#home|0 0 75 50",
+          iconUrl: "svguse:/icons.svg#add|0 0 75 50",
           path: "/create",
         },
         {
           name: "like",
-          iconUrl: "svguse:/icons.svg#home|0 0 75 50",
+          iconUrl: "svguse:/icons.svg#like|0 0 75 50",
           path: "/favorite",
         },
         {
           name: "profile",
-          iconUrl: "svguse:/icons.svg#home|0 0 75 50",
+          iconUrl: "svguse:/icons.svg#profile|0 0 75 50",
+
           path: "/dashboard",
         },
       ],
-      open: (pos) => {
-        position.value = pos;
-        dialog.value = true;
-      },
-      previewImage: (event) => {
-        var input = event.target;
-        if (input.files) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            preview.value = e.target.result;
-          };
-          image.value = input.files[0];
-          reader.readAsDataURL(input.files[0]);
-        }
-      },
-      resetImage: () => {
-        image.value = null;
-        preview.value = null;
-      },
-      nextStep: () => {
-        stepState.value = stepState.value + 1;
-        step.value = `step-${stepState.value}`;
-      },
-      prevStep: () => {
-        stepState.value = stepState.value - 1;
-        step.value = `step-${stepState.value}`;
-      },
-      postUpload: async () => {
-        if (caption.value === "" || location.value === "") {
-          $q.notify({
-            message: "Enter Missing Fields!",
-            color: "red",
-          });
-        } else {
-          let formdata = new FormData();
-          formdata.append("posts", fileUpload.value);
-          formdata.append("caption", caption.value);
-          formdata.append("location", location.value);
-          await uploadPosts(formdata);
-          caption.value = "";
-          location.value = "";
-          fileUpload.value = "";
-          if (userSuccess && userMessage) {
-            $q.notify({
-              message: userMessage.value,
-              color: "green",
-            });
-          }
-        }
-      },
     };
   },
 };
@@ -373,6 +278,9 @@ export default {
 
 <style lang="scss" scoped>
 .red-border {
+  border-right: 2px solid red;
+}
+.tab-below {
   border-right: 2px solid red;
 }
 </style>

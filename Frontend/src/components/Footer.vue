@@ -6,6 +6,29 @@
   >
     <q-tabs
       v-model="tab"
+      class="text-black q-pa-none flex items-center justify-around"
+      v-for="link in links"
+      :key="link.name"
+      vertical
+      style="height: auto"
+    >
+      <q-route-tab
+        :name="link.name"
+        :to="link.path"
+        :class="{
+          'text-red-14 ': link.path === $route.path,
+          'tab-below': $q.screen.lt.sm,
+          'red-border': $q.screen.gt.xs,
+        }"
+      >
+        <q-icon size="70px" :name="link.iconUrl" alt="" />
+        <span class="label" v-if="$q.screen.gt.sm">{{ link.name }}</span>
+      </q-route-tab>
+    </q-tabs>
+    <!-- <q-tabs
+
+
+      v-model="tab"
       :outside-arrows="false"
       class="bg-grey-1 text-black shadow-2"
       dense
@@ -46,24 +69,64 @@
           <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
         </q-avatar>
       </q-route-tab>
-    </q-tabs>
+    </q-tabs> -->
   </q-footer>
 </template>
 
 <script>
 import { ref } from "vue";
+import { useUserStore } from "stores/user";
+import { storeToRefs } from "pinia";
+import { useQuasar } from "quasar";
+
+const $q = useQuasar();
+const userStore = useUserStore();
+
+const { logoutUser } = userStore;
+
 export default {
-  name: "Footer",
   setup() {
     return {
-      tab: ref("home"),
+      logoutUser,
+      links: [
+        {
+          name: "home",
+          iconUrl: "svguse:/icons.svg#home|0 0 75 50",
+          path: "/home",
+        },
+        {
+          name: "search",
+          iconUrl: "svguse:/icons.svg#search|0 0 75 50",
+          path: "/search",
+        },
+        {
+          name: "create",
+          iconUrl: "svguse:/icons.svg#add|0 0 75 50",
+          path: "/create",
+        },
+        {
+          name: "like",
+          iconUrl: "svguse:/icons.svg#like|0 0 75 50",
+          path: "/favorite",
+        },
+        {
+          name: "profile",
+          iconUrl: "svguse:/icons.svg#profile|0 0 75 50",
+
+          path: "/dashboard",
+        },
+      ],
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.activeTab img {
-  fill: black;
+.red-border {
+  border-right: 2px solid red;
+}
+
+.tab-below {
+  border-bottom: 2px solid red; /* Add a border at the bottom for small screens */
 }
 </style>

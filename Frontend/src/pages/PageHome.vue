@@ -3,74 +3,40 @@
     <div class="xs">
       <div class="col" style="height: 100vh">
         <div class="column" style="height: 100%">
-          <div class="col-2 justify-center q-mx-lg q-mb-lg q-mt-lg">
-            <div class="flex items-center justify-between" style="width: 100%">
-              <p
-                class="text-grand-hotel text-red text-bold text-h4 custom-link"
-              >
-                Instagram
-                <span> <q-icon size="lg" name="arrow_drop_down" /> </span>
-              </p>
-              <div class="flex justify-between items-center">
-                <q-icon name="add_box" size="md" />
-                <q-icon name="message" size="md" />
-              </div>
-            </div>
-
-            <div class="q-pa-sm">
-              <q-scroll-area
-                style="height: 120px; max-width: 790px"
-                class="q-mb-lg"
-              >
-                <div class="row no-wrap flex justify-center align-items-center">
+          <div class="col-2 justify-center q-mx-lg q-mt-lg">
+            <div class="q-pa-md">
+              <q-scroll-area style="height: 130px; max-width: 790px">
+                <div
+                  class="row no-wrap flex justify-center align-items-center q-mb-lg"
+                >
                   <div
                     v-for="image in images"
                     :key="image.id"
-                    style="
-                      width: 100px;
-                      height: 100%;
-                      z-index: 9999999999999999999999999;
-                    "
-                    class="q-pa-xs flex items-center justify-center"
+                    style="width: 100px; height: 100px; background-color: #fff"
+                    class="q-pa-sm"
                   >
                     <div
-                      class="flex column inline text-center items-center justify-center wrap"
-                      style="width: 100px; height: 100%"
+                      class="flex justify-center align-items-center"
+                      style="width: 66px"
                     >
-                      <q-circular-progress
-                        show-value
-                        font-size="10px"
-                        class="q-mt-xs"
-                        :value="value"
-                        size="75px"
-                        :thickness="0.15"
-                        color="primary"
-                        track-color="red"
-                      >
-                        <q-avatar size="50px">
-                          <img :src="image.url" />
-                        </q-avatar>
-                      </q-circular-progress>
-                      <p class="q-mb-xs" style="align-self: center">name</p>
+                      <q-avatar size="60px">
+                        <img :src="image.url" />
+                      </q-avatar>
+                      <p>name</p>
                     </div>
                   </div>
                 </div>
               </q-scroll-area>
             </div>
           </div>
-          <div class="col" style="height: auto">
-            <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
-              <div
-                class="column flex items-center justify-center"
-                style="
-                  height: 100%;
-                  width: 100%;
-                  background-color: transparent;
-                  padding: 0;
-                "
-              >
+          <div class="col" style="height: auto; background-color: pink">
+            <q-scroll-area
+              style="height: 100%; max-width: 100%"
+              class="q-pa-sm custom-center"
+            >
+              <div class="column custom-center" style="height: 100%">
                 <q-dialog v-model="commDialogMobile" position="bottom">
-                  <q-card style="height: 400px; width: 90%; min-width: 500px">
+                  <q-card style="width: 1100px; max-width: 90vw; height: 400px">
                     <CommentDialog
                       :post="dialogContent"
                       :text="text"
@@ -100,81 +66,10 @@
       </div>
       <Footer />
     </div>
-    <div
-      class="q-drawer q-drawer-left flex justify-center"
-      :class="{ 'hidden-md': !$q.screen.md }"
-      v-if="$q.screen.sm"
-      style="width: 140px"
-    >
-      <q-list>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="home" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            <!-- Hide text for SM -->
-            Posts
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="search" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Saved
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="add_box" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Tagged
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="perm_identity" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            profile
-          </q-item-section>
-        </q-item>
-        <!-- Add more navigation icons as needed for SM screen -->
-      </q-list>
-    </div>
-    <!-- <div class="sm">
+    <div class="sm">
       <Footer />
-    </div> -->
-    <div style="height: 100vh">
+    </div>
+    <div class="md" style="height: 100vh">
       <div class="row" style="height: 100vh">
         <div
           class="col-2 q-px-md"
@@ -191,8 +86,8 @@
             <div class="col">
               <div class="column" style="height: 100%">
                 <div class="col-2 justify-center q-mx-lg q-mt-lg">
-                  <div class="q-pa-sm">
-                    <q-scroll-area style="height: 120px; max-width: 790px">
+                  <div class="q-pa-md">
+                    <q-scroll-area style="height: 90px; max-width: 790px">
                       <div
                         class="row no-wrap flex justify-center align-items-center q-mb-lg"
                       >
@@ -201,32 +96,19 @@
                           :key="image.id"
                           style="
                             width: 100px;
-                            height: 120px;
-                            z-index: 9999999999999999999999999;
+                            height: 100px;
+                            background-color: #fff;
                           "
-                          class="q-pa-xs flex items-center justify-center"
+                          class="q-pa-sm"
                         >
                           <div
-                            class="flex column inline text-center items-center wrap"
-                            style="width: 100px; height: 100%"
+                            class="flex justify-center align-items-center"
+                            style="width: 66px"
                           >
-                            <q-circular-progress
-                              show-value
-                              font-size="10px"
-                              class="q-mt-xs"
-                              :value="value"
-                              size="70px"
-                              :thickness="0.15"
-                              color="primary"
-                              track-color="red"
-                            >
-                              <q-avatar size="50px">
-                                <img :src="image.url" />
-                              </q-avatar>
-                            </q-circular-progress>
-                            <p class="q-mb-xs" style="align-self: center">
-                              name
-                            </p>
+                            <q-avatar size="60px">
+                              <img :src="image.url" />
+                            </q-avatar>
+                            <p>name</p>
                           </div>
                         </div>
                       </div>
@@ -270,14 +152,11 @@
                           />
                         </q-card>
                       </q-dialog>
-                      <div
-                        class="text-center q-ma-md"
-                        v-if="groupedPosts.length < 1"
-                      >
+                      <div class="text-center q-ma-md" v-if="groupedPosts.length < 1">
                         <h3>No Posts At the Time</h3>
                       </div>
                       <div
-                        v-else
+                      v-else
                         v-for="postData in getPostsData"
                         :key="postData.id"
                         class="col"
@@ -325,7 +204,8 @@
                           <div class="col flex justify-end">See All</div>
                         </div>
                       </div>
-                      <div class="col"></div>
+                      <div class="col">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -355,8 +235,7 @@ const userStore = useUserStore();
 const { groupedPosts, getPostsData, postLoading } = storeToRefs(postStore); // state and getters need "storeToRefs"
 const { getTimelinePosts, reset } = postStore;
 const { user, userLoading, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } =
-  userStore;
+const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const commDialogMobile = ref(false);
@@ -436,7 +315,7 @@ export default {
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
     clickLike: (id, user) => {
-      likeAndUnlikePost(id, user);
+      likeAndUnlikePost(id, user)
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
@@ -450,10 +329,10 @@ export default {
       commDialogMobile.value = true;
     },
     addComment: (id, textValue, user) => {
-      addPostComment(id, textValue, user);
+      addPostComment(id, textValue, user)
     },
   },
-  created() {
+  created(){
     fetchUserDetails();
     getTimelinePosts();
   },

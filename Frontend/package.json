@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "axios": "^1.2.1",
+    "axios": "^1.5.1",
     "core-js": "^3.6.5",
     "pinia": "^2.1.6",
-    "quasar": "^2.6.0",
+    "quasar": "^2.13.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
   },

@@ -4,9 +4,12 @@
       <div class="row q-px-md q-py-lg" style="height: 100%; width: 650px">
         <div
           class="col-12 q-my-md full-height"
-          style="border: 1px solid rgb(208, 208, 208)"
+          style="border: 1px solid rgb(208, 208, 208); width: 100%"
         >
-          <div class="column flex items-center justify-center q-my-md">
+          <div
+            class="column flex items-center justify-center q-my-md"
+            style="width: 100%"
+          >
             <div class="col">
               <a
                 href="#/"
@@ -88,15 +91,16 @@
               </div>
 
               <q-circular-progress
-              v-if="userLoading"
-              indeterminate
-              rounded
-              size="32px"
-              color="blue"
-              style="width: 100%"
-              class="q-my-md flex justify-center"
+                v-if="userLoading"
+                indeterminate
+                rounded
+                size="32px"
+                color="blue"
+                style="width: 100%"
+                class="q-my-md flex justify-center"
               />
-              <q-btn v-else
+              <q-btn
+                v-else
                 class="q-my-md"
                 color="primary"
                 label="Sign Up"
@@ -105,15 +109,19 @@
               />
             </div>
           </div>
-        </div>
-        <div
-          class="col-12 q-my-xs flex items-center justify-center"
-          style="border: 1px solid rgb(208, 208, 208); height: 100px"
-        >
-          <p>
-            Already have an account?
-            <a class="custom-link text-blue" href="#/login">Log in</a>
-          </p>
+          <div
+            class="col-12 q-my-xs flex items-center justify-center"
+            style="
+              border: 1px solid rgb(208, 208, 208);
+              height: 100px;
+              width: 100%;
+            "
+          >
+            <p class="q-mt-xs xs:column">
+              Already have an account?
+              <a class="custom-link text-blue" href="#/login">Log in</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

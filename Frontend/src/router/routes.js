@@ -8,6 +8,7 @@ const routes = [
     children: [
       { path: "/", component: () => import("pages/LoginPage.vue") },
       { path: "/register", component: () => import("pages/SignUpPage.vue") },
+      { path: "/login", component: () => import("pages/LoginPage.vue") },
     ],
   },
   {
@@ -27,7 +28,6 @@ const routes = [
       { path: "/favorite", component: () => import("pages/FavoritePage.vue") },
       { path: "/create", component: () => import("pages/CreatePage.vue") },
       { path: "/search", component: () => import("pages/SearchPage.vue") },
-
       { path: "/camera", component: () => import("pages/PageCamera.vue") },
 
       {

@@ -18,8 +18,9 @@
         :class="{
           'text-red-14 ': link.path === $route.path,
           'tab-below': $q.screen.lt.sm,
-          'red-border': $q.screen.gt.xs,
+          'red-border': link.path === $route.path && $q.screen.gt.xs,
         }"
+        @click="setTabBorder(link.path)"
       >
         <q-icon size="70px" :name="link.iconUrl" alt="" />
         <span class="label" v-if="$q.screen.gt.sm">{{ link.name }}</span>
@@ -86,8 +87,16 @@ const { logoutUser } = userStore;
 
 export default {
   setup() {
+    const tab = ref("home");
+
+    const setTabBorder = (path) => {
+      // Set the current tab based on the clicked tab
+      tab.value = path;
+    };
     return {
       logoutUser,
+      tab,
+      setTabBorder,
       links: [
         {
           name: "home",
@@ -125,8 +134,7 @@ export default {
 .red-border {
   border-right: 2px solid red;
 }
-
 .tab-below {
-  border-bottom: 2px solid red; /* Add a border at the bottom for small screens */
+  border-bottom: 2px solid red;
 }
 </style>

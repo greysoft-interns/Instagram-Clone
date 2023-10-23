@@ -1,7 +1,7 @@
 <template>
-  <q-page class="xs q-mx-none">
-    <div class="column" style="height: 100vh">
-      <div class="col-1">
+  <q-page>
+    <div class="col" style="height: 100vh">
+      <div class="col">
         <q-tabs v-model="tab" inline-label no-caps class="bg-white text-black">
           <q-tab name="following" label="Following" />
           <q-tab name="you" label="You" />
@@ -9,7 +9,6 @@
       </div>
       <div class="col">1 of 2</div>
     </div>
-    <Footer />
   </q-page>
 </template>
 
@@ -21,11 +20,11 @@ export default {
   components: {
     Footer,
   },
-  setup () {
+  setup() {
     return {
-      tab: ref('following')
-    }
-  }
+      tab: ref("following"),
+    };
+  },
 };
 </script>
 

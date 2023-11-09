@@ -101,99 +101,19 @@
       </div>
       <Footer />
     </div>
-    <div
-      class="q-drawer q-drawer-left flex justify-center"
-      :class="{ 'hidden-md': !$q.screen.md }"
-      v-if="$q.screen.sm"
-      style="width: 140px"
-    >
-      <q-list>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="home" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            <!-- Hide text for SM -->
-            Posts
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="search" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Saved
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="add_box" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            Tagged
-          </q-item-section>
-        </q-item>
-        <q-item
-          to="#"
-          clickable
-          class="flex column justify-center items-center"
-        >
-          <q-item-section class="icon-center">
-            <q-icon name="perm_identity" size="md" />
-          </q-item-section>
-          <q-item-section
-            class="q-item-label"
-            style="color: transparent; text-align: center"
-          >
-            profile
-          </q-item-section>
-        </q-item>
-        <!-- Add more navigation icons as needed for SM screen -->
-      </q-list>
-    </div>
     <!-- <div class="sm">
       <Footer />
     </div> -->
-    <div style="height: 100vh">
+    <div style="height: 100vh" v-show="!$q.screen.xs">
       <div class="row" style="height: 100vh">
-        <div
-          class="col-2 q-px-md"
-          style="
-            width: 230px;
-            height: 100%;
-            border-right: 1px solid rgb(111, 111, 111);
-          "
-        >
-          <Search />
-        </div>
         <div class="col">
           <div class="row" style="height: 100%">
             <div class="col">
               <div class="column" style="height: 100%">
-                <div class="col-2 justify-center q-mx-lg q-mt-lg">
+                <div class="col-auto justify-center q-mx-lg q-my-lg" style="height: 100px;">
                   <div class="q-pa-sm">
-                    <q-scroll-area style="height: 120px; max-width: 790px">
+                    <!-- <q-scroll-area style="height: 80px; max-width: 790px"> -->
+                      <q-scroll-area style="height: 120px; max-width: 790px;">
                       <div
                         class="row no-wrap flex justify-center align-items-center q-mb-lg"
                       >
@@ -202,16 +122,16 @@
                           :key="image.id"
                           style="
                             width: 100px;
-                            height: 120px;
+                            height: 118px;
                             z-index: 9999999999999999999999999;
                           "
                           class="q-pa-xs flex items-center justify-center"
                         >
                           <div
-                            class="flex column inline text-center items-center wrap"
+                            class="flex column inline items-center wrap"
                             style="width: 100px; height: 100%"
                           >
-                            <q-circular-progress
+                            <!-- <q-circular-progress
                               show-value
                               font-size="10px"
                               class="q-mt-xs"
@@ -224,8 +144,15 @@
                               <q-avatar size="50px">
                                 <img :src="image.url" />
                               </q-avatar>
-                            </q-circular-progress>
-                            <p class="q-mb-xs" style="align-self: center">
+                            </q-circular-progress> -->
+                            <q-avatar size="84px" class="q-pa-xs">
+                              <q-img src="../assets/ig-story.png">
+                                <q-avatar class="q-pa-none set-abs" size="60px">
+                                  <img :src="image.url" />
+                                </q-avatar>
+                              </q-img>
+                            </q-avatar>
+                            <p class="q-mb-xs text-center" style="align-self: center">
                               name
                             </p>
                           </div>
@@ -253,7 +180,7 @@
                     </div>
                   </q-scroll-area> -->
                 </div>
-                <div class="col">
+                <div class="col q-mt-md">
                   <q-scroll-area
                     style="height: 100%; max-width: 100%"
                     class="q-pa-sm custom-center"
@@ -277,12 +204,12 @@
                       >
                         <h3>No Posts At the Time</h3>
                       </div>
-                      <div
+                      <q-card
                         v-else
                         v-for="postData in getPostsData"
                         :key="postData.id"
-                        class="col"
-                        style="width: 80%"
+                        class="col q-mb-md"
+                        style="width: 80%;"
                       >
                         <TimelinePost
                           :postData="postData"
@@ -291,7 +218,7 @@
                           @clickLike="clickLike"
                           @OpenCommentDialog="OpenCommentDialog"
                         />
-                      </div>
+                      </q-card>
                     </div>
                   </q-scroll-area>
                 </div>
@@ -506,4 +433,34 @@ export default {
   color: black;
   text-decoration: none;
 }
+
+.set-abs{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 0 !important;
+}
+
+.circle-grad {
+  position: relative;
+  padding: 2px;
+  background: #fff;
+  margin: 5px;
+  border-width: 2px;
+  border-radius: 50%;
+}
+
+.circle-grad::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -3px;
+  border-radius: inherit;
+  background-image: linear-gradient(60deg, rgb(255, 180, 40), rgb(128, 0, 77));
+}
+
 </style>

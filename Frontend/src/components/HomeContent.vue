@@ -1,20 +1,20 @@
 <template>
   <div class="col">
     <div class="column" style="height: 100%">
-      <div class="col">
+      <div class="col"> 
         <q-toolbar class="bg-white text-black" v-if="$q.screen.lt.md">
           <q-toolbar-title
             class="text-grand-hotel text-bold text-h4 custom-link"
             >Instagram</q-toolbar-title
           >
-          <div
+          <!-- <div
             class="flex justify-around items-center"
             style="width: 20%"
             v-if="$q.screen.lt.sm"
           >
             <q-icon name="add_box" size="30px" />
             <q-icon size="30px" name="svguse:/icons.svg#message" alt="" />
-          </div>
+          </div> -->
           <SideDialog />
         </q-toolbar>
         <q-scroll-area
@@ -37,7 +37,7 @@
                   class="flex column inline text-center items-center justify-center wrap"
                   style="width: 100px; height: 100%"
                 >
-                  <q-circular-progress
+                  <!-- <q-circular-progress
                     show-value
                     font-size="10px"
                     class="q-mt-xs"
@@ -50,7 +50,14 @@
                     <q-avatar size="70px">
                       <img :src="image.url" />
                     </q-avatar>
-                  </q-circular-progress>
+                  </q-circular-progress> -->
+                  <q-avatar size="84px" class="q-pa-xs">
+                    <q-img src="../assets/ig-story.png">
+                      <q-avatar class="q-pa-none set-abs" size="60px">
+                        <img :src="image.url" />
+                      </q-avatar>
+                    </q-img>
+                  </q-avatar>
                   <p class="q-mb-xs" style="align-self: center">name</p>
                 </div>
               </div>
@@ -222,3 +229,27 @@ export default {
   },
 };
 </script>
+
+<style>
+.circle-grad {
+  position: relative;
+  padding: 2px;
+  background: #fff;
+  margin: 5px;
+  border-width: 2px;
+  border-radius: 50%;
+}
+
+.circle-grad::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -3px;
+  border-radius: inherit;
+  background-image: linear-gradient(60deg, rgb(255, 180, 40), rgb(128, 0, 77));
+}
+</style>

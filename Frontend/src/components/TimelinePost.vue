@@ -19,12 +19,13 @@
         <q-icon class="cursor-pointer" name="more_horiz" size="1.7rem" />
       </div>
     </q-card-section>
-    <q-card-section class="q-pa-none" style="height: 400px">
-      <img
+    <q-card-section class="q-pa-none" style="height: 400px;">
+      <q-img
         v-if="postData && postData.posts"
+        fit="cover"
         class="cursor-pointer"
         @dblclick="$emit('clickLike', postData._id, username)"
-        style="height: 100%; width: 100%; object-fit: contain"
+        style="height: 100%; width: 100%; object-fit: cover"
         :src="postData ? postData?.posts[0]?.url : ''"
       />
       <q-skeleton v-else class="bg-grey" height="100%" square />

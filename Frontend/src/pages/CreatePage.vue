@@ -9,7 +9,7 @@
           <q-card-section class="row items-center q-pb-none">
             <div class="text-h6">Create New Post</div>
             <q-space />
-            <q-btn icon="close" flat round dense v-close-popup />
+            <q-btn  v-show="$q.screen.xs" icon="close" flat round dense v-close-popup />
           </q-card-section>
 
           <q-card-section

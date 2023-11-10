@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const http = require("http");
 const socketIo = require("socket.io");
-const path = require('path');
+const path = require("path");
 const connectDB = require("./config/utils/db");
 
 const authRoutes = require("./routes/auth.routes");
@@ -17,30 +17,33 @@ const chatRoutes = require("./routes/Chat/chat.routes");
 
 connectDB();
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 const io = socketIo(server);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
 
   app.get("/", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../", "frontend", "dist/spa", "index.html"))
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "dist/spa", "index.html")
+    )
   );
 } else {
-  app.get('/', (req, res) => res.send('Please set to production environment'))
+  app.get("/", (req, res) => res.send("Please set to production environment"));
 }
 // ... other middleware and routes ...
 //app settings
 app.use(express.json());
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms")
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-
-app.get('/test', (req, res) => {
+app.get("/test", (req, res) => {
   res.json("You got here");
-})
+});
 
 // app routes
 app.use("/api/auth", authRoutes);
@@ -53,18 +56,18 @@ app.get("*", (req, res) => {
   res.send("Error 404: PAGE NOT FOUND!");
 });
 
-io.on('connection', (socket) => {
-  console.log('user connected');  
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+io.on("connection", (socket) => {
+  console.log("user connected");
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
   });
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
   });
 });
 
 const port = process.env.PORT || 8001;
 
-server.listen(port, () => { 
+server.listen(port, () => {
   console.log(`Server Running on port ${port}⚙️`);
 });

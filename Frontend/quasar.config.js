@@ -46,7 +46,7 @@ module.exports = configure(function (ctx) {
       // transpile: false,
       // publicPath: '/',
       env: {
-        API_URL: ctx.dev ? 'http://localhost:8000/api/' : 'https://instagram-backend-o3xe.onrender.com/api/'
+        API_URL: ctx.dev ? 'http://localhost:8002/api/' : 'https://instagram-backend-o3xe.onrender.com/api/'
       },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).

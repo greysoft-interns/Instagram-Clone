@@ -31,12 +31,8 @@
                   <div
                     v-for="image in images"
                     :key="image.id"
-                    style="
-                      width: 100px;
-                      height: 100%;
-                      z-index: 9999999999999999999999999;
-                    "
-                    class="q-pa-xs flex items-center justify-center"
+                    style="width: 100px; height: 100px; background-color: #fff"
+                    class="q-pa-sm"
                   >
                     <div
                       class="flex column inline text-center items-center justify-center wrap"
@@ -47,12 +43,12 @@
                         font-size="10px"
                         class="q-mt-xs"
                         :value="value"
-                        size="85px"
-                        :thickness="0.1"
-                        color="white"
+                        size="75px"
+                        :thickness="0.15"
+                        color="primary"
                         track-color="red"
                       >
-                        <q-avatar size="70px">
+                        <q-avatar size="50px">
                           <img :src="image.url" />
                         </q-avatar>
                       </q-circular-progress>
@@ -61,7 +57,10 @@
                   </div>
                 </div>
               </q-scroll-area>
-
+            </div>
+          </div>
+          <div class="col" style="height: auto">
+            <q-scroll-area style="height: 100%; width: 100%" class="q-pa-xs">
               <div
                 class="column flex items-center justify-center"
                 style="
@@ -72,7 +71,7 @@
                 "
               >
                 <q-dialog v-model="commDialogMobile" position="bottom">
-                  <q-card style="height: 400px; width: 100%">
+                  <q-card style="height: 400px; width: 90%; min-width: 500px">
                     <CommentDialog
                       :post="dialogContent"
                       :text="text"
@@ -102,40 +101,161 @@
       </div>
       <Footer />
     </div>
-
-    
-    <div class="col" style="height: 100vh" v-if="$q.screen.gt.xs">
-      <div class="row" style="height: 100%">
-        <Home />
-
-        <div class="col-3" v-if="$q.screen.gt.sm">
-          <div class="" style="height: 100vh">
-            <div class="column q-pa-md" style="height: 570px">
-              <div class="col-2 q-mt-lg">
-                <div class="row">
-                  <div class="col-2" style="margin-right: 10px">
-                    <q-avatar size="52px">
-                      <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                    </q-avatar>
+    <!-- <div class="sm">
+      <Footer />
+    </div> -->
+    <div style="height: 100vh" v-show="!$q.screen.xs">
+      <div class="row" style="height: 100vh">
+        <div class="col">
+          <div class="row" style="height: 100%">
+            <div class="col">
+              <div class="column" style="height: 100%">
+                <div class="col-auto justify-center q-mx-lg q-my-lg" style="height: 100px;">
+                  <div class="q-pa-sm">
+                    <!-- <q-scroll-area style="height: 80px; max-width: 790px"> -->
+                      <q-scroll-area style="height: 120px; max-width: 790px;">
+                      <div
+                        class="row no-wrap flex justify-center align-items-center q-mb-lg"
+                      >
+                        <div
+                          v-for="image in images"
+                          :key="image.id"
+                          style="
+                            width: 100px;
+                            height: 118px;
+                            z-index: 9999999999999999999999999;
+                          "
+                          class="q-pa-xs flex items-center justify-center"
+                        >
+                          <div
+                            class="flex column inline items-center wrap"
+                            style="width: 100px; height: 100%"
+                          >
+                            <!-- <q-circular-progress
+                              show-value
+                              font-size="10px"
+                              class="q-mt-xs"
+                              :value="value"
+                              size="70px"
+                              :thickness="0.15"
+                              color="primary"
+                              track-color="red"
+                            >
+                              <q-avatar size="50px">
+                                <img :src="image.url" />
+                              </q-avatar>
+                            </q-circular-progress> -->
+                            <q-avatar size="84px" class="q-pa-xs">
+                              <q-img src="../assets/ig-story.png">
+                                <q-avatar class="q-pa-none set-abs" size="60px">
+                                  <img :src="image.url" />
+                                </q-avatar>
+                              </q-img>
+                            </q-avatar>
+                            <p class="q-mb-xs text-center" style="align-self: center">
+                              name
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </q-scroll-area>
                   </div>
-                  <div class="col-6 flex column items-start justify-center">
-                    <div class="q-ma-none">{{ user?.username }}</div>
-                    <div class="q-ma-none">{{ user?.name }}</div>
-                  </div>
-                  <div class="col flex column items-center justify-center">
-                    <a class="custom-link" href="#/login">Switch</a>
-                  </div>
+                  <!-- <q-scroll-area style="height: 100%; max-width: 790px">
+                    <div
+                      v-for="image in images"
+                      :key="image.id"
+                      class="row no-wrap"
+                      style="
+                        height: 110px;
+                        width: 100%;
+                        background-color: #751616;
+                      "
+                    >
+                      <div class="" style="width: 66px">
+                        <q-avatar size="60px">
+                          <img :src="image.url" />
+                        </q-avatar>
+                        <p>name</p>
+                      </div>
+                    </div>
+                  </q-scroll-area> -->
+                </div>
+                <div class="col q-mt-md">
+                  <q-scroll-area
+                    style="height: 100%; max-width: 100%"
+                    class="q-pa-sm custom-center"
+                  >
+                    <div class="column custom-center" style="height: 100%">
+                      <q-dialog v-model="commDialog">
+                        <q-card
+                          style="width: 1100px; max-width: 90vw; height: 800px"
+                        >
+                          <CommentDialog
+                            :post="dialogContent"
+                            :text="text"
+                            @clickLike="clickLike"
+                            @addComment="addComment"
+                          />
+                        </q-card>
+                      </q-dialog>
+                      <div
+                        class="text-center q-ma-md"
+                        v-if="groupedPosts.length < 1"
+                      >
+                        <h3>No Posts At the Time</h3>
+                      </div>
+                      <q-card
+                        v-else
+                        v-for="postData in getPostsData"
+                        :key="postData.id"
+                        class="col q-mb-md"
+                        style="width: 80%;"
+                      >
+                        <TimelinePost
+                          :postData="postData"
+                          :username="user?.üsername"
+                          @addComment="addComment"
+                          @clickLike="clickLike"
+                          @OpenCommentDialog="OpenCommentDialog"
+                        />
+                      </q-card>
+                    </div>
+                  </q-scroll-area>
                 </div>
               </div>
-              <div class="col-8">
-                <div class="column" style="height: 100%">
-                  <div class="col-1.5">
-                    <div class="row flex items-center justify-between">
-                      <div class="col">Suggested For You</div>
-                      <div class="col flex justify-end">See All</div>
+            </div>
+            <div class="col-4">
+              <div class="" style="height: 100vh">
+                <div class="column q-pa-md" style="height: 570px">
+                  <div class="col-2 q-mt-lg">
+                    <div class="row">
+                      <div class="col-2" style="margin-right: 10px">
+                        <q-avatar size="52px">
+                          <img
+                            src="https://cdn.quasar.dev/img/boy-avatar.png"
+                          />
+                        </q-avatar>
+                      </div>
+                      <div class="col-6 flex column items-start justify-center">
+                        <div class="q-ma-none">{{ user?.username }}</div>
+                        <div class="q-ma-none">{{ user?.name }}</div>
+                      </div>
+                      <div class="col flex column items-center justify-center">
+                        <a class="custom-link" href="#/login">Switch</a>
+                      </div>
                     </div>
                   </div>
-                  <div class="col"></div>
+                  <div class="col-8">
+                    <div class="column" style="height: 100%">
+                      <div class="col-1.5">
+                        <div class="row flex items-center justify-between">
+                          <div class="col">Suggested For You</div>
+                          <div class="col flex justify-end">See All</div>
+                        </div>
+                      </div>
+                      <div class="col"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -164,8 +284,7 @@ const userStore = useUserStore();
 const { groupedPosts, getPostsData, postLoading } = storeToRefs(postStore); // state and getters need "storeToRefs"
 const { getTimelinePosts, reset } = postStore;
 const { user, userLoading, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } =
-  userStore;
+const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const commDialogMobile = ref(false);
@@ -246,7 +365,7 @@ export default {
     //   return groupedPosts[foundElement].likes.includes(postId);
     // },
     clickLike: (id, user) => {
-      likeAndUnlikePost(id, user);
+      likeAndUnlikePost(id, user)
     },
     OpenCommentDialog: (post) => {
       dialogContent.value = post;
@@ -260,10 +379,10 @@ export default {
       commDialogMobile.value = true;
     },
     addComment: (id, textValue, user) => {
-      addPostComment(id, textValue, user);
+      addPostComment(id, textValue, user)
     },
   },
-  created() {
+  created(){
     fetchUserDetails();
     getTimelinePosts();
   },
@@ -314,4 +433,34 @@ export default {
   color: black;
   text-decoration: none;
 }
+
+.set-abs{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 0 !important;
+}
+
+.circle-grad {
+  position: relative;
+  padding: 2px;
+  background: #fff;
+  margin: 5px;
+  border-width: 2px;
+  border-radius: 50%;
+}
+
+.circle-grad::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -3px;
+  border-radius: inherit;
+  background-image: linear-gradient(60deg, rgb(255, 180, 40), rgb(128, 0, 77));
+}
+
 </style>

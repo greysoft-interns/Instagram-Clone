@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$q.screen.gt.xs"
-    style="height: 100%; width: 100%"
+    style="height: 100vh; width: 100%"
     class="flex column text-center justify-around items-center"
   >
     <a
@@ -265,7 +265,7 @@ export default {
         },
         {
           name: "create",
-          iconUrl: "svguse:/icons.svg#add|0 0 75 50",
+          iconUrl: "svguse:/icons.svg#add|0 0 75 50", 
           path: "/create",
         },
         {
@@ -275,8 +275,7 @@ export default {
         },
         {
           name: "profile",
-          iconUrl: "svguse:/icons.svg#profile|0 0 75 50",
-
+          iconUrl: "svguse:/icons.svg#person|0 0 75 50",
           path: "/dashboard",
         },
       ],

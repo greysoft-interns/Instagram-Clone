@@ -4,7 +4,7 @@
       <div
         :style="{ width: $q.screen.gt.sm ? '200px' : '100px' }"
         class="col-2"
-        style="height: 100vh; border-right: 1px solid rgb(216, 151, 151)"
+        style="border-right: 1px solid rgb(216, 151, 151); height: 100vh;"
         v-if="$q.screen.gt.xs"
       >
         <search />

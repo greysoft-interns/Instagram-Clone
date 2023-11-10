@@ -73,8 +73,7 @@
           <a
             class="col custom-link"
             style="width: fit-content"
-            href="#"
-            @click="$emit('OpenCommentDialog', postData)"
+            @click="$emit('OpenCommentDialog', postData, 'bottom')"
             >View all {{ postData.comments.length }} comments</a
           >
           <q-input

@@ -145,7 +145,7 @@
                                 <img :src="image.url" />
                               </q-avatar>
                             </q-circular-progress> -->
-                            <q-avatar size="84px" class="q-pa-xs">
+                            <q-avatar size="70px" class="q-pa-xs">
                               <q-img src="../assets/ig-story.png">
                                 <q-avatar class="q-pa-none set-abs" size="60px">
                                   <img :src="image.url" />
@@ -368,6 +368,7 @@ export default {
       likeAndUnlikePost(id, user)
     },
     OpenCommentDialog: (post) => {
+      console.log('Here!')
       dialogContent.value = post;
       dialogHeight.value = "md";
       commDialog.value = true;
@@ -436,8 +437,8 @@ export default {
 
 .set-abs{
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 5px;
+  left: 5px;
   padding: 0 !important;
 }
 

@@ -51,9 +51,9 @@
                       <img :src="image.url" />
                     </q-avatar>
                   </q-circular-progress> -->
-                  <q-avatar size="84px" class="q-pa-xs">
+                  <q-avatar :size="$q.screen.xs ? '58px' : '84px'" class="q-pa-xs">
                     <q-img src="../assets/ig-story.png">
-                      <q-avatar class="q-pa-none set-abs" size="60px">
+                      <q-avatar class="q-pa-none set-abs" :size="$q.screen.xs ? '50' : '60px'">
                         <img :src="image.url" />
                       </q-avatar>
                     </q-img>

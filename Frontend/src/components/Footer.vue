@@ -22,7 +22,7 @@
         }"
         @click="setTabBorder(link.path)"
       >
-        <q-icon size="60px" :name="link.iconUrl" alt="" />
+        <q-icon size="50px" :name="link.iconUrl" alt="" />
         <span class="label" v-if="$q.screen.gt.sm">{{ link.name }}</span>
       </q-route-tab>
     </q-tabs>

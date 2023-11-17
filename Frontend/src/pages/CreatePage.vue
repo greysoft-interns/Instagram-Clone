@@ -9,7 +9,14 @@
           <q-card-section class="row items-center q-pb-none">
             <div class="text-h6">Create New Post</div>
             <q-space />
-            <q-btn  v-show="$q.screen.xs" icon="close" flat round dense v-close-popup />
+            <q-btn
+              v-show="$q.screen.xs"
+              icon="close"
+              flat
+              round
+              dense
+              v-close-popup
+            />
           </q-card-section>
 
           <q-card-section
@@ -18,16 +25,19 @@
           >
             <q-file
               class="q-pa-none"
-              style="width: 250px"
+              :style="$q.screen.xs ? 'width: 250px' : 'width: 350px'"
               @input="previewImage"
               type="file"
               clearable
               color="blue"
               standout
               bottom-slots
+              max-file-size="512000"
+              accept=".jpg, image/*"
               @clear="resetImage"
               v-model="fileUpload"
-              label="Upload Image"
+              :label="$q.screen.xs ? 'Upload (max-size: 500KB)': 'Upload Image (max-size: 500KB)'"
+              @rejected="onRejected"
               counter
             >
               <template v-slot:prepend>
@@ -37,7 +47,7 @@
             <q-btn label="Next" @click="nextStep" />
           </q-card-section>
           <q-card-section
-            v-if="preview"
+            v-if="preview && !limit"
             style="width: 100%; margin-top: 40px"
             class="flex items-center justify-center"
           >
@@ -50,8 +60,13 @@
               class="flex items-center justify-between q-mx-md"
               style="width: 100%"
             >
-              <p class="mb-0">file name: {{ image.name }}</p>
-              <p class="mb-0">size: {{ image.size / 1024 }}KB</p>
+              <div>
+                <p>File Max Size: 500kb</p>
+              </div>
+              <div>
+                <p class="mb-0">file name: {{ image.name }}</p>
+                <p class="mb-0">size: {{ image.size / 1024 }}KB</p>
+              </div>
             </div>
           </q-card-section>
         </q-card>
@@ -231,7 +246,6 @@ import { useUserStore } from "stores/user";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
-const $q = useQuasar();
 const userStore = useUserStore();
 const {
   user,
@@ -248,17 +262,23 @@ const image = ref(null);
 const preview = ref(null);
 const commentDialog = ref(false);
 const addPost = ref(false);
+const limit = ref(true);
 const position = ref("left");
 const tab = ref("left");
 const text = ref("");
 const search = ref("");
 const stepState = ref(1);
 const step = ref("step-1");
-const caption = ref("Meeeeeeeeeeeee");
-const location = ref("Nigeria");
+const caption = ref("");
+const location = ref("");
+const resetImage = () => {
+  image.value = null;
+  preview.value = null;
+};
 
 export default {
   setup() {
+    const $q = useQuasar();
     return {
       tab,
       dialog,
@@ -276,36 +296,45 @@ export default {
       location,
       userLoading,
       logoutUser,
+      resetImage,
 
       open: (pos) => {
         position.value = pos;
         dialog.value = true;
       },
       previewImage: (event) => {
-        var input = event.target;
-        if (input.files) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            preview.value = e.target.result;
-          };
-          image.value = input.files[0];
-          reader.readAsDataURL(input.files[0]);
-        }
-      },
-      resetImage: () => {
-        image.value = null;
-        preview.value = null;
+        const imgSixe = event.target.files[0].size / 1024;
+        if (imgSixe < 500) {
+          var input = event.target;
+          if (input.files) {
+            var reader = new FileReader();
+            reader.onload = (e) => {
+              preview.value = e.target.result;
+            };
+            image.value = input.files[0];
+            reader.readAsDataURL(input.files[0]);
+          }
+        } else {
+            image.value = null;
+            preview.value = null;
+          }
       },
       nextStep: () => {
-        stepState.value = stepState.value + 1;
-        step.value = `step-${stepState.value}`;
+        if (limit.value) {
+          stepState.value = stepState.value + 1;
+          step.value = `step-${stepState.value}`;
+        }
       },
       prevStep: () => {
         stepState.value = stepState.value - 1;
         step.value = `step-${stepState.value}`;
       },
       postUpload: async () => {
-        if (caption.value === "" || location.value === "") {
+        if (
+          caption.value === "" ||
+          location.value === "" ||
+          fileUpload.value === ""
+        ) {
           $q.notify({
             message: "Enter Missing Fields!",
             color: "red",
@@ -326,6 +355,14 @@ export default {
             });
           }
         }
+      },
+      onRejected: async () => {
+        limit.value = false;
+        $q.notify({
+          type: "negative",
+          message: `Image Size is more than 500kb`,
+        });
+        // resetImage();
       },
     };
   },

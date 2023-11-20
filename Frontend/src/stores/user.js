@@ -2,7 +2,7 @@ import { defineStore, storeToRefs } from "pinia";
 import axios from "axios";
 import { usePostStore } from "./posts";
 const postStore = usePostStore();
-const { groupedPosts } = storeToRefs(postStore);
+const { groupedPost, getTimelinePosts } = storeToRefs(postStore);
 
 const API_URL = process.env.API_URL || "http://localhost:8002/api/";
 
@@ -13,6 +13,8 @@ export const useUserStore = defineStore("user", {
     userLoading: false,
     userSuccess: false,
     userError: false,
+    userNewPost: false,
+    userNewPostId: "",
     userMessage: "",
   }),
 
@@ -194,7 +196,9 @@ export const useUserStore = defineStore("user", {
         };
         const response = await axios.post(`${API_URL}user/posts`, data, config);
         this.userMessage = "Post Created successfully";
-        this.fetchUserPosts();
+        const { message, id } = response.data;
+        this.userNewPost = true;
+        this.userNewPostId = id;
         this.router.push("/home");
         this.userLoading = false;
         this.userSuccess = true;
@@ -236,6 +240,8 @@ export const useUserStore = defineStore("user", {
       this.userError = false;
       this.userLoading = false;
       this.userSuccess = false;
+      this.userNewPost= false;
+      this.userNewPostId= "";
     },
   },
 });

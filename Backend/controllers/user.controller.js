@@ -52,7 +52,7 @@ const uploadPosts = async (req, res) => {
         if (!newGrouped) {
           return res.status(400).send("Could not Upload Post");
         }
-        return res.status(200).json("Upload Successful");
+        return res.status(200).json({message: "Upload Successful", id: newGrouped._id});
       })
       .catch((error) => {
         console.log(error);

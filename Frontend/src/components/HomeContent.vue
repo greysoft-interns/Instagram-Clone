@@ -114,10 +114,9 @@ import SideDialog from "./SideDialog.vue";
 const postStore = usePostStore();
 const userStore = useUserStore();
 const { groupedPosts, getPostsData, postLoading } = storeToRefs(postStore); // state and getters need "storeToRefs"
-const { getTimelinePosts, reset } = postStore;
-const { user, userLoading, getUserDetails } = storeToRefs(userStore); // state and getters need "storeToRefs"
-const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } =
-  userStore;
+const { getTimelinePosts, postReset } = postStore;
+const { user, userLoading, getUserDetails, userNewPost, userNewPostId } = storeToRefs(userStore); // state and getters need "storeToRefs"
+const { fetchUserDetails, userReset, addPostComment, likeAndUnlikePost } = userStore;
 const dialog = ref(false);
 const commDialog = ref(false);
 const commDialogMobile = ref(false);
@@ -140,6 +139,7 @@ export default {
       search,
       addPost,
       postliked,
+      postReset,
       value: 30,
       open: (pos) => {
         position.value = pos;
@@ -218,10 +218,19 @@ export default {
     },
   },
   created() {
+    if(userNewPost.value){
+      getTimelinePosts(userNewPostId.value);
+    } else {
+      getTimelinePosts();
+    }
     fetchUserDetails();
-    getTimelinePosts();
   },
   computed: {},
+  unmounted() {
+    postReset();
+    userReset();
+    this.userPosts = [];
+  },
   filters: {
     newDate(value) {
       return date.formatDate(value, "MMMM D h:mmA");

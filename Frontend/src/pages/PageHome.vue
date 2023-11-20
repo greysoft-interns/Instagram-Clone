@@ -200,9 +200,32 @@
                       </q-dialog>
                       <div
                         class="text-center q-ma-md"
+                        style="width: 100%;"
                         v-if="groupedPosts.length < 1"
                       >
-                        <h3>No Posts At the Time</h3>
+                      <q-card style="width: 90%;">
+                        <q-item>
+                          <q-item-section avatar>
+                            <q-skeleton type="QAvatar" />
+                          </q-item-section>
+                  
+                          <q-item-section>
+                            <q-item-label>
+                              <q-skeleton type="text" />
+                            </q-item-label>
+                            <q-item-label caption>
+                              <q-skeleton type="text" />
+                            </q-item-label>
+                          </q-item-section>
+                        </q-item>
+                  
+                        <q-skeleton height="200px" square />
+                  
+                        <q-card-actions align="right" class="q-gutter-md">
+                          <q-skeleton type="QBtn" />
+                          <q-skeleton type="QBtn" />
+                        </q-card-actions>
+                      </q-card>
                       </div>
                       <q-card
                         v-else

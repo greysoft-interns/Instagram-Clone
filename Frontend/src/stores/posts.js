@@ -18,7 +18,7 @@ export const usePostStore = defineStore("posts", {
   },
 
   actions: {
-    async getTimelinePosts(){
+    async getTimelinePosts(id){
       try {
         const fetchStorage = await localStorage.getItem("userTokens");
         const fetchToken = JSON.parse(fetchStorage);
@@ -27,9 +27,10 @@ export const usePostStore = defineStore("posts", {
         const config = {
           headers: { 'Authorization': 'Bearer ' + value }
         }
-        const response = await axios.get(`${API_URL}post/timeline`, config);
+        const response = await axios.get(`${API_URL}post/timeline/${id ? id : "all"}`, config);
         this.postLoading = false;
         this.postSuccess = true;
+
         this.groupedPosts = response?.data?.data;
       } catch (error) {
         this.postLoading = false;
@@ -42,7 +43,7 @@ export const usePostStore = defineStore("posts", {
       this.postError = false;
       this.postLoading = false;
       this.postSuccess = false;
-      this.postMessage = ""
+      this.postMessage = "";
   },
   }
 });

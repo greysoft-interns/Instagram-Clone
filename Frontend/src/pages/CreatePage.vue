@@ -305,6 +305,7 @@ export default {
       previewImage: (event) => {
         const imgSixe = event.target.files[0].size / 1024;
         if (imgSixe < 500) {
+          limit.value = true;
           var input = event.target;
           if (input.files) {
             var reader = new FileReader();

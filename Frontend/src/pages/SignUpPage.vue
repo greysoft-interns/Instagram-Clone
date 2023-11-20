@@ -97,7 +97,7 @@
                 size="32px"
                 color="blue"
                 style="width: 100%"
-                class="q-my-md flex justify-center"
+                class="q-my-lg flex justify-center"
               />
               <q-btn
                 v-else
